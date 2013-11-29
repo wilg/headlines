@@ -16,6 +16,8 @@ gem 'bootstrap-sass-rails'
 gem 'font-awesome-rails'
 gem 'will_paginate-bootstrap'
 
+gem "tweet-button"
+
 gem 'nokogiri'
 
 # Heroku Deploy

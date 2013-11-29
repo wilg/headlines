@@ -9,3 +9,5 @@
   %td.text-right.sources
     - headline.sources.each do |source_name|
       = source_image_tag source_name
+  %td.permalink
+    = tweet_button url: headline_url(headline), text: headline.name, lang: 'en', via: nil, dnt: true, count: 'none', hashtags: 'fakeheadlines'
