@@ -14,7 +14,7 @@
         %span.lead.vote-count= headline.votes
       %td
         - if can_vote?(headline)
-          = link_to vote_headline_url(headline), remote: true, class: "btn btn-success upvote-button" do
+          = link_to vote_headline_url(headline), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Upvoting..."} do
             %i.fa.fa-thumbs-up
             Upvote
         - else
