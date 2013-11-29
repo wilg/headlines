@@ -13,6 +13,8 @@
       = link_to (params.merge({page: 1, filter: source})), class: default_button_toggle(:filter, source) do
         = source_image_tag source
 
+%p.text-muted
+  These headlines have been saved from the generator. #{link_to "Generate your own!", generator_url}
 
 %table.table.table-striped.headlines-table
   = render @headlines
