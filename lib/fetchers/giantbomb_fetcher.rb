@@ -1,6 +1,6 @@
-require_relative 'scraper'
+require_relative '../scraper'
 
-class GiantBombScraper < Scraper
+class GiantBombFetcher < Scraper
 
   def scrape_page(i)
     doc = Nokogiri::HTML(open("http://www.giantbomb.com/news/?page=#{i}"))
@@ -11,4 +11,4 @@ class GiantBombScraper < Scraper
 
 end
 
-GiantBombScraper.new.scrape!
+GiantBombFetcher.new.fetch!

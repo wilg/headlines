@@ -1,6 +1,6 @@
-require_relative 'scraper'
+require_relative '../scraper'
 
-class BuzzfeedScraper < Scraper
+class BuzzfeedFetcher < Scraper
 
   def scrape_page(i)
     doc = Nokogiri::HTML(open("http://www.buzzfeed.com/plugin/midcolumn/v:1.0/p:#{i}"))
@@ -15,4 +15,4 @@ class BuzzfeedScraper < Scraper
 
 end
 
-BuzzfeedScraper.new.scrape!
+BuzzfeedFetcher.new.fetch!

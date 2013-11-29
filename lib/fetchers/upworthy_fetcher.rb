@@ -1,6 +1,6 @@
-require_relative 'scraper'
+require_relative '../scraper'
 
-class UpworthyScraper < Scraper
+class UpworthyFetcher < Scraper
 
   def scrape_page(i)
     doc = Nokogiri::HTML(open("http://www.upworthy.com/page/#{i}"))
@@ -11,4 +11,4 @@ class UpworthyScraper < Scraper
 
 end
 
-UpworthyScraper.new.scrape!
+UpworthyFetcher.new.fetch!

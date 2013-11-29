@@ -1,6 +1,6 @@
-require_relative 'scraper'
+require_relative '../scraper'
 
-class TMZScraper < Scraper
+class TMZFetcher < Scraper
 
   def scrape_page(i)
     doc = Nokogiri::HTML(open("http://www.tmz.com/page/#{i}/"))
@@ -11,4 +11,4 @@ class TMZScraper < Scraper
 
 end
 
-TMZScraper.new.scrape!
+TMZFetcher.new.fetch!

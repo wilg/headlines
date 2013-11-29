@@ -1,6 +1,6 @@
-require_relative 'scraper'
+require_relative '../scraper'
 
-class TestedScraper < Scraper
+class TestedFetcher < Scraper
 
   def scrape_page(i)
     doc = Nokogiri::HTML(open("http://www.tested.com/?&p=#{i}"))
@@ -11,4 +11,4 @@ class TestedScraper < Scraper
 
 end
 
-TestedScraper.new.scrape!
+TestedFetcher.new.fetch!
