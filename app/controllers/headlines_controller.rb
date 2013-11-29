@@ -12,11 +12,13 @@ class HeadlinesController < ApplicationController
 
   def best
     @headlines = Headline.top
-    if params[:filter].present? && params[:filter].to_sym != :all
-      @headlines = @headlines.where(["sources ILIKE ?", "%#{params[:filter]}%"])
-    end
     if params[:order].present? && params[:order].to_sym == :new
       @headlines = @headlines.reorder("created_at desc")
+    elsif params[:order].present? && params[:order].to_sym == :trending
+      @headlines = @headlines.reorder("created_at desc").where("votes > 1")
+    end
+    if params[:filter].present? && params[:filter].to_sym != :all
+      @headlines = @headlines.where(["sources ILIKE ?", "%#{params[:filter]}%"])
     end
     @headlines = @headlines.paginate(:page => params[:page], :per_page => 40)
   end

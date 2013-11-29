@@ -5,13 +5,13 @@
   .btn-group
     = link_to "Top Voted", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true)
     = link_to "Most Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new)
+    = link_to "\"Trending\"", params.merge({page: 1, order: :trending}), class: default_button_toggle(:order, :trending)
 
   .btn-group.pull-right
     = link_to "All Sources", params.merge({page: 1, filter: :all}), class: default_button_toggle(:filter, :all, true)
     - HEADLINE_SOURCES.each do |source|
       = link_to (params.merge({page: 1, filter: source})), class: default_button_toggle(:filter, source) do
         = source_image_tag source
-        = source_pretty_name source
 
 
 %table.table.table-striped.headlines-table
