@@ -13,5 +13,6 @@ gem 'jquery-rails'
 gem 'marky_markov'
 
 # Heroku Deploy
+gem 'foreman'
 gem 'rails_12factor', group: :production
 ruby "2.0.0"
