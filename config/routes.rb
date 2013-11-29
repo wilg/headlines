@@ -10,6 +10,6 @@ Headlines::Application.routes.draw do
     end
   end
 
-  root "headlines#index"
+  root "headlines#best"
 
 end

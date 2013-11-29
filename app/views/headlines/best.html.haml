@@ -1,10 +1,15 @@
 - @title = "Top-Voted Headlines"
-%h3 Top-Voted Headlines
 
-%ul
+%table.table.table-striped
   - Headline.top.each do |headline|
-    %li
-      %strong= headline.votes
-      = headline.name
-      - if can_vote?(headline)
-        = link_to "+ upvote", vote_headline_url(headline), remote: true, class: "upvote-existing"
+    %tr
+      %td
+        %strong= headline.votes
+      %td
+        - if can_vote?(headline)
+          = link_to "+ upvote", vote_headline_url(headline), remote: true, class: "upvote-existing"
+        - else
+          .text-muted voted!
+      %td= headline.name
+
+= link_to "Generate Random Headlines", headlines_url, class: "btn btn-success btn-large"

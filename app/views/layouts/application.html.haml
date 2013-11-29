@@ -6,19 +6,22 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
+    .container
+      %h2 Automatically Generated Hacker News Headlines
+      %p Upvote the best ones! And people say computers aren't funny!
+      %p ripped off of #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"}
 
-    %h1 Headlines
+      %ul.nav.nav-tabs
+        %li= nav_link "Top-Voted Headlines", root_url
+        %li= nav_link "Random Headlines", headlines_url
 
-    %p
-      = link_to_unless_current "Random Headlines", headlines_url
-      |
-      = link_to_unless_current "Top-Voted Headlines", best_headlines_url
+      %br/
 
-    %hr/
+      = yield
 
-    = yield
+      %hr/
 
-    %hr/
-
-    %p
-      inspired by #{link_to "this awesome tool", "http://grantslatton.com/hngen/?lookback=2"}, #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
+      %p
+        this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
+      %p
+        made really quickly by #{link_to "Wil Gieseler", "http://github.com/wilg"}

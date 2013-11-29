@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/wilg/bootstrap_active_nav.git
+  revision: e88f828e057e839e82d8ac81b5eeff8573336024
+  specs:
+    bootstrap_active_nav (0.0.2)
+      rails (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,6 +34,9 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    bootstrap-sass-rails (3.0.2.1)
+      railties (>= 3.1.0)
+      sass-rails (>= 3.1.0)
     builder (3.1.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -118,6 +128,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass-rails
+  bootstrap_active_nav!
   coffee-rails (~> 4.0.0)
   foreman
   haml

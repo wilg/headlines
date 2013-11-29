@@ -1,8 +1,7 @@
 - @title = "Random Headlines"
-%h3 Random Headlines
 
-%ul
+%table.table.table-striped
   - Headline.random.each do |headline_string|
-    %li
-      = headline_string
-      = link_to "+ upvote", save_headlines_path(headline: headline_string), remote: true, class: "upvote-new"
+    %tr
+      %td= link_to "+ upvote", save_headlines_path(headline: headline_string), remote: true, class: "upvote-new"
+      %td= headline_string
