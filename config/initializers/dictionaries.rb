@@ -1,1 +1,1 @@
-HEADLINE_DICTIONARIES = [:hackernews, :upworthy]
+HEADLINE_DICTIONARIES = [:hackernews, :upworthy, :buzzfeed]
