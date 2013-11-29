@@ -34,9 +34,27 @@ table.headlines-table
     vertical-align: middle !important
     &.headline
       font-size: 16px
+    &.votebox
+      .btn
+        width: 100%
+    &.count
+      width: 60px
+      text-align: center
+      font-weight: bold
+    &.sources
+      max-width: 100px
+    &.permalink
+      a:link, a:visited
+        color: darken(white, 25%)
+      a:hover
+        color: black
 
 .source-checkbox-block
   display: inline-block
 
 .best-toolbar
   margin-bottom: 20px
+
+.single-headline .votebox
+  margin-top: 10px
+

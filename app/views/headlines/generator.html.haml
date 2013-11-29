@@ -11,11 +11,11 @@
         .source-box
           %strong Use sources:
           %br/
-          - HEADLINE_DICTIONARIES.each do |source|
+          - HEADLINE_SOURCES.each do |source|
             %span.source-checkbox-block
               = check_box_tag source, 1, sources_includes?(source)
               = label_tag source do
                 = source_image_tag source
-                = source
+                = source_pretty_name source
 
 #generated-headlines

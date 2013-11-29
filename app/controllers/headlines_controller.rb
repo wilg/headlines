@@ -20,6 +20,10 @@ class HeadlinesController < ApplicationController
     end
   end
 
+  def show
+    @headline = Headline.find(params[:id])
+  end
+
   def vote
     headline = Headline.find(params[:id])
     Headline.increment_counter(:votes, headline.id)
@@ -39,10 +43,10 @@ private
 
   def parse_sources!
     @sources = []
-    HEADLINE_DICTIONARIES.each do |dict|
+    HEADLINE_SOURCES.each do |dict|
       @sources << dict if params[dict].to_i == 1
     end
-    @sources = DEFAULT_HEADLINE_DICTIONARIES if @sources.blank?
+    @sources = DEFAULT_HEADLINE_SOURCES if @sources.blank?
   end
 
   def save_vote!(headline)

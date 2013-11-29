@@ -1,0 +1,26 @@
+- @title = @headline.name
+
+.jumbotron.single-headline
+  %h1= @headline.name
+  %h2
+    .count
+      %span.vote-count= @headline.votes
+      = @headline.votes != 1 ? "votes" : "vote"
+    .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline}
+.row
+  .col-md-6
+    %h4.text-muted
+      This stupid thing is a mashup of headlines from:
+      %ul
+      - @headline.sources.each do |source_name|
+        %li.source
+          = source_image_tag source_name
+          = source_pretty_name source_name
+
+    %p.text-muted
+      %small
+        Discovered #{time_ago_in_words @headline.created_at} ago.
+  .col-md-6
+    .well
+      = link_to "Make Your Own Stupid or Funny Mashup", generator_url, class: "btn btn-warning btn-lg btn-block"
+      = link_to "View The Best Headlines", best_url, class: "btn btn-primary btn-lg btn-block"

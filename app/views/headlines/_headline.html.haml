@@ -1,0 +1,11 @@
+%tr
+  %td.count
+    %span.lead.vote-count= headline.votes
+  %td.votebox= render partial: "headlines/headline_votebox", locals: {headline: headline}
+  %td.permalink
+    = link_to(headline, abbr: "Permalink") do
+      %i.fa.fa-link
+  %td.headline= headline.name
+  %td.text-right.sources
+    - headline.sources.each do |source_name|
+      = source_image_tag source_name

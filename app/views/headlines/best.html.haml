@@ -8,27 +8,11 @@
 
   .btn-group.pull-right
     = link_to "All Sources", params.merge({filter: :all}), class: default_button_toggle(:filter, :all, true)
-    - HEADLINE_DICTIONARIES.each do |source|
+    - HEADLINE_SOURCES.each do |source|
       = link_to (params.merge({filter: source})), class: default_button_toggle(:filter, source) do
         = source_image_tag source
-        = source.to_s.titleize
+        = source_pretty_name source
 
 
 %table.table.table-striped.headlines-table
-  - @headlines.each do |headline|
-    %tr
-      %td
-        %span.lead.vote-count= headline.votes
-      %td
-        - if can_vote?(headline)
-          = link_to vote_headline_url(headline), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Upvoting..."} do
-            %i.fa.fa-thumbs-up
-            Upvote
-        - else
-          %button.btn.disabled{type: :button}
-            %i.fa.fa-thumbs-up
-            Voted
-      %td.headline= headline.name
-      %td.text-right
-        - headline.sources.each do |source_name|
-          = source_image_tag source_name
+  = render @headlines

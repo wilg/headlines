@@ -9,7 +9,11 @@ module HeadlinesHelper
   end
 
   def source_image_tag(source_name)
-    image_tag("#{source_name}.png", class: 'source-icon')
+    image_tag("#{source_name}.png", class: 'source-icon', alt: source_pretty_name(source_name))
+  end
+
+  def source_pretty_name(source)
+    HEADLINE_SOURCE_NAMES[source.to_sym] || source.to_s.humanize
   end
 
   def active_if_param(param_name, param_value, also_if_blank = false)
