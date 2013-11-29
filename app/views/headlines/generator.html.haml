@@ -1,24 +1,24 @@
 - @title = "Generator"
 - @short_title = :generator
 
-.generate-form
-  = form_tag generate_headlines_path, method: :post, data: {remote: true} do
-    .row
-      .col-md-4.col-md-offset-4
+
+.row
+  .col-md-4
+    .generate-form
+      = form_tag generate_headlines_path, method: :post, data: {remote: true} do
         = submit_tag "Invent Hilarious Headlines", class: "btn btn-warning btn-lg", disable_with: "Inventing...", id: "invent-button"
-    .row
-      .col-md-4.col-md-offset-4
         .source-box
-          %strong Use sources:
-          %br/
-          - Source.all.each do |source|
-            %span.source-checkbox-block
-              = check_box_tag source.id, 1, selected_sources_includes?(source)
-              = label_tag source.id do
-                = source_image_tag source
-                = source.name
-
-%p.text-muted
-  Think any of these are funny? Click save to add them to #{link_to "the list of best headlines", best_url}.
-
-#generated-headlines
+          - Source.categories.each do |category_name, sources|
+            .source-category
+              %strong #{category_name}:
+              %br/
+              - sources.each do |source|
+                %span.source-checkbox-block
+                  = check_box_tag source.id, 1, selected_sources_includes?(source)
+                  = label_tag source.id do
+                    = source_image_tag source
+                    = source.name
+  .col-md-8
+    %p.text-muted
+      Think any of these are funny? Click save to add them to #{link_to "the list of best headlines", best_url}.
+    #generated-headlines
