@@ -11,12 +11,12 @@
         .source-box
           %strong Use sources:
           %br/
-          - HEADLINE_SOURCES.each do |source|
+          - Source.all.each do |source|
             %span.source-checkbox-block
-              = check_box_tag source, 1, sources_includes?(source)
-              = label_tag source do
+              = check_box_tag source.id, 1, selected_sources_includes?(source)
+              = label_tag source.id do
                 = source_image_tag source
-                = source_pretty_name source
+                = source.name
 
 %p.text-muted
   Think any of these are funny? Click save to add them to #{link_to "the list of best headlines", best_url}.

@@ -12,10 +12,10 @@
     %h4.text-muted
       This stupid thing is a mashup of headlines from:
       %ul
-      - @headline.sources.each do |source_name|
+      - @headline.source_objects.each do |source|
         %li.source
-          = source_image_tag source_name
-          = source_pretty_name source_name
+          = source_image_tag source
+          = source.name
 
     %p.text-muted
       %small

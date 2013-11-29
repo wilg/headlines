@@ -4,16 +4,12 @@ module HeadlinesHelper
     session[:votes].blank? || !session[:votes].include?(headline.id)
   end
 
-  def sources_includes?(source_name)
-    @sources.present? && @sources.include?(source_name.to_sym)
+  def selected_sources_includes?(source)
+    @sources.present? && @sources.include?(source.id)
   end
 
-  def source_image_tag(source_name)
-    image_tag("#{source_name}.png", class: 'source-icon', alt: source_pretty_name(source_name))
-  end
-
-  def source_pretty_name(source)
-    HEADLINE_SOURCE_NAMES[source.to_sym] || source.to_s.humanize
+  def source_image_tag(source)
+    image_tag("#{source.id}.png", class: 'source-icon', alt: source.name)
   end
 
   def active_if_param(param_name, param_value, also_if_blank = false)

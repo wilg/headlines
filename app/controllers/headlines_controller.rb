@@ -46,10 +46,10 @@ private
 
   def parse_sources!
     @sources = []
-    HEADLINE_SOURCES.each do |dict|
-      @sources << dict if params[dict].to_i == 1
+    Source.all.each do |source|
+      @sources << source.id if params[source.id].to_i == 1
     end
-    @sources = DEFAULT_HEADLINE_SOURCES if @sources.blank?
+    @sources = Source.all.reject{|s| !s.default }.map(&:id) if @sources.blank?
   end
 
   def save_vote!(headline)

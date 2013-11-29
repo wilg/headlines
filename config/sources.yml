@@ -1,0 +1,21 @@
+hackernews:
+  name: Hacker News
+  category: Tech
+tmz:
+  name: TMZ
+  category: Celebrity
+  default: true
+giantbomb:
+  name: Giant Bomb
+  category: Games
+buzzfeed:
+  name: BuzzFeed
+  category: Trash
+  default: true
+upworthy:
+  name: Upworthy
+  category: Trash
+  default: true
+tested:
+  name: Tested
+  category: Tech

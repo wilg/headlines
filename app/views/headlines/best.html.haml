@@ -9,8 +9,8 @@
 
   .btn-group.pull-right
     = link_to "All Sources", params.merge({page: 1, filter: :all}), class: default_button_toggle(:filter, :all, true)
-    - HEADLINE_SOURCES.each do |source|
-      = link_to (params.merge({page: 1, filter: source})), class: default_button_toggle(:filter, source) do
+    - Source.all.each do |source|
+      = link_to (params.merge({page: 1, filter: source.id})), class: default_button_toggle(:filter, source.id) do
         = source_image_tag source
 
 %p.text-muted
