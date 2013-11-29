@@ -16,6 +16,8 @@ gem 'bootstrap-sass-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap_active_nav', github: 'wilg/bootstrap_active_nav'
 
+gem 'nokogiri'
+
 # Heroku Deploy
 gem 'foreman'
 gem 'rails_12factor', group: :production

@@ -1,10 +1,19 @@
-- @title = "Random Headlines"
+- @title = "Generator"
+
+.well.clearfix
+  = form_tag headlines_path, method: :get do
+    .pull-right
+      - HEADLINE_DICTIONARIES.each do |source|
+        .source
+          = check_box_tag source, 1, sources_includes?(source)
+          = label_tag source, source.to_s.titleize
+    = submit_tag "Invent More Headlines", class: "btn btn-primary btn-lg"
 
 %table.table.table-striped
-  - Headline.random.each do |headline_string|
+  - Headline.random(@sources).each do |headline_string|
     %tr
       %td
-        = link_to save_headlines_path(headline: headline_string), remote: true, class: "btn btn-success upvote-button" do
+        = link_to save_headlines_path(headline: headline_string, sources: @sources.join(",")), remote: true, class: "btn btn-success upvote-button" do
           %i.fa.fa-thumbs-up
           Upvote
       %td= headline_string

@@ -1,19 +1,19 @@
 !!!
 %html
   %head
-    %title Headlines | #{@title}
+    %title Comedy Headline Generator Dingus | #{@title}
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
     .container
-      %h2 Automatically Generated Hacker News Headlines
-      %p Upvote the best ones! And people say computers aren't funny!
-      %p ripped off of #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"}
+      %h2 Comedy Headline Generator Dingus
+      %p Mashup different sources, like Hacker News and Upworthy. Upvote the best ones! Laugh! Cry! Learn to love!
+      %p Ripped off from #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"}.
 
       %ul.nav.nav-tabs
-        %li= nav_link "Top-Voted Headlines", root_url
-        %li= nav_link "Random Headlines", headlines_url
+        %li= nav_link "Best Headlines", root_url
+        %li= nav_link "Generator", headlines_url
 
       %br/
 

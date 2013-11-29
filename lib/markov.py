@@ -2,6 +2,7 @@ from collections import defaultdict
 from random import random
 import os
 import itertools
+import sys
 
 """
 PLEASE DO NOT RUN THIS QUOTED CODE FOR THE SAKE OF daemonology's SERVER, IT IS
@@ -32,11 +33,34 @@ archive.close()
 """
 
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, "dictionaries/hackernews.txt")
 
-archive = open(filename)
-titles = archive.read().split("\n")
-archive.close()
+imported_titles = []
+
+# Accept args for different dictionaries
+dicts = sys.argv
+dicts.pop(0)
+
+# import multiple dictionaries
+for dictionary_name in dicts:
+    filename = os.path.join(dir, "dictionaries/" + dictionary_name + ".txt")
+
+    archive = open(filename)
+    dict_titles = archive.read().split("\n")
+    archive.close()
+
+    imported_titles = imported_titles + dict_titles
+
+
+titles = []
+
+# lowercase everything, remove quotes (to prevent dangling quotes)
+# we're also going to create a mapping back to the original case if it's a weird word (like iPad)
+titlecase_mappings = {}
+for title in imported_titles:
+    titles.append(title.lower().replace("\"", ""))
+    for original_word in title.replace("\"", "").split(" "):
+        titlecase_mappings[original_word.lower()] = original_word
+
 markov_map = defaultdict(lambda:defaultdict(int))
 
 lookback = 2
@@ -78,6 +102,14 @@ def get_sentence(length_max=140):
             continue
         return sentence
 
+def retitlize_sentence(sentence):
+    lowercase_sentence = sentence.split(" ")
+    uppercase_sentence = []
+
+    for word in lowercase_sentence:
+        uppercase_sentence.append(titlecase_mappings.get(word, word))
+
+    return " ".join(uppercase_sentence)
 
 for _ in itertools.repeat(None, 10):
-    print get_sentence()
+    print retitlize_sentence(get_sentence())

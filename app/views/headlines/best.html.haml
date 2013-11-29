@@ -1,7 +1,13 @@
-- @title = "Top-Voted Headlines"
+- @title = "Best Headlines"
+
+%p
+  %ul.nav.nav-pills.pull-right
+    %li= nav_link "All", {filter: :all}
+    - HEADLINE_DICTIONARIES.each do |source|
+      %li= nav_link source.to_s.titleize, {filter: source}
 
 %table.table.table-striped
-  - Headline.top.each do |headline|
+  - @headlines.each do |headline|
     %tr
       %td
         %span.lead.vote-count= headline.votes
@@ -15,5 +21,7 @@
             %i.fa.fa-thumbs-up
             Voted
       %td= headline.name
+      %td.text-right
+        %small.text-muted= headline.sources.join(", ")
 
 = link_to "Generate Random Headlines", headlines_url, class: "btn btn-primary btn-large"
