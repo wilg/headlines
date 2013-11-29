@@ -1,7 +1,6 @@
 - @title = "Generator"
 - @short_title = :generator
 
-
 .row
   .col-md-4
     .generate-form
@@ -22,3 +21,8 @@
     %p.text-muted
       Think any of these are funny? Click save to add them to #{link_to "the list of best headlines", best_url}.
     #generated-headlines
+
+:javascript
+  $(function(){
+    $("#invent-button").click();
+  });
