@@ -11,8 +11,8 @@ class Headline < ActiveRecord::Base
     `python #{Rails.root}/lib/markov.py #{dicts.join(" ")}`.lines.map(&:chomp)
   end
 
-  def to_param
-    "#{id}-#{name.parameterize}"
-  end
+  # def to_param
+  #   "#{id}-#{name.parameterize}"
+  # end
 
 end
