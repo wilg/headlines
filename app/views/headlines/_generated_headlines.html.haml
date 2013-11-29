@@ -3,6 +3,6 @@
     %tr
       %td.headline= headline_string
       %td.text-right
-        = link_to save_headlines_path(headline: headline_string, sources: @sources.join(",")), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Upvoting..."}  do
+        = link_to save_headlines_path(headline: headline_string, sources: @sources.join(",")), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Voting..."}  do
           %i.fa.fa-thumbs-up
-          Save + Upvote
+          Save + Vote
