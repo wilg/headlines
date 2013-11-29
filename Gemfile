@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'marky_markov'
 
 gem 'bootstrap-sass-rails'
+gem 'font-awesome-rails'
 gem 'bootstrap_active_nav', github: 'wilg/bootstrap_active_nav'
 
 # Heroku Deploy

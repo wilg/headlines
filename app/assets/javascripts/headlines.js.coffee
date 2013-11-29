@@ -1,9 +1,9 @@
 $ ->
 
-  $(".upvote-new").on "ajax:before", ->
+  $(".upvote-button").on "ajax:before", ->
+    votecount = $(@).closest("tr").find(".vote-count")
+    if votecount?
+      votes = parseInt votecount.text()
+      votecount.text(votes + 1)
     $(@).hide()
-    $(@).parent().append("<span class='text-success'>upvoted!</span>")
-
-  $(".upvote-existing").on "ajax:before", ->
-    $(@).hide()
-    $(@).parent().append("<span class='text-success'>upvoted!</span>")
+    $(@).parent().append $("#upvoted-button").html()

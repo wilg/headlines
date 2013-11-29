@@ -4,12 +4,16 @@
   - Headline.top.each do |headline|
     %tr
       %td
-        %strong= headline.votes
+        %span.lead.vote-count= headline.votes
       %td
         - if can_vote?(headline)
-          = link_to "+ upvote", vote_headline_url(headline), remote: true, class: "upvote-existing"
+          = link_to vote_headline_url(headline), remote: true, class: "btn btn-success upvote-button" do
+            %i.fa.fa-thumbs-up
+            Upvote
         - else
-          .text-muted voted!
+          %button.btn.disabled{type: :button}
+            %i.fa.fa-thumbs-up
+            Voted
       %td= headline.name
 
-= link_to "Generate Random Headlines", headlines_url, class: "btn btn-success btn-large"
+= link_to "Generate Random Headlines", headlines_url, class: "btn btn-primary btn-large"

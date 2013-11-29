@@ -3,5 +3,8 @@
 %table.table.table-striped
   - Headline.random.each do |headline_string|
     %tr
-      %td= link_to "+ upvote", save_headlines_path(headline: headline_string), remote: true, class: "upvote-new"
+      %td
+        = link_to save_headlines_path(headline: headline_string), remote: true, class: "btn btn-success upvote-button" do
+          %i.fa.fa-thumbs-up
+          Upvote
       %td= headline_string
