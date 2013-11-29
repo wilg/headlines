@@ -18,6 +18,7 @@ class HeadlinesController < ApplicationController
     if params[:order].present? && params[:order].to_sym == :new
       @headlines = @headlines.reorder("created_at desc")
     end
+    @headlines = @headlines.paginate(:page => params[:page], :per_page => 40)
   end
 
   def show

@@ -14,6 +14,7 @@ gem 'marky_markov'
 
 gem 'bootstrap-sass-rails'
 gem 'font-awesome-rails'
+gem 'will_paginate-bootstrap'
 
 gem 'nokogiri'
 
