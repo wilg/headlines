@@ -1,0 +1,9 @@
+%h1 Best Headlines
+
+%ul
+  - Headline.top.each do |headline|
+    %li
+      %strong= headline.votes
+      = headline.name
+      - if can_vote?(headline)
+        = link_to "+ vote", vote_headline_url(headline)

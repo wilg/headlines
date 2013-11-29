@@ -1,0 +1,7 @@
+%h1 Random Headlines
+
+%ul
+  - Headline.random.each do |headline_string|
+    %li
+      = headline_string
+      = link_to "+ vote", save_headlines_path(headline: headline_string)
