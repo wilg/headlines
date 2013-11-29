@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title Headlines
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+
+    %p
+      = link_to_unless_current "Random Headlines", headlines_url
+      |
+      = link_to_unless_current "Top-Voted Headlines", best_headlines_url
+
+    = yield
+
+    %p
+      inspired by #{link_to "this awesome tool", "http://grantslatton.com/hngen/?lookback=2"}, #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
