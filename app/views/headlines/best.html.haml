@@ -7,7 +7,7 @@
     - HEADLINE_DICTIONARIES.each do |source|
       %li= nav_link source.to_s.titleize, {filter: source}
 
-%table.table.table-striped
+%table.table.table-striped.headlines-table
   - @headlines.each do |headline|
     %tr
       %td
@@ -21,8 +21,7 @@
           %button.btn.disabled{type: :button}
             %i.fa.fa-thumbs-up
             Voted
-      %td= headline.name
+      %td.headline= headline.name
       %td.text-right
-        %small.text-muted= headline.sources.join(", ")
-
-= link_to "Generate Random Headlines", headlines_url, class: "btn btn-primary btn-large"
+        - headline.sources.each do |source_name|
+          = source_image_tag source_name

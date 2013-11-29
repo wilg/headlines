@@ -15,12 +15,12 @@
 
         .text-center
           .btn-group
-            = link_to root_url, class: "btn btn-lg #{@short_title == :generator ? "btn-primary" : "btn-default"}" do
-              %i.fa.fa-gears
-              Headline Generator
             = link_to best_url, class: "btn btn-lg #{@short_title == :best ? "btn-primary" : "btn-default"}" do
               %i.fa.fa-star
               Best Headlines
+            = link_to generator_url, class: "btn btn-lg #{@short_title == :generator ? "btn-primary" : "btn-default"}" do
+              %i.fa.fa-gears
+              Headline Generator
 
       %br/
 

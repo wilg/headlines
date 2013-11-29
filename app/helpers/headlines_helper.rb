@@ -8,4 +8,8 @@ module HeadlinesHelper
     @sources.present? && @sources.include?(source_name.to_sym)
   end
 
+  def source_image_tag(source_name)
+    image_tag("#{source_name}.png", class: 'source-icon')
+  end
+
 end

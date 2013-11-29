@@ -12,7 +12,8 @@ Headlines::Application.routes.draw do
   end
 
   get "best", to: "headlines#best"
+  get "generator", to: "headlines#generator"
 
-  root "headlines#generator"
+  root to: redirect("best")
 
 end

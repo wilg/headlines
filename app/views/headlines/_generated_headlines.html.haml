@@ -1,7 +1,7 @@
-%table.table.table-striped
+%table.table.table-striped.headlines-table
   - Headline.random(@sources).each do |headline_string|
     %tr
-      %td= headline_string
+      %td.headline= headline_string
       %td.text-right
         = link_to save_headlines_path(headline: headline_string, sources: @sources.join(",")), remote: true, class: "btn btn-success upvote-button" do
           %i.fa.fa-thumbs-up
