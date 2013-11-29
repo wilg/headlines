@@ -1,0 +1,19 @@
+- @title = "Generator"
+- @short_title = :generator
+
+.generate-form
+  = form_tag generate_headlines_path, method: :post, data: {remote: true} do
+    .row
+      .col-md-4.col-md-offset-4
+        = submit_tag "Invent Hilarious Headlines", class: "btn btn-warning btn-lg", disable_with: "Inventing...", id: "invent-button"
+    .row
+      .col-md-4.col-md-offset-4
+        .source-box
+          %strong Use sources:
+          %br/
+          - HEADLINE_DICTIONARIES.each do |source|
+            %span.source
+              = check_box_tag source, 1, sources_includes?(source)
+              = label_tag source, source.to_s.titleize
+
+#generated-headlines

@@ -24,15 +24,23 @@ class HeadlinesController < ApplicationController
     redirect_to best_headlines_url
   end
 
-  def index
+  def generator
+    parse_sources!
+  end
+
+  def generate
+    parse_sources!
+  end
+
+private
+
+  def parse_sources!
     @sources = []
     HEADLINE_DICTIONARIES.each do |dict|
       @sources << dict if params[dict].to_i == 1
     end
-    @sources << HEADLINE_DICTIONARIES.first if @sources.blank?
+    @sources = DEFAULT_HEADLINE_DICTIONARIES if @sources.blank?
   end
-
-private
 
   def save_vote!(headline)
     votes = session[:votes] || []
