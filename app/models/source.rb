@@ -18,7 +18,7 @@ class Source
   end
 
   def self.find(id)
-    all.bsearch{|source| source.id == id.to_sym}
+    all.find{|source| source.id == id.to_sym}
   end
 
   def self.categories
