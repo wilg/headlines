@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/wilg/bootstrap_active_nav.git
-  revision: e88f828e057e839e82d8ac81b5eeff8573336024
-  specs:
-    bootstrap_active_nav (0.0.2)
-      rails (>= 3.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -134,7 +127,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass-rails
-  bootstrap_active_nav!
   coffee-rails (~> 4.0.0)
   font-awesome-rails
   foreman

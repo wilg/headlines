@@ -1,6 +1,6 @@
 class Headline < ActiveRecord::Base
 
-  scope :top, -> { order("votes desc") }
+  scope :top, -> { order("votes desc, created_at desc") }
 
   serialize :sources, Array
 

@@ -12,4 +12,12 @@ module HeadlinesHelper
     image_tag("#{source_name}.png", class: 'source-icon')
   end
 
+  def active_if_param(param_name, param_value, also_if_blank = false)
+    params[param_name].to_s == param_value.to_s || also_if_blank && params[param_name].blank? ? 'active' : ''
+  end
+
+  def default_button_toggle(*args)
+    "btn btn-default " + active_if_param(*args)
+  end
+
 end

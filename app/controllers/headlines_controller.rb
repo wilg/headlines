@@ -15,6 +15,9 @@ class HeadlinesController < ApplicationController
     if params[:filter].present? && params[:filter].to_sym != :all
       @headlines = @headlines.where(["sources ILIKE ?", "%#{params[:filter]}%"])
     end
+    if params[:order].present? && params[:order].to_sym == :new
+      @headlines = @headlines.reorder("created_at desc")
+    end
   end
 
   def vote

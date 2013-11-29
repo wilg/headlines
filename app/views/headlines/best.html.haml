@@ -1,11 +1,18 @@
 - @title = "Best Headlines"
 - @short_title = :best
 
-%p
-  %ul.nav.nav-pills.pull-right
-    %li= nav_link "All", {filter: :all}
+.btn-toolbar.best-toolbar
+  .btn-group
+    = link_to "Top Voted", params.merge({order: :top}), class: default_button_toggle(:order, :top, true)
+    = link_to "Most Recent", params.merge({order: :new}), class: default_button_toggle(:order, :new)
+
+  .btn-group.pull-right
+    = link_to "All Sources", params.merge({filter: :all}), class: default_button_toggle(:filter, :all, true)
     - HEADLINE_DICTIONARIES.each do |source|
-      %li= nav_link source.to_s.titleize, {filter: source}
+      = link_to (params.merge({filter: source})), class: default_button_toggle(:filter, source) do
+        = source_image_tag source
+        = source.to_s.titleize
+
 
 %table.table.table-striped.headlines-table
   - @headlines.each do |headline|

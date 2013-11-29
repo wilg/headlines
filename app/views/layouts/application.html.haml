@@ -30,11 +30,12 @@
 
       %small.text-muted
         .pull-right
-          this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
+          %p this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
         .pull-left
-          made really quickly by #{link_to "Wil Gieseler", "http://github.com/wilg"}
-          \ -
-          ripped off from #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"} that I didn't make
+          %p
+            made really quickly by #{link_to "Wil Gieseler", "http://github.com/wilg"}
+            \ -
+            ripped off from #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"} that I didn't make
 
     #upvoted-button{style: "display:none"}
       %button.btn.disabled{type: :button}
