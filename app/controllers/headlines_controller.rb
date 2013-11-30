@@ -22,6 +22,9 @@ class HeadlinesController < ApplicationController
     if params[:filter].present? && params[:filter].to_sym != :all
       @headlines = @headlines.where(["sources ILIKE ?", "%#{params[:filter]}%"])
     end
+    if params[:category].present? && params[:category].to_sym != :all
+      @headlines = @headlines.in_category(params[:category].to_s)
+    end
     @headlines = @headlines.paginate(:page => params[:page], :per_page => 40)
   end
 

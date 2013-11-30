@@ -19,6 +19,7 @@ gem 'will_paginate-bootstrap'
 gem "tweet-button"
 
 gem 'nokogiri'
+gem 'squeel'
 
 # Heroku Deploy
 gem 'foreman'

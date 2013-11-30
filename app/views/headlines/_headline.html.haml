@@ -8,9 +8,8 @@
     %td.permalink
       = link_to(tweet_url(headline), abbr: "Permalink", target: "_blank") do
         %i.fa.fa-twitter
-  %td.headline= headline.name
+  %td.headline= link_to headline.name, headline
   %td.text-right.sources
-    - headline.source_objects.each do |source|
-      = source_image_tag source
-  / %td.permalink
-  /   = tweet_button url: headline_url(headline), text: headline.name, lang: 'en', via: nil, dnt: true, count: 'none', hashtags: 'fakeheadlines'
+    %small.text-muted= headline.categories.join(" / ")
+    / - headline.source_objects.each do |source|
+    /   = source_image_tag source

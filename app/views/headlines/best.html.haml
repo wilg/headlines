@@ -6,13 +6,18 @@
   %p.text-muted
     These headlines are ones people saved from the generater. #{link_to "Want to generate your own?", generator_url}
 
-  .btn-group.source-picker
-    = link_to "All Sources", params.merge({page: 1, filter: :all}), class: default_button_toggle(:filter, :all, true)
-    - Source.all.each do |source|
-      = link_to (params.merge({page: 1, filter: source.id})), class: default_button_toggle(:filter, source.id) do
-        = source_image_tag source
-        %span.title= source.name
+  / .btn-group.source-picker
+  /   = link_to "All Sources", params.merge({page: 1, filter: :all}), class: default_button_toggle(:filter, :all, true)
+  /   - Source.all.each do |source|
+  /     = link_to (params.merge({page: 1, filter: source.id})), class: default_button_toggle(:filter, source.id) do
+  /       = source_image_tag source
+  /       %span.title= source.name
 
+  .btn-group.source-picker
+    = link_to "All", params.merge({page: 1, category: :all}), class: default_button_toggle(:category, :all, true)
+    - Source.categories.each do |cat, sources|
+      = link_to (params.merge({page: 1, category: cat})), class: default_button_toggle(:category, cat) do
+        = cat
 
 %table.table.table-striped.headlines-table
   = render @headlines
