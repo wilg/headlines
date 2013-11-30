@@ -8,7 +8,7 @@ Headlines::Application.routes.draw do
       post :game_vote
     end
     member do
-      get :vote
+      post :vote
     end
   end
 
