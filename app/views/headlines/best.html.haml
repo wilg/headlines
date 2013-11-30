@@ -3,12 +3,12 @@
 
 .btn-toolbar.best-toolbar
   .btn-group
-    = link_to params.merge({page: 1, order: :trending}), class: default_button_toggle(:order, :trending, true) do
-      %i.fa.fa-flash
-      Hot
-    = link_to params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top) do
+    = link_to params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true) do
       %i.fa.fa-star
       Top Voted
+    = link_to params.merge({page: 1, order: :trending}), class: default_button_toggle(:order, :trending) do
+      %i.fa.fa-flash
+      Hot
     = link_to params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new) do
       %i.fa.fa-clock-o
       Recent
