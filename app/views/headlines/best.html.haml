@@ -4,7 +4,7 @@
 .text-center
 
   %p.text-muted
-    These headlines are ones people saved from the generater. #{link_to "Want to generate your own?", generator_url}
+    These headlines are ones people saved from the generator. #{link_to "Want to generate your own?", generator_url}
 
   / .btn-group.source-picker
   /   = link_to "All Sources", params.merge({page: 1, filter: :all}), class: default_button_toggle(:filter, :all, true)
