@@ -12,12 +12,22 @@
   /     = link_to (params.merge({page: 1, filter: source.id})), class: default_button_toggle(:filter, source.id) do
   /       = source_image_tag source
   /       %span.title= source.name
-
-  .btn-group.source-picker
-    = link_to "All", params.merge({page: 1, category: :all}), class: default_button_toggle(:category, :all, true)
-    - Source.categories.each do |cat, sources|
-      = link_to (params.merge({page: 1, category: cat})), class: default_button_toggle(:category, cat) do
-        = cat
+.tools
+  = form_tag params, class: :searchbar, method: :get do
+    %span.input-group
+      %span.input-group-addon
+        %i.fa.fa-search
+      = text_field_tag :q, params[:q], placeholder: "Search", class: "form-control"
+      - if params[:q].present?
+        %span.input-group-btn
+          = link_to params.merge(q: nil), class: "btn btn-default input" do
+            %i.fa.fa-times
+  .pull-left
+    .btn-group.source-picker
+      = link_to "All", params.merge({page: 1, category: :all}), class: default_button_toggle(:category, :all, true)
+      - Source.categories.each do |cat, sources|
+        = link_to (params.merge({page: 1, category: cat})), class: default_button_toggle(:category, cat) do
+          = cat
 
 %table.table.table-striped.headlines-table
   = render @headlines

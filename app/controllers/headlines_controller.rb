@@ -25,6 +25,9 @@ class HeadlinesController < ApplicationController
     if params[:category].present? && params[:category].to_sym != :all
       @headlines = @headlines.in_category(params[:category].to_s)
     end
+    if params[:q].present?
+      @headlines = @headlines.where("name ilike (?)", "%#{params[:q]}%")
+    end
     @headlines = @headlines.paginate(:page => params[:page], :per_page => 40)
   end
 
