@@ -1,7 +1,7 @@
 class Headline < ActiveRecord::Base
 
   scope :top, -> { order("votes desc, created_at desc") }
-  scope :hot, -> { order("(votes / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 1.hour.ago) }
+  scope :hot, -> { order("(votes / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 20.minutes.ago).where("votes > 1 AND votes < 50") }
 
   scope :in_category, -> (category) {
     cat_sources = Source.categories[category].map{|s|
