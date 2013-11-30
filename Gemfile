@@ -21,6 +21,8 @@ gem "tweet-button"
 gem 'nokogiri'
 gem 'squeel'
 
+gem 'newrelic_rpm'
+
 # Heroku Deploy
 gem 'foreman'
 gem 'rails_12factor', group: :production
