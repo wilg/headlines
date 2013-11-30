@@ -1,0 +1,20 @@
+- hl1 = game_headlines.first
+- hl2 = hl1.present? ? game_headlines.where("id != ?", hl1.id).first : nil
+- if hl1.present? && hl2.present?
+  .row.fight-game
+    .col-md-6
+      .well
+        %h2= hl1.name
+      = link_to "This One Is Funnier", game_vote_headlines_url(yep: hl1.id), remote: true, method: :post, class: "btn btn-primary fight-game-button btn-block btn-lg"
+    .col-md-6
+      .well
+        %h2= hl2.name
+      = link_to "Nope, This One Is Funnier", game_vote_headlines_url(yep: hl2.id), remote: true, method: :post, class: "btn btn-primary fight-game-button btn-block btn-lg"
+  .row.fight-nopes
+    .col-md-4.col-md-offset-4
+      = link_to "Neither Of These Headlines Are Funny This Sucks", game_vote_headlines_url(nope:"#{hl1.id},#{hl2.id}"), remote: true, method: :post, class: "btn btn-danger fight-game-button btn-block"
+- else
+  .well.text-center
+    %h3.text-danger There's no one left to fight.
+    %p You've expressed an opinion on literally everything. That's pretty impressive. Congrats.
+    %p{style: "padding: 20px"}= link_to "Generate Some Hot New Headlines", generator_url, class: "btn btn-lg btn-primary"
