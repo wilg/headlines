@@ -18,15 +18,21 @@
 
         .text-center
           .btn-group
-            = link_to best_url, class: "btn btn-lg #{@short_title == :best ? "btn-primary" : "btn-default"}" do
+            = link_to best_url, class: main_button_best_toggle(:order, :top, true) do
               %i.fa.fa-star
-              View Best Headlines
+              Best Headlines
+            = link_to params.merge({action: :best, controller: :headlines, page: 1, order: :trending}), class: main_button_best_toggle(:order, :trending) do
+              %i.fa.fa-flash
+              Hot
+            = link_to params.merge({action: :best, controller: :headlines, page: 1, order: :new}), class: main_button_best_toggle(:order, :new) do
+              %i.fa.fa-clock-o
+              Recent
             / = link_to game_url, class: "btn btn-lg #{@short_title == :game ? "btn-primary" : "btn-default"}" do
             /   %i.fa.fa-trophy
             /   Headline Fight!
-            = link_to generator_url, class: "btn btn-lg #{@short_title == :generator ? "btn-primary" : "btn-default"}" do
+            = link_to generator_url, class: "btn btn-lg btn-default #{@short_title == :generator ? "active" : "btn-default"}" do
               %i.fa.fa-gears
-              Generate New Headlines
+              Smash New Headlines
 
       %br/
 

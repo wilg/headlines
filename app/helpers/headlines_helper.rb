@@ -20,4 +20,10 @@ module HeadlinesHelper
     "btn btn-default " + active_if_param(*args)
   end
 
+  def main_button_best_toggle(*args)
+    k = "btn btn-lg btn-default "
+    k << active_if_param(*args) if params[:action].to_sym == :best
+    k
+  end
+
 end

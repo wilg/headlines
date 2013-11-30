@@ -1,6 +1,4 @@
-// Place all the styles related to the headlines controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$accent: #962020
 
 header
   overflow: hidden
@@ -11,9 +9,8 @@ header
     p:last-child
       margin-bottom: 0
 
-  .site-title
-    i
-      color: #962020
+  .site-title i
+    color: $accent
 
 .generate-form
   margin-top: 30px
@@ -63,6 +60,7 @@ table.headlines-table
   margin-top: 10px
 
 .source-picker
+  margin-bottom: 20px
   a .title
     display: none
   a:hover .title, a.active .title
