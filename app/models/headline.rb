@@ -18,7 +18,7 @@ class Headline < ActiveRecord::Base
     # Is this literally the worst possible way of doing this?
     # ...
     # Yes. Yes it is.
-    `python #{Rails.root}/lib/markov.py #{sources.join(" ")}`.lines.map(&:chomp)
+    `python #{Rails.root}/lib/markov.py #{sources.join(" ")}`.lines.map(&:chomp).map(&:grubercase)
   end
 
   def source_objects
