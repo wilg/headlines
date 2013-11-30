@@ -8,6 +8,9 @@ tmz:
 giantbomb:
   name: Giant Bomb
   category: Games
+kotaku:
+  name: Kotaku
+  category: Games
 buzzfeed:
   name: BuzzFeed
   category: Trash

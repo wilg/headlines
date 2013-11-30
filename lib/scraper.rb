@@ -4,22 +4,25 @@ class Scraper < Fetcher
 
   def fetch!
     super
-    i = @progress || 0
+    @progress = @progress || 0
     while true
       begin
-        puts "Scraping page #{i} | #{@headlines.length} headlines found"
-        scrape_page(i)
-        @progress = i
+        puts "Scraping page #{@progress} | #{@headlines.length} headlines found"
+        @progress = scrape_page_and_progress(@progress)
         write_file
       rescue => e
-        puts "*** Failed on page #{i}"
+        puts "*** Failed on page #{@progress}"
         puts e.to_s
       end
-      i = i + 1
     end
   end
 
-  def scrape_page(i)
+  def scrape_page_and_progress(progress)
+    scrape_page(progress)
+    return progress + 1
+  end
+
+  def scrape_page(page_number)
     # add_headline! foo
   end
 
