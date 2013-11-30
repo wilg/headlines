@@ -3,16 +3,20 @@ hackernews:
   category: Tech
 theblaze:
   name: The Blaze
-  category: Conservative News
+  category: Opinion
+  default: true
 nypost:
   name: New York Post
-  category: Conservative News
+  category: Opinion
+  default: true
 huffpost_blogs:
   name: Huffington Post Blogs
-  category: Liberal News
+  category: Opinion
+  default: true
 thinkprogress:
   name: ThinkProgress
-  category: Liberal News
+  category: Opinion
+  default: true
 tmz:
   name: TMZ
   category: Entertainment
@@ -20,9 +24,11 @@ tmz:
 giantbomb:
   name: Giant Bomb
   category: Games
+  default: true
 kotaku:
   name: Kotaku
   category: Games
+  default: true
 buzzfeed:
   name: BuzzFeed
   category: Trash
@@ -34,18 +40,19 @@ upworthy:
 gawker:
   name: Gawker
   category: Trash
-  default: false
+  default: true
 jezebel:
   name: Jezebel
   category: Entertainment
-  default: false
+  default: true
 io9:
   name: io9
   category: Entertainment
-  default: false
+  default: true
 tested:
   name: Tested
   category: Tech
+  default: true
 r_politics:
   name: r/politics
   category: Reddit
