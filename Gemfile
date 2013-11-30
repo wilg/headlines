@@ -23,6 +23,8 @@ gem 'squeel'
 
 gem 'newrelic_rpm'
 
+gem 'gruber-case'
+
 # Heroku Deploy
 gem 'foreman'
 gem 'rails_12factor', group: :production
