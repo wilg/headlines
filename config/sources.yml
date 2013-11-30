@@ -3,7 +3,7 @@ hackernews:
   category: Tech
 tmz:
   name: TMZ
-  category: Celebrity
+  category: Entertainment
   default: true
 giantbomb:
   name: Giant Bomb
@@ -19,6 +19,18 @@ upworthy:
   name: Upworthy
   category: Trash
   default: true
+gawker:
+  name: Gawker
+  category: Trash
+  default: false
+jezebel:
+  name: Jezebel
+  category: Entertainment
+  default: false
+io9:
+  name: io9
+  category: Entertainment
+  default: false
 tested:
   name: Tested
   category: Tech
