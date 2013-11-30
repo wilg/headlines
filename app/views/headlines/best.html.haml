@@ -1,18 +1,10 @@
 - @title = "Stupidly Funny Computer-Generated Fake Headlines"
 - @short_title = :best
 
-.text-center
-
-  %p.text-muted
+.sort-tools
+  .hint.text-muted.pull-left
     These headlines are ones people saved from the generator. #{link_to "Want to generate your own?", generator_url}
 
-  / .btn-group.source-picker
-  /   = link_to "All Sources", params.merge({page: 1, filter: :all}), class: default_button_toggle(:filter, :all, true)
-  /   - Source.all.each do |source|
-  /     = link_to (params.merge({page: 1, filter: source.id})), class: default_button_toggle(:filter, source.id) do
-  /       = source_image_tag source
-  /       %span.title= source.name
-.tools
   = form_tag params, class: :searchbar, method: :get do
     %span.input-group
       %span.input-group-addon
@@ -22,12 +14,6 @@
         %span.input-group-btn
           = link_to params.merge(q: nil), class: "btn btn-default input" do
             %i.fa.fa-times
-  .pull-left
-    .btn-group.source-picker
-      = link_to "All", params.merge({page: 1, category: :all}), class: default_button_toggle(:category, :all, true)
-      - Source.categories.each do |cat, sources|
-        = link_to (params.merge({page: 1, category: cat})), class: default_button_toggle(:category, cat) do
-          = cat
 
 %table.table.table-striped.headlines-table
   = render @headlines
