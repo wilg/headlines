@@ -15,7 +15,7 @@ class HeadlinesController < ApplicationController
     if params[:order].present? && params[:order].to_sym == :new
       @headlines = Headline.top.reorder("created_at desc")
     elsif params[:order].present? && params[:order].to_sym == :trending
-      @headlines = Headline.order("created_at desc").where("votes > 1")
+      @headlines = Headline.hot
     else
       @headlines = Headline.top
     end

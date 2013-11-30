@@ -1,6 +1,7 @@
 class Headline < ActiveRecord::Base
 
   scope :top, -> { order("votes desc, created_at desc") }
+  scope :hot, -> { order("(votes / (extract(epoch from now()) - extract(epoch from created_at))) desc") }
 
   serialize :sources, Array
 
