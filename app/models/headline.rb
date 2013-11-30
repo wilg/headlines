@@ -15,6 +15,14 @@ class Headline < ActiveRecord::Base
     Source.find_all(sources)
   end
 
+  before_save do
+    self.name_hash = Headline.name_hash(self.name)
+  end
+
+  def self.name_hash(name)
+    name.parameterize
+  end
+
   # def to_param
   #   "#{id}-#{name.parameterize}"
   # end
