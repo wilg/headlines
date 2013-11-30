@@ -5,11 +5,11 @@
   .col-md-4
     .generate-form
       = form_tag generate_headlines_path, method: :post, data: {remote: true} do
-        = submit_tag "Invent Hilarious Headlines", class: "btn btn-warning btn-lg", disable_with: "Inventing...", id: "invent-button"
+        = submit_tag "Generate Hilarious Headlines", class: "btn btn-warning btn-lg", disable_with: "Generating...", id: "invent-button"
         .source-box
           - Source.categories.each do |category_name, sources|
             .source-category
-              %strong #{category_name}:
+              %strong #{category_name}
               %br/
               - sources.each do |source|
                 %span.source-checkbox-block
@@ -19,7 +19,9 @@
                     = source.name
   .col-md-8
     %p.text-muted
-      Think any of these are funny? Click save to add them to #{link_to "the list of best headlines", best_url}.
+      Computers are good at smashing headlines together, but only you can help us discover which are the silliest.
+    %p.text-muted
+      If you find a good one, save it to #{link_to "the list of best headlines", best_url}.
     #generated-headlines
 
 :javascript

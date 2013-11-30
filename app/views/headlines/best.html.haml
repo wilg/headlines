@@ -3,9 +3,15 @@
 
 .btn-toolbar.best-toolbar
   .btn-group
-    = link_to "Top Voted", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true)
-    = link_to "Most Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new)
-    = link_to "\"Trending\"", params.merge({page: 1, order: :trending}), class: default_button_toggle(:order, :trending)
+    = link_to params.merge({page: 1, order: :trending}), class: default_button_toggle(:order, :trending, true) do
+      %i.fa.fa-flash
+      Hot
+    = link_to params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top) do
+      %i.fa.fa-star
+      Top Voted
+    = link_to params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new) do
+      %i.fa.fa-clock-o
+      Recent
 
   .btn-group.pull-right.source-picker
     = link_to "All Sources", params.merge({page: 1, filter: :all}), class: default_button_toggle(:filter, :all, true)
@@ -15,7 +21,7 @@
         %span.title= source.name
 
 %p.text-muted
-  These headlines have been saved from the generator. #{link_to "Generate your own!", generator_url}
+  These headlines are ones people saved from the generater. #{link_to "Want to generate your own?", generator_url}
 
 %table.table.table-striped.headlines-table
   = render @headlines
