@@ -19,3 +19,9 @@ upworthy:
 tested:
   name: Tested
   category: Tech
+r_politics:
+  name: r/politics
+  category: Reddit
+r_funny:
+  name: r/funny
+  category: Reddit
