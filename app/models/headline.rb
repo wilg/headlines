@@ -4,6 +4,8 @@ class Headline < ActiveRecord::Base
 
   serialize :sources, Array
 
+  validates_presence_of :name
+
   def self.random(sources = ["hackernews"])
     # Is this literally the worst possible way of doing this?
     # ...
