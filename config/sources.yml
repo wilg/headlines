@@ -1,6 +1,18 @@
 hackernews:
   name: Hacker News
   category: Tech
+theblaze:
+  name: The Blaze
+  category: Conservative News
+nypost:
+  name: New York Post
+  category: Conservative News
+huffpost_blogs:
+  name: Huffington Post Blogs
+  category: Liberal News
+thinkprogress:
+  name: ThinkProgress
+  category: Liberal News
 tmz:
   name: TMZ
   category: Entertainment
