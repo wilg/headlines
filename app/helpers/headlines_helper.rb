@@ -26,4 +26,8 @@ module HeadlinesHelper
     k
   end
 
+  def tweet_url(headline)
+    "https://twitter.com/intent/tweet?text=#{CGI.escape headline.name}&source=#{CGI.escape "Headline Smasher"}&url=#{headline_url(headline)}"
+  end
+
 end

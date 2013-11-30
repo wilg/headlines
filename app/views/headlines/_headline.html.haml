@@ -5,6 +5,9 @@
   %td.permalink
     = link_to(headline, abbr: "Permalink") do
       %i.fa.fa-link
+    %td.permalink
+      = link_to(tweet_url(headline), abbr: "Permalink", target: "_blank") do
+        %i.fa.fa-twitter
   %td.headline= headline.name
   %td.text-right.sources
     - headline.source_objects.each do |source|
