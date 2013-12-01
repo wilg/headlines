@@ -1,52 +1,31 @@
 from collections import defaultdict
+from random import randint
 from random import random
 import os
 import itertools
 import sys
 
-"""
-PLEASE DO NOT RUN THIS QUOTED CODE FOR THE SAKE OF daemonology's SERVER, IT IS
-NOT MY SERVER AND I FEEL BAD FOR ABUSING IT. JUST GET THE RESULTS OF THE
-CRAWL HERE: http://pastebin.com/raw.php?i=nqpsnTtW AND SAVE THEM TO "archive.txt"
-
-import urllib2
-import re
-import sys
-
-archive = open("archive.txt","w")
-
-for year in xrange(1,4):
-    for month in xrange(1,13):
-        for day in xrange(1,32):
-            try:
-                print "http://www.daemonology.net/hn-daily/201%d-%02d-%02d.html" % (year, month, day)
-                response = urllib2.urlopen("http://www.daemonology.net/hn-daily/201%d-%02d-%02d.html" % (year, month, day))
-                html = response.read()
-                titles = re.findall(r'ylink"><[^>]*>([^<]*)', html)
-                for title in titles:
-                    archive.write(title+"\n")
-            except:
-                #Invalid dates, could make this less hacky... but... meh
-                pass
-archive.close()
-
-"""
-
-dir = os.path.dirname(__file__)
-
-imported_titles = []
+# Settings
+max_corpus_size = 20000
 
 # Accept args for different dictionaries
 dicts = sys.argv
 dicts.pop(0)
 
 # import multiple dictionaries
+dir = os.path.dirname(__file__)
+imported_titles = []
+per_dictionary_limit = max_corpus_size / len(dicts)
 for dictionary_name in dicts:
     filename = os.path.join(dir, "dictionaries/" + dictionary_name + ".txt")
 
     archive = open(filename)
     dict_titles = archive.read().split("\n")
     archive.close()
+
+    if len(dict_titles) > per_dictionary_limit:
+        window_start = randint(0,len(dict_titles) - per_dictionary_limit)
+        dict_titles = dict_titles[window_start:window_start+per_dictionary_limit]
 
     imported_titles = imported_titles + dict_titles
 
