@@ -55,15 +55,15 @@ class HeadlinesController < ApplicationController
     parse_sources!
   end
 
-  def game_vote
-    if params[:yep].present?
-      upvote_headline! Headline.find(params[:yep])
-    elsif params[:nope].present?
-      params[:nope].split(",").each do |bad_id|
-        downvote_headline! Headline.find(bad_id)
-      end
-    end
-  end
+  # def game_vote
+  #   if params[:yep].present?
+  #     upvote_headline! Headline.find(params[:yep])
+  #   elsif params[:nope].present?
+  #     params[:nope].split(",").each do |bad_id|
+  #       downvote_headline! Headline.find(bad_id)
+  #     end
+  #   end
+  # end
 
 private
 
