@@ -2,16 +2,15 @@ require 'yaml'
 
 class Markov
 
+  @markov_map = {}
+  @lookback = 2
   @source_sentences = []
+
+  attr_reader :markov_map
 
   def initialize(source_sentences)
     build_map! source_sentences
   end
-
-  attr_reader :markov_map
-
-  @markov_map = {}
-  @lookback = 2
 
   def build_map!(source_sentences, lookback = 2)
     @source_sentences = source_sentences
@@ -46,7 +45,7 @@ class Markov
   end
 
   # Typical sampling from a categorical distribution
-  def sample(items)
+  def markov_sample(items)
     items = {} unless items
     next_word = nil
     t = 0.0
@@ -58,97 +57,29 @@ class Markov
   end
 
   def get_sentence(length_max = 140)
-    i = 0
-    j = 0
+    mapkeys = @markov_map.keys
     while true
-      i += 1
       sentence = []
-      next_word = @markov_map.keys.sample
+      next_word = mapkeys.sample
       while next_word != '' && next_word != nil
-        j+= 1
         sentence << next_word
-        # puts "next = #{next_word}"
-        next_word = sample(@markov_map[sentence.last(@lookback).join(' ')])
+        next_word = markov_sample(@markov_map[sentence.last(@lookback).join(' ')])
       end
       sentence = sentence.join(' ')
 
       # Prune titles that are substrings of actual titles
-      next if @source_sentences.any?{|title|
-        if title.include?(sentence)
-          # puts "** #{sentence} ** is substring of ** #{title}"
-          true
-        else
-          false
-        end
-      }
+      next if @source_sentences.any?{|title| title.include?(sentence) }
 
       next if sentence.length > length_max
 
-      # puts "** #{i} outer iterations #{j} inner iterations"
       return sentence
     end
   end
 
 end
 
-path = File.expand_path("../../../lib/dictionaries/hackernews.txt", __FILE__)
-sources = File.readlines(path).map{|l| l.chomp.strip}
+# path = File.expand_path("../../../lib/dictionaries/hackernews.txt", __FILE__)
+# sources = File.readlines(path).map{|l| l.chomp.strip}
 
-markov = Markov.new(sources)
-10.times { puts markov.get_sentence }
-
-# dumppath = File.expand_path("../../../markov.yml", __FILE__)
-# File.open(dumppath, 'w') {|f| f.write markov.markov_map.to_yaml }
-
-# puts YAML.dump(markov.markov_map)
-
-# archive = open("archive.txt")
-# titles = archive.read().split("\n")
-# archive.close()
-# markov_map = defaultdict(lambda:defaultdict(int))
-
-# lookback = 2
-
-#Generate map in the form word1 -> word2 -> occurences of word2 after word1
-# for title in titles[:-1]:
-#     title = title.split()
-#     if len(title) > lookback:
-#         for i in xrange(len(title)+1):
-#             markov_map[' '.join(title[max(0,i-lookback):i])][' '.join(title[i:i+1])] += 1
-
-# #Convert map to the word1 -> word2 -> probability of word2 after word1
-# for word, following in markov_map.items():
-#     total = float(sum(following.values()))
-#     for key in following:
-#         following[key] /= total
-
-# #Typical sampling from a categorical distribution
-# def sample(items):
-#     next_word = None
-#     t = 0.0
-#     for k, v in items:
-#         t += v
-#         if t and random() < v/t:
-#             next_word = k
-#     return next_word
-
-# sentences = []
-# while len(sentences) < 100:
-#     sentence = []
-#     next_word = sample(markov_map[''].items())
-#     while next_word != '':
-#         sentence.append(next_word)
-#         next_word = sample(markov_map[' '.join(sentence[-lookback:])].items())
-#     sentence = ' '.join(sentence)
-#     flag = True
-#     for title in titles: #Prune titles that are substrings of actual titles
-#         if sentence in title:
-#             flag = False
-#             break
-#     if flag:
-#         sentences.append(sentence)
-
-# for sentence in sentences:
-#     print sentence
-
-# end
+# markov = Markov.new(sources)
+# 10.times { puts markov.get_sentence }
