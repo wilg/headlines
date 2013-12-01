@@ -1,5 +1,7 @@
 require 'yaml'
 
+# This class is a nightmare.
+
 class MarkovSourcePhrase
   attr_accessor :title, :source_id
   def initialize(title, source_id)
@@ -16,6 +18,9 @@ class MarkovSourcePhrase
   end
   def hash
     self.title.hash
+  end
+  def to_s
+    title
   end
   alias_method :eql?, :==
 end
@@ -37,7 +42,24 @@ class MarkovFragment
   def hash
     self.fragment.hash
   end
+  def to_s
+    fragment
+  end
   alias_method :eql?, :==
+end
+
+class MarkovResultPhrase
+  @fragments = []
+  attr_accessor :fragments
+  def initialize
+    @fragments = []
+  end
+  def <<(next_frag)
+    @fragments << next_frag
+  end
+  def to_s
+    @fragments.map(&:fragment).join(' ')
+  end
 end
 
 class Markov
@@ -97,24 +119,22 @@ class Markov
     next_word
   end
 
-  def get_sentence(length_max = 140)
+  def generate(length_max = 140)
     mapkeys = @markov_map.keys.map(&:fragment)
     while true
-      sentence = []
-      next_word = mapkeys.sample
-      while next_word != '' && next_word != nil
-        sentence << next_word
-        frag = markov_sample(@markov_map[MarkovFragment.new(sentence.last(@lookback).join(' '), nil)])
-        next_word = frag ? frag.fragment : nil
+      result = MarkovResultPhrase.new
+      next_fragment = MarkovFragment.new(mapkeys.sample, nil)
+      while next_fragment && next_fragment.fragment != ''
+        result << next_fragment
+        next_fragment = markov_sample(@markov_map[MarkovFragment.new(result.fragments.map(&:to_s).last(@lookback).join(' '), nil)])
       end
-      sentence = sentence.join(' ')
 
       # Prune titles that are substrings of actual titles
-      next if @source_phrases.any?{|phrase| phrase.title.include?(sentence) }
+      next if @source_phrases.any?{|phrase| phrase.title.include?(result.to_s) }
 
-      next if sentence.length > length_max
+      next if result.to_s.length > length_max
 
-      return sentence
+      return result
     end
   end
 
@@ -127,4 +147,4 @@ end
 
 # puts "=== genny ==="
 
-# 10.times { puts markov.get_sentence }
+# 10.times { puts markov.generate.to_s }
