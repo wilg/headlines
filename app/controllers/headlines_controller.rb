@@ -44,7 +44,7 @@ class HeadlinesController < ApplicationController
   def vote
     headline = Headline.find(params[:id])
     upvote_headline! headline
-    redirect_to best_headlines_url
+    head :ok
   end
 
   def generator
