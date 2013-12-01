@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class Headline < ActiveRecord::Base
 
   scope :top, -> { order("votes desc, created_at desc") }
@@ -50,6 +52,10 @@ class Headline < ActiveRecord::Base
     sorted = cats.to_a.sort{|c| c[1] }
     sorted = sorted[0,2] if sorted.length > 2
     sorted.map{|pair| pair[0]}
+  end
+
+  def self.salted_hash(headline)
+    Digest::SHA1.hexdigest("#{headline}-#{ENV['HEADLINE_INJECTION_SALT']}")
   end
 
 end

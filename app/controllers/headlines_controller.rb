@@ -1,13 +1,19 @@
 class HeadlinesController < ApplicationController
 
   def save
+
+    if Headline.salted_hash(params[:headline]) != params[:hash]
+      head :forbidden
+      return
+    end
+
     headline = Headline.where(name: params[:headline]).first_or_create
     headline.sources = params[:sources].split(",")
     headline.save
 
     upvote_headline! headline
 
-    redirect_to best_headlines_url
+    head :ok
   end
 
   def best
