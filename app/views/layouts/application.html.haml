@@ -44,13 +44,16 @@
       %hr/
 
       %small.text-muted
-        .pull-right
-          %p this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
+        .pull-right.text-right
+          %p
+            #{link_to "report a bug", "https://github.com/wilg/headlines/issues"} or #{link_to "suggest a feature", "https://github.com/wilg/headlines/issues"}
+            %br/
+            this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
         .pull-left
           %p
             made really quickly by #{link_to "Wil Gieseler", "http://github.com/wilg"} (#{link_to "@wilgieseler", "http://twitter.com/wilgieseler"})
-            \ -
-            ripped off from #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"} that I didn't make
+            %br/
+            inspired by #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"} that I didn't make
 
     #upvoted-button{style: "display:none"}
       %button.btn.disabled{type: :button}
