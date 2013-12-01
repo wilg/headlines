@@ -1,7 +1,15 @@
-%tr
+%tr{class: "headline-row-#{headline.id}"}
   %td.count
     %span.lead.vote-count= headline.votes
-  %td.votebox= render partial: "headlines/headline_votebox", locals: {headline: headline}
+  - if can_downvote?(headline) || did_downvote?(headline)
+    %td.votebox.downvotebox
+      .btn-group.btn-group-justified
+        = render partial: "headlines/headline_votebox", locals: {headline: headline}
+        = render partial: "headlines/headline_downvotebox", locals: {headline: headline}
+  - else
+    %td.votebox
+      .btn-group.btn-group-justified
+        = render partial: "headlines/headline_votebox", locals: {headline: headline}
   %td.headline= link_to headline.name, headline
   %td.permalink
     = link_to(headline, abbr: "Permalink") do

@@ -42,9 +42,23 @@ class HeadlinesController < ApplicationController
   end
 
   def vote
-    headline = Headline.find(params[:id])
-    upvote_headline! headline
-    head :ok
+    Headline.transaction do
+      @headline = Headline.find(params[:id])
+      if params[:down].to_i == 1
+        if can_downvote?(@headline) && !did_downvote?(@headline)
+          downvote_headline! @headline
+        else
+          clear_votes! @headline
+        end
+      else
+        if did_upvote?(@headline)
+          clear_votes! @headline
+        else
+          upvote_headline! @headline
+        end
+      end
+    end
+    @headline.reload
   end
 
   def generator
@@ -55,27 +69,7 @@ class HeadlinesController < ApplicationController
     parse_sources!
   end
 
-  # def game_vote
-  #   if params[:yep].present?
-  #     upvote_headline! Headline.find(params[:yep])
-  #   elsif params[:nope].present?
-  #     params[:nope].split(",").each do |bad_id|
-  #       downvote_headline! Headline.find(bad_id)
-  #     end
-  #   end
-  # end
-
 private
-
-  def upvote_headline!(headline)
-    Headline.increment_counter(:votes, headline.id)
-    save_vote! headline
-  end
-
-  def downvote_headline!(headline)
-    Headline.decrement_counter(:votes, headline.id)
-    clear_vote!(headline)
-  end
 
   def parse_sources!
     @sources = []
@@ -83,18 +77,6 @@ private
       @sources << source.id if params[source.id].to_i == 1
     end
     @sources = Source.all.reject{|s| !s.default }.map(&:id) if @sources.blank?
-  end
-
-  def save_vote!(headline)
-    votes = session[:votes] || []
-    votes << headline.id
-    session[:votes] = votes.uniq
-  end
-
-  def clear_vote!(headline)
-    votes = session[:votes] || []
-    votes.delete(headline.id)
-    session[:votes] = votes.uniq
   end
 
 end

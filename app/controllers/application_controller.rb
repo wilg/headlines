@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :redirect_if_old
 
+  include VoteHelper
+
   protected
 
   def redirect_if_old

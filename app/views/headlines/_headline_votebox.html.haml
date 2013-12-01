@@ -1,8 +1,7 @@
-- if can_vote?(headline)
-  = link_to vote_headline_url(headline), remote: true, method: :post, class: "btn btn-success upvote-button", data: {disable_with: "Voting"} do
-    %i.fa.fa-thumbs-up
-    Vote
-- else
-  %button.btn.disabled{type: :button}
-    %i.fa.fa-thumbs-up
-    Voted
+= link_to vote_headline_url(headline), remote: true, method: :post, class: "btn #{did_upvote?(headline) ? "btn-success" : 'btn-default'} upvote-button", data: {disable_with: loading_icon} do
+  %i.fa.fa-thumbs-up
+  - unless can_downvote?(headline) || did_downvote?(headline)
+    - if did_upvote?(headline)
+      Voted
+    - else
+      Vote

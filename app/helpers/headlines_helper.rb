@@ -1,9 +1,5 @@
 module HeadlinesHelper
 
-  def can_vote?(headline)
-    session[:votes].blank? || !session[:votes].include?(headline.id)
-  end
-
   def selected_sources_includes?(source)
     @sources.present? && @sources.include?(source.id)
   end
@@ -28,6 +24,10 @@ module HeadlinesHelper
 
   def tweet_url(headline)
     "https://twitter.com/intent/tweet?text=#{CGI.escape headline.name}&source=#{CGI.escape "Headline Smasher"}&url=#{headline_url(headline)}"
+  end
+
+  def loading_icon
+    "..."
   end
 
 end
