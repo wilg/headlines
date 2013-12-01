@@ -23,7 +23,14 @@ class HeadlinesController < ApplicationController
     elsif params[:order].present? && params[:order].to_sym == :trending
       @headlines = Headline.hot
     else
+      @sorting_top = true
       @headlines = Headline.top
+      if params[:timeframe].present? && params[:timeframe].to_sym == :all
+      elsif params[:timeframe].present? && params[:timeframe].to_sym == :yesterday
+        @headlines = @headlines.on_day(Date.yesterday)
+      else
+        @headlines = @headlines.on_day(Date.today)
+      end
     end
     if params[:filter].present? && params[:filter].to_sym != :all
       @headlines = @headlines.where(["sources ILIKE ?", "%#{params[:filter]}%"])

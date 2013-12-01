@@ -2,8 +2,11 @@
 - @short_title = :best
 
 .sort-tools
-  .hint.text-muted.pull-left
-    These headlines are ones people saved from the generator. #{link_to "Want to generate your own?", generator_url}
+  - if @sorting_top
+    .btn-group.source-picker
+      = link_to "Today", params.merge({page: 1, timeframe: :today}), class: default_button_toggle(:timeframe, :today, true)
+      = link_to "Yesterday", params.merge({page: 1, timeframe: :yesterday}), class: default_button_toggle(:timeframe, :yesterday)
+      = link_to "All Time", params.merge({page: 1, timeframe: :all}), class: default_button_toggle(:timeframe, :all)
 
   = form_tag params, class: :searchbar, method: :get do
     %span.input-group
