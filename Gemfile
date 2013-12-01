@@ -25,6 +25,8 @@ gem 'newrelic_rpm'
 
 gem 'gruber-case'
 
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
 # Heroku Deploy
 gem 'foreman'
 gem 'rails_12factor', group: :production
