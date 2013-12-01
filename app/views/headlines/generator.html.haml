@@ -23,13 +23,9 @@
     %p.text-muted
       If you find a good one, save it to #{link_to "the list of best headlines", best_url}.
 
-    .alert.alert-warning
-      %strong Some Slowness
-      We're currently experiencing a little more traffic than usual so the generator might be a bit slow.
-
     #generated-headlines
 
-/ :javascript
-/   $(function(){
-/     $("#invent-button").click();
-/   });
+:javascript
+  $(function(){
+    $("#invent-button").click();
+  });
