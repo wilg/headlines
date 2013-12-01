@@ -41,6 +41,10 @@ gawker:
   name: Gawker
   category: Trash
   default: true
+defamer:
+  name: Defamer
+  category: Entertainment
+  default: true
 jezebel:
   name: Jezebel
   category: Entertainment
