@@ -1,30 +1,71 @@
 require 'yaml'
 
+class MarkovSourcePhrase
+  attr_accessor :title, :source_id
+  def initialize(title, source_id)
+    self.title = title
+    self.source_id = source_id
+  end
+  def ==(object)
+    if object.equal?(self)
+     return true
+    elsif !self.class.equal?(object.class)
+     return false
+    end
+    return self.title == object.title
+  end
+  def hash
+    self.title.hash
+  end
+  alias_method :eql?, :==
+end
+
+class MarkovFragment
+  attr_accessor :fragment, :source_phrase
+  def initialize(fragment, source_phrase)
+    self.fragment = fragment
+    self.source_phrase = source_phrase
+  end
+  def ==(object)
+    if object.equal?(self)
+     return true
+    elsif !self.class.equal?(object.class)
+     return false
+    end
+    return self.fragment == object.fragment
+  end
+  def hash
+    self.fragment.hash
+  end
+  alias_method :eql?, :==
+end
+
 class Markov
 
   @markov_map = {}
   @lookback = 2
-  @source_sentences = []
+  @source_phrases = []
 
   attr_reader :markov_map
 
-  def initialize(source_sentences)
-    build_map! source_sentences
+  def initialize(source_sentences, source_id)
+    hls = source_sentences.map{|s| MarkovSourcePhrase.new(s, source_id) }
+    build_map! hls
   end
 
-  def build_map!(source_sentences, lookback = 2)
-    @source_sentences = source_sentences
+  def build_map!(source_phrases, lookback = 2)
+    @source_phrases = source_phrases
     @lookback = lookback
 
     markov_map = {}
 
     # Generate map in the form word1 -> word2 -> occurences of word2 after word1
-    @source_sentences.each do |title|
-      title = title.split
+    @source_phrases.each do |phrase|
+      title = phrase.title.split
       if title.length > lookback
         (title.length + 1).times do |i|
-          a = title[([0, i - lookback].max)...i].join(' ')
-          b = title[i...i+1].join(' ')
+          a = MarkovFragment.new(title[([0, i - lookback].max)...i].join(' '), phrase)
+          b = MarkovFragment.new(title[i...i+1].join(' '), phrase)
           markov_map[a]    = {} if markov_map[a].nil?
           markov_map[a][b] = 0 if markov_map[a][b].nil?
           markov_map[a][b] = markov_map[a][b] + 1
@@ -33,7 +74,7 @@ class Markov
     end
 
     # Convert map to the word1 -> word2 -> probability of word2 after word1
-    markov_map.each do |word, following|
+    markov_map.each do |fragment, following|
       total = following.values.reduce(:+).to_f # sum
       following.each_key do |key|
         following[key] /= total
@@ -57,18 +98,19 @@ class Markov
   end
 
   def get_sentence(length_max = 140)
-    mapkeys = @markov_map.keys
+    mapkeys = @markov_map.keys.map(&:fragment)
     while true
       sentence = []
       next_word = mapkeys.sample
       while next_word != '' && next_word != nil
         sentence << next_word
-        next_word = markov_sample(@markov_map[sentence.last(@lookback).join(' ')])
+        frag = markov_sample(@markov_map[MarkovFragment.new(sentence.last(@lookback).join(' '), nil)])
+        next_word = frag ? frag.fragment : nil
       end
       sentence = sentence.join(' ')
 
       # Prune titles that are substrings of actual titles
-      next if @source_sentences.any?{|title| title.include?(sentence) }
+      next if @source_phrases.any?{|phrase| phrase.title.include?(sentence) }
 
       next if sentence.length > length_max
 
@@ -81,5 +123,8 @@ end
 # path = File.expand_path("../../../lib/dictionaries/hackernews.txt", __FILE__)
 # sources = File.readlines(path).map{|l| l.chomp.strip}
 
-# markov = Markov.new(sources)
+# markov = Markov.new(sources, 'hackernews')
+
+# puts "=== genny ==="
+
 # 10.times { puts markov.get_sentence }
