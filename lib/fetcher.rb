@@ -40,8 +40,13 @@ class Fetcher
     end
   end
 
+  def is_valid?(headline)
+    headline[-1, 1] != "…" # We don't want pre-truncated headlines
+  end
+
   def write_file
-    File.open(dictionary_path, 'w') {|f| f.write(@headlines.uniq.join("\n")) }
+    headlines = @headlines.uniq.select{|x| is_valid?(x) }
+    File.open(dictionary_path, 'w') {|f| f.write(headlines.join("\n")) }
     write_progress
   end
 
