@@ -10,9 +10,9 @@ class HeadlinesController < ApplicationController
       @headlines = Headline.top
       if params[:timeframe].present? && params[:timeframe].to_sym == :all
       elsif params[:timeframe].present? && params[:timeframe].to_sym == :yesterday
-        @headlines = @headlines.on_day(Date.yesterday)
+        @headlines = @headlines.yesterday
       else
-        @headlines = @headlines.on_day(Date.today)
+        @headlines = @headlines.today
       end
     end
     if params[:filter].present? && params[:filter].to_sym != :all
