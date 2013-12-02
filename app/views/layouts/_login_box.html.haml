@@ -1,14 +1,14 @@
 #login-box.text-muted.pull-right
   - if user_signed_in?
-    = link_to leaderboard_url, class: 'btn btn-link' do
-      %i.fa.fa-trophy
-      = number_with_delimiter current_user.karma
+    = link_to destroy_user_session_path, method: :delete, class: 'btn btn-link btn-autohide link-muted' do
+      %i.fa.fa-sign-out
+      %span sign out
     = link_to current_user, class: 'btn btn-link' do
       %i.fa.fa-user
       = current_user.login
-    = link_to destroy_user_session_path, method: :delete, class: 'btn btn-default btn-sm' do
-      %i.fa.fa-sign-out
-      Sign Out
+    = link_to leaderboard_url, class: 'btn btn-link' do
+      %i.fa.fa-trophy
+      = number_with_delimiter current_user.karma
   - else
     .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
       %i.fa.fa-user

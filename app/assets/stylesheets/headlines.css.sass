@@ -29,6 +29,11 @@ header
 #login-box
   margin-top: 20px
   margin-bottom: 10px
+  a
+    text-decoration: none
+    &:hover
+      background: white
+      border-radius: 6px
 
 .modal-sign-up,
   width: 250px
@@ -96,15 +101,16 @@ table.headlines-table
 
 .source-picker
   margin-bottom: 20px
-  a .title
+
+.btn-autohide
+  span
     display: none
-  a:hover .title, a.active .title
+  &:hover span, &.active span
     display: inline
 
-.fight-game
-  .well
-    min-height: 200px
-.fight-nopes
-
-  padding-top: 30px
-  padding-bottom: 30px
+.link-muted
+  color: $text-muted
+  &:hover
+    color: $gray
+  &:active
+    color: $gray-dark
