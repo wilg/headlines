@@ -10,7 +10,7 @@ class GeneratorController < ApplicationController
   end
 
   def save
-    head :ok and return if GENERATOR_DISABLED
+    head :ok and return if GENERATOR_DISABLED || GENERATOR_SAVING_DISABLED
 
     if Headline.salted_hash(params[:headline]) != params[:hash]
       head :forbidden
