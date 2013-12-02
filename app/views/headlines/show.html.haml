@@ -4,8 +4,8 @@
   %h1= @headline.name
   %h2
     .count
-      %span.vote-count= @headline.votes
-      = @headline.votes != 1 ? "votes" : "vote"
+      %span.vote-count= @headline.vote_count
+      = @headline.vote_count != 1 ? "votes" : "vote"
     - unless VOTING_DISABLED
       .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline}
 .row
@@ -22,7 +22,10 @@
 
     %p.text-muted
       %small
-        generated #{time_ago_in_words @headline.created_at} ago - depth #{@headline.depth}
+        generated #{time_ago_in_words @headline.created_at} ago
+        - if @headline.creator
+          \ - discovered by #{@headline.creator.login}
+        \ - depth #{@headline.depth}
 
   .col-md-6
     .well

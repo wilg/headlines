@@ -33,22 +33,22 @@ class HeadlinesController < ApplicationController
 
   def vote
     head :ok and return if VOTING_DISABLED
-    Headline.transaction do
-      @headline = Headline.find(params[:id])
+    @headline = Headline.find(params[:id])
+    # Headline.transaction do
       if params[:down].to_i == 1
-        if can_downvote?(@headline) && !did_downvote?(@headline)
-          downvote_headline! @headline
+        if did_downvote?(@headline)
+          current_user.clear_votes! @headline
         else
-          clear_votes! @headline
+          current_user.downvote_headline! @headline
         end
       else
         if did_upvote?(@headline)
-          clear_votes! @headline
+          current_user.clear_votes! @headline
         else
-          upvote_headline! @headline
+          current_user.upvote_headline! @headline
         end
       end
-    end
+    # end
     @headline.reload
   end
 

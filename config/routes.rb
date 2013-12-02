@@ -1,5 +1,7 @@
 Headlines::Application.routes.draw do
 
+  devise_for :users
+
   resources :headlines do
     collection do
       get :best

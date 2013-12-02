@@ -1,0 +1,15 @@
+#login-box.text-muted.pull-right
+  - if user_signed_in?
+    %buttton.btn.disabled
+      %i.fa.fa-user
+      = current_user.login
+    = link_to destroy_user_session_path, method: :delete, class: 'btn btn-default btn-sm' do
+      %i.fa.fa-sign-out
+      Sign Out
+  - else
+    = link_to new_user_registration_path, class: 'btn btn-default btn-sm' do
+      %i.fa.fa-user
+      Sign Up
+    = link_to new_user_session_path, class: 'btn btn-default btn-sm' do
+      %i.fa.fa-sign-in
+      Sign In

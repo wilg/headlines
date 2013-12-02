@@ -36,10 +36,17 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
+    better_errors (1.0.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass-rails (3.0.2.1)
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.1.4)
+    coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -47,6 +54,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    debug_inspector (0.0.2)
+    devise (3.2.2)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     dotenv (0.9.0)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -71,12 +85,13 @@ GEM
     marky_markov (0.3.4)
       ox (~> 1.4)
     mime-types (1.25.1)
-    mini_portile (0.5.1)
+    mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
     newrelic_rpm (3.6.9.171)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    orm_adapter (0.5.0)
     ox (1.9.4)
     pg (0.17.0)
     polyamorous (0.6.4)
@@ -132,13 +147,15 @@ GEM
       polyglot (>= 0.3.1)
     tweet-button (0.1.0)
     tzinfo (0.3.38)
-    uglifier (2.3.1)
+    uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.7.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    warden (1.2.3)
+      rack (>= 1.0)
     will_paginate (3.0.5)
     will_paginate-bootstrap (1.0.0)
       will_paginate (>= 3.0.3)
@@ -148,8 +165,11 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store!
+  better_errors
+  binding_of_caller
   bootstrap-sass-rails
   coffee-rails (~> 4.0.0)
+  devise
   font-awesome-rails
   foreman
   gruber-case

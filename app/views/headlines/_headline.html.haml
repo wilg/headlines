@@ -1,6 +1,6 @@
 %tr{class: "headline-row-#{headline.id}"}
   %td.count
-    %span.lead.vote-count= headline.votes
+    %span.lead.vote-count= headline.vote_count
   - unless VOTING_DISABLED
     - if can_downvote?(headline) || did_downvote?(headline)
       %td.votebox.downvotebox

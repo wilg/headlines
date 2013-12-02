@@ -2,8 +2,8 @@ require 'digest/sha1'
 
 class Headline < ActiveRecord::Base
 
-  scope :top, -> { order("votes desc, created_at desc") }
-  scope :hot, -> { order("(votes / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 20.minutes.ago).where("votes > 1 AND votes < 50") }
+  scope :top, -> { order("vote_count desc, created_at desc") }
+  scope :hot, -> { order("(vote_count / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 20.minutes.ago).where("vote_count > 1 AND vote_count < 50") }
   scope :today, -> { where("created_at > ?", 1.day.ago) }
   scope :yesterday, -> { where("created_at > ? AND created_at < ?", 2.days.ago, 1.day.ago) }
 
@@ -18,12 +18,16 @@ class Headline < ActiveRecord::Base
 
   validates_presence_of :name
 
+  has_many :votes
+  belongs_to :creator, class_name: "User"
+
   def source_objects
     Source.find_all(sources)
   end
 
   before_save do
     self.name_hash = Headline.name_hash(self.name)
+    self.vote_count = self.votes.sum(:value)
   end
 
   def self.name_hash(name)

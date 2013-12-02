@@ -18,6 +18,8 @@ gem 'will_paginate-bootstrap'
 
 gem "tweet-button"
 
+gem 'devise'
+
 gem 'nokogiri'
 gem 'squeel'
 
@@ -26,6 +28,12 @@ gem 'newrelic_rpm'
 gem 'gruber-case'
 
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
+# Dev
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
 
 # Heroku Deploy
 gem 'foreman'

@@ -17,12 +17,15 @@ class GeneratorController < ApplicationController
       return
     end
 
-    @headline = Headline.where(name: params[:headline]).first_or_create
-    @headline.sources = params[:sources].split(",")
-    @headline.depth = params[:depth]
-    @headline.save
+    @headline = Headline.where(name: params[:headline]).first_or_initialize
+    if @headline.new_record?
+      @headline.sources = params[:sources].split(",")
+      @headline.depth = params[:depth]
+      @headline.creator = current_user
+      @headline.save!
+    end
 
-    upvote_headline! @headline
+    current_user.upvote_headline! @headline
   end
 
 private

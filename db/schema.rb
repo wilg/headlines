@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201231150) do
+ActiveRecord::Schema.define(version: 20131202041835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "headlines", force: true do |t|
     t.string   "name"
-    t.integer  "votes",      default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "sources"
     t.string   "name_hash"
     t.integer  "depth",      default: 2
+    t.integer  "creator_id"
+    t.integer  "vote_count"
   end
 
   create_table "sessions", force: true do |t|
@@ -35,5 +36,30 @@ ActiveRecord::Schema.define(version: 20131201231150) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "login",               default: "", null: false
+    t.string   "encrypted_password",  default: "", null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "vote_count",          default: 0,  null: false
+  end
+
+  add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "value"
+    t.integer  "headline_id"
+    t.integer  "user_id"
+    t.string   "ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

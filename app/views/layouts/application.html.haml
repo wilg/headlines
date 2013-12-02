@@ -9,38 +9,43 @@
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
     %meta{charset: 'utf-8'}
   %body
+    %header
+      .container
+        #header-content
+          = render 'layouts/login_box'
+
+          %h1.site-title
+            Headline
+            %i.fa.fa-gavel
+            Smasher
+          .lead Fake headlines created by mashing up real headlines.
+
+          .btn-toolbar
+            .btn-group
+              = link_to best_url, class: main_button_best_toggle(:order, :top, true) do
+                %i.fa.fa-star
+                Best Headlines
+              = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :trending}), class: main_button_best_toggle(:order, :trending) do
+                %i.fa.fa-flash
+                Hot
+              = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :new}), class: main_button_best_toggle(:order, :new) do
+                %i.fa.fa-clock-o
+                Recent
+              / = link_to game_url, class: "btn btn-lg #{@short_title == :game ? "btn-primary" : "btn-default"}" do
+              /   %i.fa.fa-trophy
+              /   Headline Fight!
+            - unless GENERATOR_DISABLED
+              .btn-group.pull-right
+                = link_to generator_url, class: "btn btn-lg btn-default #{@short_title == :generator ? "active" : "btn-default"}" do
+                  %i.fa.fa-gears
+                  Smash New Headlines
     .container
 
-      %header.text-center
-
-        %h1.site-title
-          Headline
-          %i.fa.fa-gavel
-          Smasher
-        .lead Fake headlines created by mashing up real headlines.
-
-        .text-center
-          .btn-group
-            = link_to best_url, class: main_button_best_toggle(:order, :top, true) do
-              %i.fa.fa-star
-              Best Headlines
-            = link_to params.merge({action: :best, controller: :headlines, page: 1, order: :trending}), class: main_button_best_toggle(:order, :trending) do
-              %i.fa.fa-flash
-              Hot
-            = link_to params.merge({action: :best, controller: :headlines, page: 1, order: :new}), class: main_button_best_toggle(:order, :new) do
-              %i.fa.fa-clock-o
-              Recent
-            / = link_to game_url, class: "btn btn-lg #{@short_title == :game ? "btn-primary" : "btn-default"}" do
-            /   %i.fa.fa-trophy
-            /   Headline Fight!
-            - unless GENERATOR_DISABLED
-              = link_to generator_url, class: "btn btn-lg btn-default #{@short_title == :generator ? "active" : "btn-default"}" do
-                %i.fa.fa-gears
-                Smash New Headlines
       - if ENV['SITE_ALERT'].present?
         #site-alert.alert.alert-warning.text-center
           %strong Hey!
           = ENV['SITE_ALERT']
+
 
       %br/
 
