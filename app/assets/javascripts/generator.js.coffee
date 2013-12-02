@@ -34,8 +34,6 @@ $ ->
   # Auto-generate when opening generator page
   if $("#invent-button").length > 0
     generate_new()
-  else
-    alert 'not on page'
 
   $("#invent-button").on 'click', ->
     generate_new()
