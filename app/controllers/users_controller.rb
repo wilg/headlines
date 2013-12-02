@@ -4,4 +4,8 @@ class UsersController < ApplicationController
     @users = User.all.top.paginate(:page => params[:page], :per_page => 40)
   end
 
+  def show
+    @user = User.find_by_login(params[:id])
+  end
+
 end

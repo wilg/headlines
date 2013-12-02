@@ -1,0 +1,17 @@
+- @title = "User | #{@user.login}"
+
+%h2= @user.login
+
+.lead
+  .karma
+    %i.fa.fa-trophy
+    = @user.karma
+    karma
+    .pull-right
+      signed up #{time_ago_in_words @user.created_at} ago
+  .karma
+    %span.text-muted
+      = pluralize @user.headlines.size, 'saved headline'
+  .karma
+    %span.text-muted
+      = pluralize @user.votes.size, 'vote'

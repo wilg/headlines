@@ -24,7 +24,7 @@
       %small
         generated #{time_ago_in_words @headline.created_at} ago
         - if @headline.creator
-          \ - discovered by #{@headline.creator.login}
+          \ - discovered by #{link_to @headline.creator.login, @headline.creator}
         \ - depth #{@headline.depth}
 
   .col-md-6

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :votes, counter_cache: true
   has_many :headlines, foreign_key: :creator_id
+  has_many :voted_headlines, through: :votes, source: :headline
 
   scope :top, -> { order("karma desc") }
 
@@ -39,6 +40,10 @@ class User < ActiveRecord::Base
 
   def clear_votes(headline)
     votes.where(headline: headline).delete_all
+  end
+
+  def to_param
+    login
   end
 
 end

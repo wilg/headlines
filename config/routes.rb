@@ -12,13 +12,8 @@ Headlines::Application.routes.draw do
   end
 
   resources :users do
-    collection do
-      get :top
-    end
-    member do
-      get :submitted
-      get :voted
-    end
+    resources :headlines
+    resources :votes
   end
 
   get "leaderboard", to: "users#index"
