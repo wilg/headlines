@@ -5,10 +5,13 @@ class GeneratorController < ApplicationController
   end
 
   def generate
+    head :ok and return if GENERATOR_DISABLED
     parse_sources!
   end
 
   def save
+    head :ok and return if GENERATOR_DISABLED
+
     if Headline.salted_hash(params[:headline]) != params[:hash]
       head :forbidden
       return

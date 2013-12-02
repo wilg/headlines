@@ -6,7 +6,8 @@
     .count
       %span.vote-count= @headline.votes
       = @headline.votes != 1 ? "votes" : "vote"
-    .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline}
+    - unless VOTING_DISABLED
+      .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline}
 .row
   .col-md-6
     %p

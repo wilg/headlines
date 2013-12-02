@@ -3,21 +3,26 @@
 
 .row
   .col-md-4
-    .generate-form
-      = form_tag generate_path, method: :post, data: {remote: true} do
-        = submit_tag "Generate Hilarious Headlines", class: "btn btn-warning btn-lg", disable_with: "Generating...", id: "invent-button"
-        .source-box
-          %h5.text-muted Sources to Mash
-          - Source.categories.each do |category_name, sources|
-            .source-category
-              %h6 #{category_name}
-              - sources.each do |source|
-                %span.source-checkbox-block
-                  = check_box_tag source.id, 1, selected_sources_includes?(source)
-                  = label_tag source.id do
-                    = source_image_tag source
-                    = source.name
-          / %h5.text-muted Mashiness
+    - if GENERATOR_DISABLED
+      .alert.alert-danger
+        %strong Whoops!
+        The generator is currently offline. Pardon our dust.
+    - else
+      .generate-form
+        = form_tag generate_path, method: :post, data: {remote: true} do
+          = submit_tag "Generate Hilarious Headlines", class: "btn btn-warning btn-lg", disable_with: "Generating...", id: "invent-button"
+          .source-box
+            %h5.text-muted Sources to Mash
+            - Source.categories.each do |category_name, sources|
+              .source-category
+                %h6 #{category_name}
+                - sources.each do |source|
+                  %span.source-checkbox-block
+                    = check_box_tag source.id, 1, selected_sources_includes?(source)
+                    = label_tag source.id do
+                      = source_image_tag source
+                      = source.name
+            / %h5.text-muted Mashiness
 
   .col-md-8
     %p.text-muted

@@ -32,6 +32,7 @@ class HeadlinesController < ApplicationController
   end
 
   def vote
+    head :ok and return if VOTING_DISABLED
     Headline.transaction do
       @headline = Headline.find(params[:id])
       if params[:down].to_i == 1
