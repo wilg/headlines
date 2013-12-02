@@ -1,6 +1,9 @@
 #login-box.text-muted.pull-right
   - if user_signed_in?
     %buttton.btn.disabled
+      %i.fa.fa-trophy
+      = number_with_delimiter current_user.karma
+    %buttton.btn.disabled
       %i.fa.fa-user
       = current_user.login
     = link_to destroy_user_session_path, method: :delete, class: 'btn btn-default btn-sm' do

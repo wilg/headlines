@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, :within => Devise.password_length, :allow_blank => true
 
   has_many :votes, counter_cache: true
-  has_many :headlines, as: :creator
+  has_many :headlines, foreign_key: :creator_id
 
   def upvote_headline!(headline)
     clear_votes!(headline)
@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
 
   def clear_votes(headline)
     votes.where(headline: headline).delete_all
+  end
+
+  def karma
+    self.headlines.sum(:vote_count)
   end
 
 end
