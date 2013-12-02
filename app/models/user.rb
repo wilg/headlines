@@ -14,27 +14,27 @@ class User < ActiveRecord::Base
   scope :top, -> { order("karma desc") }
 
   before_save do
-    self.karma = self.headlines.sum(:vote_count)
+    self.karma = self.headlines.sum(:vote_count) - self.headlines.count
   end
 
   def upvote_headline!(headline)
     clear_votes!(headline)
     headline.votes.create(user: self, value: 1)
     headline.save!
-    headline.user.save! if headline.user
+    headline.creator.save! if headline.creator
   end
 
   def downvote_headline!(headline)
     clear_votes!(headline)
     headline.votes.create(user: self, value: -1)
     headline.save!
-    headline.user.save! if headline.user
+    headline.creator.save! if headline.creator
   end
 
   def clear_votes!(headline)
     clear_votes headline
     headline.save!
-    headline.user.save! if headline.user
+    headline.creator.save! if headline.creator
   end
 
   def clear_votes(headline)
