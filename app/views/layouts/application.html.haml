@@ -39,6 +39,9 @@
                 = link_to generator_url, class: "btn btn-lg btn-default #{@short_title == :generator ? "active" : "btn-default"}" do
                   %i.fa.fa-gears
                   Smash New Headlines
+              .btn-group.pull-right
+                = link_to leaderboard_url, class: "btn btn-lg btn-default #{@short_title == :leaderboard ? "active" : "btn-default"}" do
+                  %i.fa.fa-list-ol
     .container
 
       - if ENV['SITE_ALERT'].present?
