@@ -63,3 +63,18 @@ r_politics:
 r_funny:
   name: r/funny
   category: Reddit
+cnn_blog:
+  name: CNN News Blog
+  category: News
+guardian_blogs:
+  name: Guardian Blogs
+  category: News
+nature_blog:
+  name: Nature Blog
+  category: Science
+npr_two_way:
+  name: NPR Two Way
+  category: News
+nytimes_lede:
+  name: New York Times Lede
+  category: News
