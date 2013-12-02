@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Headlines::Application.config.secret_key_base = '50f87082a104fb27e7967c1a334d587181f05b517a6d49131d160a00bc4cc521ca34c1ced4df62045e38275f2a461655c8be7443da1607a202ba44e2a6603842'
+Headlines::Application.config.secret_key_base = ENV['RAILS_SECRET_KEY_BASE']
