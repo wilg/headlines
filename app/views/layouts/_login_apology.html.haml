@@ -1,0 +1,34 @@
+#modal-login-form.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %h2{style: "margin-top:0"} Sign up to vote on headlines, add new ones, and earn karma!
+        %p.text-success
+          %strong We don't need your email address, and we won't (and can't) spam you!
+        .clearfix
+          .modal-sign-up
+            %h4 Sign Up
+            = form_for(User.new, :as => :user, :url => registration_path(:user), class: "form-horizontal") do |f|
+              .form-group
+                = f.label :login, "Username"
+                = f.text_field :login, :autofocus => true, class: 'form-control'
+              .form-group
+                = f.label :password
+                = f.password_field :password, class: 'form-control'
+              .form-group
+                = f.label :password_confirmation
+                = f.password_field :password_confirmation, class: 'form-control'
+              .form-group
+                = f.submit "Sign Up", class: 'btn btn-primary'
+          .modal-sign-in
+            %h4 Existing users sign in
+            = form_for(User.new(remember_me: true), :as => :user, :url => session_path(:user), class: "form-horizontal") do |f|
+              = f.hidden_field :remember_me
+              .form-group
+                = f.label :login, "Username"
+                = f.text_field :login, :autofocus => true, class: 'form-control'
+              .form-group
+                = f.label :password
+                = f.password_field :password, class: 'form-control'
+              .form-group
+                = f.submit "Sign In", class: 'btn btn-primary'

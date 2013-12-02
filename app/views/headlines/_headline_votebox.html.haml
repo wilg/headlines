@@ -1,7 +1,12 @@
-= link_to vote_headline_url(headline), remote: true, method: :post, class: "btn #{did_upvote?(headline) ? "btn-success" : 'btn-default'} upvote-button", data: {disable_with: loading_icon} do
-  %i.fa.fa-thumbs-up
-  - unless can_downvote?(headline) || did_downvote?(headline)
-    - if did_upvote?(headline)
-      Voted
-    - else
-      Vote
+- if user_signed_in?
+  = link_to vote_headline_url(headline), remote: true, method: :post, class: "btn #{did_upvote?(headline) ? "btn-success" : 'btn-default'} upvote-button", data: {disable_with: loading_icon} do
+    %i.fa.fa-thumbs-up
+    - unless can_downvote?(headline) || did_downvote?(headline)
+      - if did_upvote?(headline)
+        Voted
+      - else
+        Vote
+- else
+  %buton.btn.btn-default.upvote-button{data:{toggle: 'modal', target: '#modal-login-form'}}
+    %i.fa.fa-thumbs-up
+    Vote

@@ -7,9 +7,9 @@
       %i.fa.fa-sign-out
       Sign Out
   - else
-    = link_to new_user_registration_path, class: 'btn btn-default btn-sm' do
+    .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
       %i.fa.fa-user
       Sign Up
-    = link_to new_user_session_path, class: 'btn btn-default btn-sm' do
+    .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
       %i.fa.fa-sign-in
       Sign In
