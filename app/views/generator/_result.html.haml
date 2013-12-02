@@ -16,8 +16,8 @@
       - elsif !user_signed_in?
         %button.btn.btn-success.upvote-button{data:{toggle: 'modal', target: '#modal-login-form'}}
           %i.fa.fa-thumbs-up
-          Save + Vote
+          Save
       - else
-        = link_to save_path(headline: headline.name, sources: @sources.join(","), hash: Headline.salted_hash(headline.name), depth: @depth), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Voting..."}  do
+        = link_to save_path(headline: headline.name, sources: @sources.join(","), hash: Headline.salted_hash(headline.name), depth: @depth), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Saving"}  do
           %i.fa.fa-thumbs-up
-          Save + Vote
+          Save

@@ -25,7 +25,6 @@ class GeneratorController < ApplicationController
       @headline.save!
     end
 
-    current_user.upvote_headline! @headline
   end
 
 private
