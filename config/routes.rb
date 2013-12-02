@@ -11,8 +11,19 @@ Headlines::Application.routes.draw do
     end
   end
 
+  resources :users do
+    collection do
+      get :top
+    end
+    member do
+      get :submitted
+      get :voted
+    end
+  end
+
+  get "leaderboard", to: "users#index"
+
   get "best", to: "headlines#best"
-  get "game", to: "headlines#game"
 
   get "generator", to: "generator#index"
   post "generator/generate", to: "generator#generate", as: :generate

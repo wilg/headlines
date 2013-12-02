@@ -1,0 +1,12 @@
+%tr{class: "user-#{user.id} lead"}
+  %td.login{style:"width:50%"}
+    = user.login
+  %td.karma.text-right
+    = user.karma
+    karma
+  %td.karma.text-right
+    %span.text-muted
+      = pluralize user.headlines.size, 'saved headline'
+  %td.karma.text-right
+    %span.text-muted
+      = pluralize user.votes.size, 'vote'

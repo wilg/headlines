@@ -1,0 +1,9 @@
+- @title = "Leaderboard"
+
+%h2 Leaderboard
+.lead.text-muted Who is the funniest of them all?
+
+%table.table.table-striped.users-table
+  = render @users
+
+= will_paginate @users, renderer: BootstrapPagination::Rails

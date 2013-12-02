@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202043925) do
+ActiveRecord::Schema.define(version: 20131202061550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20131202043925) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vote_count",          default: 0,  null: false
+    t.integer  "karma",               default: 0,  null: false
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree

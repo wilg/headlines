@@ -1,6 +1,6 @@
 #login-box.text-muted.pull-right
   - if user_signed_in?
-    %buttton.btn.disabled
+    = link_to leaderboard_url, class: 'btn btn-link' do
       %i.fa.fa-trophy
       = number_with_delimiter current_user.karma
     %buttton.btn.disabled

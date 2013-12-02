@@ -11,29 +11,34 @@ class User < ActiveRecord::Base
   has_many :votes, counter_cache: true
   has_many :headlines, foreign_key: :creator_id
 
+  scope :top, -> { order("karma desc") }
+
+  before_save do
+    self.karma = self.headlines.sum(:vote_count)
+  end
+
   def upvote_headline!(headline)
     clear_votes!(headline)
     headline.votes.create(user: self, value: 1)
     headline.save!
+    headline.user.save! if headline.user
   end
 
   def downvote_headline!(headline)
     clear_votes!(headline)
     headline.votes.create(user: self, value: -1)
     headline.save!
+    headline.user.save! if headline.user
   end
 
   def clear_votes!(headline)
     clear_votes headline
     headline.save!
+    headline.user.save! if headline.user
   end
 
   def clear_votes(headline)
     votes.where(headline: headline).delete_all
-  end
-
-  def karma
-    self.headlines.sum(:vote_count)
   end
 
 end
