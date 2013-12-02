@@ -3,7 +3,7 @@
     = link_to leaderboard_url, class: 'btn btn-link' do
       %i.fa.fa-trophy
       = number_with_delimiter current_user.karma
-    %buttton.btn.disabled
+    = link_to current_user, class: 'btn btn-link' do
       %i.fa.fa-user
       = current_user.login
     = link_to destroy_user_session_path, method: :delete, class: 'btn btn-default btn-sm' do

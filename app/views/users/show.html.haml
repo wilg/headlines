@@ -1,17 +1,22 @@
 - @title = "User | #{@user.login}"
 
-%h2= @user.login
+%h2
+  = @user.login
+  - if current_user == @user
+    = link_to edit_user_registration_url, class: 'btn btn-default pull-right' do
+      %i.fa.fa-edit
+      Edit Profile
 
 .lead
   .karma
     %i.fa.fa-trophy
     = @user.karma
     karma
-    .pull-right
+    .pull-right.text-muted
       signed up #{time_ago_in_words @user.created_at} ago
   .karma
     %span.text-muted
-      = pluralize @user.headlines.size, 'saved headline'
+      = link_to pluralize(@user.headlines.size, 'saved headline'), user_headlines_url(@user)
   .karma
     %span.text-muted
-      = pluralize @user.votes_count, 'vote'
+      = link_to pluralize(@user.votes_count, 'vote'), user_votes_url(@user)

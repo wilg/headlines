@@ -2,29 +2,29 @@
   Edit #{resource_name.to_s.humanize}
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
-  %div
+  .form-group
     = f.label :login
     %br/
-    = f.text_field :login, :autofocus => true
+    = f.text_field :login, :autofocus => true, class: 'form-control'
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}
-  %div
+  .form-group
     = f.label :password
     %i (leave blank if you don't want to change it)
     %br/
-    = f.password_field :password, :autocomplete => "off"
-  %div
+    = f.password_field :password, :autocomplete => "off", class: 'form-control'
+  .form-group
     = f.label :password_confirmation
     %br/
-    = f.password_field :password_confirmation
-  %div
+    = f.password_field :password_confirmation, class: 'form-control'
+  .form-group
     = f.label :current_password
     %i (we need your current password to confirm your changes)
     %br/
-    = f.password_field :current_password
-  %div= f.submit "Update"
+    = f.password_field :current_password, class: 'form-control'
+  %div= f.submit "Update", class: 'btn btn-primary'
 %h3 Cancel my account
 %p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}
+  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-primary'}
 = link_to "Back", :back

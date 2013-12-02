@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of   :password, :on=>:create
   validates_length_of :password, :within => Devise.password_length, :allow_blank => true
 
-  has_many :votes, counter_cache: true
-  has_many :headlines, foreign_key: :creator_id
+  has_many :votes, counter_cache: true, dependent: :destroy
+  has_many :headlines, foreign_key: :creator_id, dependent: :nullify
   has_many :voted_headlines, through: :votes, source: :headline
 
   scope :top, -> { order("karma desc") }
