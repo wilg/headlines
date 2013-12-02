@@ -12,6 +12,9 @@ max_corpus_size = 20000
 dicts = sys.argv
 dicts.pop(0)
 
+# Import depth
+lookback = int(dicts.pop(0))
+
 # import multiple dictionaries
 dir = os.path.dirname(__file__)
 imported_titles = []
@@ -41,8 +44,6 @@ for title in imported_titles:
         titlecase_mappings[original_word.lower()] = original_word
 
 markov_map = defaultdict(lambda:defaultdict(int))
-
-lookback = 2
 
 #Generate map in the form word1 -> word2 -> occurences of word2 after word1
 for title in titles[:-1]:

@@ -1,0 +1,4 @@
+- @depth = [[(params[:depth] || 2).to_i, 5].min, 1].max
+%table.table.table-striped.headlines-table
+  - Generator.generate!(@sources, @depth).each do |temp_headline|
+    = render partial: "generator/result", locals: {headline: temp_headline}

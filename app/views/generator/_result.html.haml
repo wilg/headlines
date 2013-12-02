@@ -1,0 +1,18 @@
+%tr{class: "generated-headline-#{Headline.salted_hash(headline.name)}"}
+  %td.headline
+    - if headline.persisted?
+      = link_to headline.name, headline
+    - else
+      = headline.name
+  %td.text-right
+    - if headline.persisted?
+      / = link_to headline, class: "btn btn-primary" do
+      /   %i.fa.fa-arrow-right
+      /   View
+      = link_to headline, class: "btn btn-default disabled" do
+        %i.fa.fa-thumbs-up
+        Saved
+    - else
+      = link_to save_path(headline: headline.name, sources: @sources.join(","), hash: Headline.salted_hash(headline.name), depth: @depth), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Voting..."}  do
+        %i.fa.fa-thumbs-up
+        Save + Vote

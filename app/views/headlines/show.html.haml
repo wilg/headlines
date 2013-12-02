@@ -21,7 +21,8 @@
 
     %p.text-muted
       %small
-        Discovered #{time_ago_in_words @headline.created_at} ago.
+        generated #{time_ago_in_words @headline.created_at} ago - depth #{@headline.depth}
+
   .col-md-6
     .well
       = link_to "Make Your Own Stupid or Funny Mashup", generator_url, class: "btn btn-warning btn-lg btn-block"

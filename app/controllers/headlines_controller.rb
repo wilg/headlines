@@ -1,23 +1,6 @@
 class HeadlinesController < ApplicationController
 
-  def save
-
-    if Headline.salted_hash(params[:headline]) != params[:hash]
-      head :forbidden
-      return
-    end
-
-    headline = Headline.where(name: params[:headline]).first_or_create
-    headline.sources = params[:sources].split(",")
-    headline.save
-
-    upvote_headline! headline
-
-    head :ok
-  end
-
   def best
-    # Start trending
     if params[:order].present? && params[:order].to_sym == :new
       @headlines = Headline.top.reorder("created_at desc")
     elsif params[:order].present? && params[:order].to_sym == :trending
@@ -66,24 +49,6 @@ class HeadlinesController < ApplicationController
       end
     end
     @headline.reload
-  end
-
-  def generator
-    parse_sources!
-  end
-
-  def generate
-    parse_sources!
-  end
-
-private
-
-  def parse_sources!
-    @sources = []
-    Source.all.each do |source|
-      @sources << source.id if params[source.id].to_i == 1
-    end
-    @sources = Source.all.reject{|s| !s.default }.map(&:id) if @sources.blank?
   end
 
 end

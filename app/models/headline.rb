@@ -17,13 +17,6 @@ class Headline < ActiveRecord::Base
 
   validates_presence_of :name
 
-  def self.random(sources = ["hackernews"])
-    # Is this literally the worst possible way of doing this?
-    # ...
-    # Yes. Yes it is.
-    `python #{Rails.root}/lib/markov.py #{sources.join(" ")}`.lines.map(&:chomp).map(&:grubercase)
-  end
-
   def source_objects
     Source.find_all(sources)
   end
@@ -57,6 +50,10 @@ class Headline < ActiveRecord::Base
 
   def self.salted_hash(headline)
     Digest::SHA1.hexdigest("#{headline}-#{ENV['HEADLINE_INJECTION_SALT']}")
+  end
+
+  def salted_hash
+    Headline.salted_hash(name)
   end
 
 end

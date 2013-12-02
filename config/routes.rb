@@ -2,10 +2,7 @@ Headlines::Application.routes.draw do
 
   resources :headlines do
     collection do
-      get :save
       get :best
-      post :generate
-      post :game_vote
     end
     member do
       post :vote
@@ -13,8 +10,11 @@ Headlines::Application.routes.draw do
   end
 
   get "best", to: "headlines#best"
-  get "generator", to: "headlines#generator"
   get "game", to: "headlines#game"
+
+  get "generator", to: "generator#index"
+  post "generator/generate", to: "generator#generate", as: :generate
+  get "generator/save", to: "generator#save", as: :save
 
   root to: redirect("best")
 
