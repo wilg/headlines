@@ -1,0 +1,11 @@
+%table.table.table-striped.headlines-table
+  #generator-result
+    {{#each headlines}}
+    %tr{class: "generated-headline-{{hash}}"}
+      %td.headline
+        {{headline}}
+        %td.text-right
+          %a.btn.btn-success.upvote-button{"data-disable-with" => "Saving", "data-remote" => "true", href: "{{save_url}}"}
+            %i.fa.fa-thumbs-up
+            Save + Vote
+    {{/each}}

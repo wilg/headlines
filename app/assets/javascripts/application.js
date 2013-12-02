@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap/modal
+//= require handlebars.runtime
 // require turbolinks
+//= require_tree ./templates
 //= require_tree .
