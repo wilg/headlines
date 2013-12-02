@@ -6,6 +6,7 @@
     .count
       %span.vote-count= @headline.vote_count
       = @headline.vote_count != 1 ? "votes" : "vote"
+
     - unless VOTING_DISABLED
       .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline}
 .row
@@ -19,6 +20,14 @@
         %li.source
           = source_image_tag source
           = source.name
+
+    %p.text-muted
+      %small
+        %span.vote-count= @headline.upvote_count
+        = @headline.upvote_count != 1 ? "upvotes" : "upvote"
+        \/
+        %span.vote-count= @headline.downvote_count
+        = @headline.downvote_count != 1 ? "downvotes" : "downvote"
 
     %p.text-muted
       %small

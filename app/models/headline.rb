@@ -6,6 +6,7 @@ class Headline < ActiveRecord::Base
   scope :hot, -> { order("(vote_count / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 20.minutes.ago).where("vote_count > 1 AND vote_count < 50") }
   scope :today, -> { where("created_at > ?", 1.day.ago) }
   scope :yesterday, -> { where("created_at > ? AND created_at < ?", 2.days.ago, 1.day.ago) }
+  scope :newest, -> { order("created_at desc") }
 
   scope :in_category, -> (category) {
     cat_sources = Source.categories[category].map{|s|
@@ -59,6 +60,14 @@ class Headline < ActiveRecord::Base
 
   def salted_hash
     Headline.salted_hash(name)
+  end
+
+  def downvote_count
+    @downvote_count ||= votes.downvotes.sum(:value)
+  end
+
+  def upvote_count
+    @upvote_count ||= votes.upvotes.sum(:value)
   end
 
 end

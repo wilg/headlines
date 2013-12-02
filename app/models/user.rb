@@ -46,4 +46,12 @@ class User < ActiveRecord::Base
     login
   end
 
+  def voted_headlines_without_self
+    voted_headlines.where("headlines.creator_id is null or headlines.creator_id != ?", id)
+  end
+
+  def votes_count
+    voted_headlines_without_self.size
+  end
+
 end

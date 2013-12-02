@@ -2,7 +2,7 @@ class HeadlinesController < ApplicationController
 
   def best
     if params[:order].present? && params[:order].to_sym == :new
-      @headlines = Headline.top.reorder("created_at desc")
+      @headlines = Headline.newest
     elsif params[:order].present? && params[:order].to_sym == :trending
       @headlines = Headline.hot
     else

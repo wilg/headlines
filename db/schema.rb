@@ -18,13 +18,13 @@ ActiveRecord::Schema.define(version: 20131202061550) do
 
   create_table "headlines", force: true do |t|
     t.string   "name"
+    t.integer  "vote_count", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "sources"
     t.string   "name_hash"
     t.integer  "depth",      default: 2
     t.integer  "creator_id"
-    t.integer  "vote_count"
   end
 
   create_table "users", force: true do |t|

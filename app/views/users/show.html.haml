@@ -14,4 +14,4 @@
       = pluralize @user.headlines.size, 'saved headline'
   .karma
     %span.text-muted
-      = pluralize @user.votes.size, 'vote'
+      = pluralize @user.votes_count, 'vote'

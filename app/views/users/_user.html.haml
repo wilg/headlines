@@ -10,4 +10,4 @@
       = link_to pluralize(user.headlines.size, 'saved headline'), user_headlines_url(user)
   %td.karma.text-left
     %span.text-muted
-      = link_to pluralize(user.votes.size, 'vote'), user_votes_url(user)
+      = link_to pluralize(user.votes_count, 'vote'), user_votes_url(user)
