@@ -1,5 +1,7 @@
 $ ->
 
+  window.userSignedIn = -> $("body").hasClass('logged-in')
+
   generate_new = ->
 
     $("#invent-button").addClass 'disabled'
@@ -23,7 +25,7 @@ $ ->
     url = $("#generate-form").data('generator-url') + "?" + query
 
     $.getJSON url, (data) ->
-      $("#generated-headlines").html HandlebarsTemplates['generator/results'](data)
+      $("#generated-headlines").html HandlebarsTemplates[if window.userSignedIn() then 'generator/results' else 'generator/results_signed_out'](data)
     .fail ->
       $("#generate-form .alert").removeClass('hidden')
     .always ->
@@ -37,7 +39,6 @@ $ ->
 
   $("#invent-button").on 'click', ->
     generate_new()
-
 
 Handlebars.registerHelper 'save_url', (person) ->
 

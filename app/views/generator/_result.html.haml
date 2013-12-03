@@ -7,9 +7,6 @@
   - unless GENERATOR_SAVING_DISABLED
     %td.text-right
       - if headline.persisted?
-        / = link_to headline, class: "btn btn-primary" do
-        /   %i.fa.fa-arrow-right
-        /   View
         = link_to headline, class: "btn btn-default disabled" do
           %i.fa.fa-thumbs-up
           Saved

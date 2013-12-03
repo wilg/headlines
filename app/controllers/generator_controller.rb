@@ -4,11 +4,6 @@ class GeneratorController < ApplicationController
     parse_sources!
   end
 
-  def generate
-    head :ok and return if GENERATOR_DISABLED
-    parse_sources!
-  end
-
   def save
     head :ok and return if GENERATOR_DISABLED || GENERATOR_SAVING_DISABLED
 

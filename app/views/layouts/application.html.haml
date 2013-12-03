@@ -8,7 +8,7 @@
     = favicon_link_tag 'favicon.ico'
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
     %meta{charset: 'utf-8'}
-  %body
+  %body{class: user_signed_in? ? 'logged-in' : 'logged-out'}
     %header
       .container
         #header-content

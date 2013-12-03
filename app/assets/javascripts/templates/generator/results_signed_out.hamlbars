@@ -1,0 +1,11 @@
+%table.table.table-striped.headlines-table
+  #generator-result
+    {{#each headlines}}
+    %tr{class: "generated-headline-{{hash}}"}
+      %td.headline
+        {{headline}}
+        %td.text-right
+          %button.btn.btn-success.upvote-button{data:{toggle: 'modal', target: '#modal-login-form'}}
+            %i.fa.fa-thumbs-up
+            Save + Vote
+    {{/each}}

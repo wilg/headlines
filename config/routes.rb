@@ -21,7 +21,6 @@ Headlines::Application.routes.draw do
   get "best", to: "headlines#best"
 
   get "generator", to: "generator#index"
-  post "generator/generate", to: "generator#generate", as: :generate
   get "generator/save", to: "generator#save", as: :save
 
   root to: redirect("best")
