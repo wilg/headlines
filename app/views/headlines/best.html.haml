@@ -8,7 +8,7 @@
       = link_to "Yesterday", params.merge({page: 1, timeframe: :yesterday}), class: default_button_toggle(:timeframe, :yesterday)
       = link_to "All Time", params.merge({page: 1, timeframe: :all}), class: default_button_toggle(:timeframe, :all)
 
-  = form_tag params, class: :searchbar, method: :get do
+  = form_tag params, class: 'searchbar hidden-xs', method: :get do
     %span.input-group
       %span.input-group-addon
         %i.fa.fa-search

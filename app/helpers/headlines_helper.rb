@@ -22,6 +22,12 @@ module HeadlinesHelper
     k
   end
 
+  def main_button_best_toggle_phone(*args)
+    k = "btn btn-sm btn-default "
+    k << active_if_param(*args) if params[:action].to_sym == :best
+    k
+  end
+
   def tweet_url(headline)
     "https://twitter.com/intent/tweet?text=#{CGI.escape headline.name}&source=#{CGI.escape "Headline Smasher"}&url=#{headline_url(headline)}"
   end

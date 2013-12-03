@@ -1,0 +1,14 @@
+$phone: '(max-width: 480px)'
+$tablet-portrait: '(max-width: 767px)'
+$tablet-landscape-desktop: '(min-width: 768px) and (max-width: 979px)'
+$large-desktop: '(min-width: 1200px)'
+$non-retina: 'screen and (-webkit-max-device-pixel-ratio: 1)'
+$retina: 'screen and (-webkit-min-device-pixel-ratio: 2)'
+
+=respond-to($media)
+  @media #{$media}
+    @content
+
+=phone
+  +respond-to($phone)
+    @content

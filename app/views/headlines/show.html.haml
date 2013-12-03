@@ -3,7 +3,7 @@
 .jumbotron.single-headline
   %h1= @headline.name
   %h2
-    .count
+    .count.text-muted
       %span.vote-count= @headline.vote_count
       = @headline.vote_count != 1 ? "votes" : "vote"
 
@@ -11,15 +11,19 @@
       .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline}
 .row
   .col-md-6
+    .well
+      = link_to "Make Your Own Mashup", generator_url, class: "btn btn-warning btn-lg btn-block"
+      = link_to "View The Best Headlines", best_url, class: "btn btn-primary btn-lg btn-block"
+  .col-md-6
     %p
       = tweet_button url: headline_url(@headline), text: @headline.name, lang: 'en', via: nil, dnt: true, size: 'large', no_js: true
     %h4.text-muted
       This stupid thing is a mashup of headlines from:
-      %ul
-      - @headline.source_objects.each do |source|
-        %li.source
-          = source_image_tag source
-          = source.name
+    %ul
+    - @headline.source_objects.each do |source|
+      %li.source
+        = source_image_tag source
+        = source.name
 
     %p.text-muted
       %small
@@ -35,8 +39,3 @@
         - if @headline.creator
           \ - discovered by #{link_to @headline.creator.login, @headline.creator}
         \ - depth #{@headline.depth}
-
-  .col-md-6
-    .well
-      = link_to "Make Your Own Stupid or Funny Mashup", generator_url, class: "btn btn-warning btn-lg btn-block"
-      = link_to "View The Best Headlines", best_url, class: "btn btn-primary btn-lg btn-block"

@@ -1,4 +1,5 @@
 @import twitter/bootstrap/variables
+@import helpers
 
 $accent: #962020
 
@@ -17,6 +18,35 @@ header
 
   .site-title i
     color: $accent
+
+header
+  h1
+    +phone
+      font-size: 24px
+      text-align: center
+      margin-top: 0
+    a
+      color: #333333
+      &:hover
+        text-decoration: none
+        color: $accent
+  .lead
+    +phone
+      text-align: center
+      margin-top: 0
+      margin-bottom: 10px
+
+.vote-count.visible-xs
+  margin: 0
+  margin-bottom: 8px
+  // font-weight: bold
+  text-align: center
+  font-size: 26px
+
+footer
+  +phone
+    .col-md-6
+      text-align: center !important
 
 .generate-form
   margin-top: 30px

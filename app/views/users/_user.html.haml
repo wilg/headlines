@@ -7,9 +7,9 @@
     %i.fa.fa-trophy
     = number_with_delimiter user.karma
     karma
-  %td.karma.text-left
+  %td.karma.text-left.hidden-xs
     %span.text-muted
       = link_to pluralize(user.headlines.size, 'saved headline'), user_headlines_url(user)
-  %td.karma.text-left
+  %td.karma.text-left.hidden-xs
     %span.text-muted
       = link_to pluralize(user.votes_count, 'vote'), user_votes_url(user)

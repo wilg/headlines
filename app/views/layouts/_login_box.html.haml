@@ -1,4 +1,4 @@
-#login-box.text-muted.pull-right
+#login-box.text-muted
   - if user_signed_in?
     = link_to destroy_user_session_path, method: :delete, class: 'btn btn-link btn-autohide link-muted' do
       %i.fa.fa-sign-out

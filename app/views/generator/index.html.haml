@@ -15,7 +15,10 @@
         .alert.alert-warning.hidden{style: 'margin-top: 10px'}
           %strong Couldn't Generate Headlines
           .swamp We might be getting swamped, try again!
-        .source-box
+        %button.btn.btn-default.btn-block{data: {toggle: :collapse, target: "#generate-form .source-box"}, style: "margin-top:10px"}
+          %span.caret
+          Pick Sources
+        .source-box.collapse
           %h5.text-muted Sources to Mash
           - Source.categories.each do |category_name, sources|
             .source-category

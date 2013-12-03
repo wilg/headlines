@@ -1,0 +1,53 @@
+%header
+  .container
+    #header-content
+      .clearfix
+        .pull-left
+          %h1.site-title
+            = link_to root_url do
+              Headline
+              %i.fa.fa-gavel
+              Smasher
+          .lead Fake headlines created by mashing up real headlines.
+        .hidden-xs= render 'layouts/login_box'
+
+      .btn-toolbar.hidden-xs
+        .btn-group
+          = link_to best_url, class: main_button_best_toggle(:order, :top, true) do
+            %i.fa.fa-star
+            Best Headlines
+          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :trending}), class: main_button_best_toggle(:order, :trending) do
+            %i.fa.fa-flash
+            Hot
+          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :new}), class: main_button_best_toggle(:order, :new) do
+            %i.fa.fa-clock-o
+            Recent
+        - unless GENERATOR_DISABLED
+          .btn-group.pull-right
+            = link_to generator_url, class: "btn btn-lg btn-default #{@short_title == :generator ? "active" : "btn-default"}" do
+              %i.fa.fa-gears
+              Smash New Headlines
+          .btn-group.pull-right
+            = link_to leaderboard_url, class: "btn btn-lg btn-default #{@short_title == :leaderboard ? "active" : "btn-default"}" do
+              %i.fa.fa-list-ol
+
+      .btn-toolbar.visible-xs
+        .btn-group
+          = link_to best_url, class: main_button_best_toggle_phone(:order, :top, true) do
+            %i.fa.fa-star
+            Best
+          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :trending}), class: main_button_best_toggle_phone(:order, :trending) do
+            %i.fa.fa-flash
+            Hot
+          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :new}), class: main_button_best_toggle_phone(:order, :new) do
+            %i.fa.fa-clock-o
+        - unless GENERATOR_DISABLED
+          .btn-group.pull-right
+            = link_to generator_url, class: "btn btn-sm btn-default #{@short_title == :generator ? "active" : "btn-default"}" do
+              %i.fa.fa-gears
+              Smash
+          .btn-group.pull-right
+            = link_to leaderboard_url, class: "btn btn-sm btn-default #{@short_title == :leaderboard ? "active" : "btn-default"}" do
+              %i.fa.fa-list-ol
+
+      .visible-xs.text-center= render 'layouts/login_box'
