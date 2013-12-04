@@ -16,7 +16,7 @@ $ ->
       $(this).attr('name')
     ).get()
     window.generator_last_source_names = source_names
-    window.generator_last_depth = 2
+    window.generator_last_depth = 2 #$("#generate-form input:radio[name=depth]:checked").val();
 
     # Build query string
     query = $.param({depth:window.generator_last_depth, sources:source_names.join(",")})

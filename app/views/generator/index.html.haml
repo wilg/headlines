@@ -8,16 +8,16 @@
         %strong Whoops!
         The generator is currently offline. Pardon our dust.
     - else
-      #generate-form{data: {generator_url: GENERATOR_URL, save_url: save_url}}
-        %button#invent-button.btn.btn-primary.btn-lg{data: {disable_with: "Generating Comedy"} }
+      %form#generate-form{data: {generator_url: GENERATOR_URL, save_url: save_url}}
+        %a#invent-button.btn.btn-primary.btn-lg{data: {disable_with: "Generating Comedy"} }
           %i.fa.fa-refresh
           %span Generate Hilarious Headlines
         .alert.alert-warning.hidden{style: 'margin-top: 10px'}
           %strong Couldn't Generate Headlines
           .swamp We might be getting swamped, try again!
-        %button.btn.btn-default.btn-block{data: {toggle: :collapse, target: "#generate-form .source-box"}, style: "margin-top:10px"}
-          %span.caret
-          Pick Sources
+        %a.btn.btn-default.btn-block{data: {toggle: :collapse, target: "#generate-form .source-box"}, style: "margin-top:10px"}
+          %i.fa.fa-gear
+          Advanced Options
         .source-box.collapse
           %h5.text-muted Sources to Mash
           - Source.categories.each do |category_name, sources|
@@ -29,8 +29,21 @@
                   = label_tag source.id do
                     = source_image_tag source
                     = source.name
-          / %h5.text-muted Mashiness
-
+          -# %h5.text-muted
+          -# Mashiness
+          -# .btn-group{"data-toggle" => "buttons"}
+          -#   %label.btn.btn-default
+          -#     %input#option1{name: :depth, value: 1, type: "radio"}
+          -#     1 - More Mashy
+          -#   %label.btn.btn-default.active
+          -#     %input#option2{name: :depth, value: 2, type: "radio", checked: true}
+          -#     2
+          -#   %label.btn.btn-default
+          -#     %input#option3{name: :depth, value: 3, type: "radio"}
+          -#     3
+          -#   %label.btn.btn-default
+          -#     %input#option3{name: :depth, value: 4, type: "radio"}
+          -#     4 - Less Mashy
   .col-md-8
     %p.text-muted
       Computers are good at smashing headlines together, but only you can help us discover which are the silliest.

@@ -1,6 +1,7 @@
 hackernews:
   name: Hacker News
   category: Tech
+  default: true
 theblaze:
   name: The Blaze
   category: Opinion
@@ -60,21 +61,28 @@ tested:
 r_politics:
   name: r/politics
   category: Reddit
+  default: true
 r_funny:
   name: r/funny
   category: Reddit
+  default: true
 cnn_blog:
   name: CNN News Blog
   category: News
+  default: true
 guardian_blogs:
   name: Guardian Blogs
   category: News
+  default: true
 nature_blog:
   name: Nature Blog
   category: Science
+  default: true
 npr_two_way:
   name: NPR Two Way
   category: News
+  default: true
 nytimes_lede:
   name: New York Times Lede
   category: News
+  default: true

@@ -15,6 +15,7 @@
 //= require twitter/bootstrap/modal
 //= require twitter/bootstrap/tooltip
 //= require twitter/bootstrap/collapse
+//= require twitter/bootstrap/button
 //= require handlebars.runtime
 // require turbolinks
 //= require_tree ./templates
