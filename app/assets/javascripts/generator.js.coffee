@@ -29,6 +29,7 @@ $ ->
     .fail ->
       $("#generate-form .alert").removeClass('hidden')
     .always ->
+      $('.headline-fragment').tooltip()
       $("#invent-button").removeClass 'disabled'
       $("#invent-button i").removeClass 'fa-spin'
       $("#invent-button span").html(normal_title)

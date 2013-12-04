@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap/modal
+//= require twitter/bootstrap/tooltip
 //= require twitter/bootstrap/collapse
 //= require handlebars.runtime
 // require turbolinks
