@@ -1,2 +1,2 @@
-= link_to vote_headline_url(headline, down: 1), remote: true, method: :post, class: "btn #{did_downvote?(headline) ? "btn-danger" : 'btn-default'} downvote-button", data: {disable_with: loading_icon} do
+= link_to vote_headline_url(headline, down: 1), remote: true, method: :post, class: "btn #{vote_statuses.did_downvote?(headline) ? "btn-danger" : 'btn-default'} downvote-button", data: {disable_with: loading_icon} do
   %i.fa.fa-thumbs-down

@@ -54,4 +54,8 @@ class User < ActiveRecord::Base
     voted_headlines_without_self.size
   end
 
+  def vote_statuses(headlines)
+    VoteStatusCollection.new(self, headlines)
+  end
+
 end

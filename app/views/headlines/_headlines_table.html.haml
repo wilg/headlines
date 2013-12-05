@@ -1,0 +1,11 @@
+- vote_statuses = current_user.present? ? current_user.vote_statuses(headlines) : VoteStatusCollection.new
+
+%table.table.table-striped.headlines-table
+  - headlines.each do |h|
+    = render partial: 'headlines/headline', locals: {headline: h, vote_statuses: vote_statuses}
+
+- if headlines.length < 1
+  .well
+    No headlines found.
+
+= will_paginate headlines, renderer: BootstrapPagination::Rails

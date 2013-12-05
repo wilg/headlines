@@ -2,12 +2,12 @@
   %td.count.hidden-xs
     %span.lead.vote-count= headline.vote_count
   - unless VOTING_DISABLED
-    %td.votebox{class: can_downvote?(headline) || did_downvote?(headline) ? 'downvotebox' : ''}
+    %td.votebox{class: can_downvote?(headline) || vote_statuses.did_downvote?(headline) ? 'downvotebox' : ''}
       .lead.vote-count.visible-xs= headline.vote_count
       .btn-group.btn-group-justified
-        = render partial: "headlines/headline_votebox", locals: {headline: headline}
-        - if can_downvote?(headline) || did_downvote?(headline)
-          = render partial: "headlines/headline_downvotebox", locals: {headline: headline}
+        = render partial: "headlines/headline_votebox", locals: {headline: headline, vote_statuses: vote_statuses}
+        - if can_downvote?(headline) || vote_statuses.did_downvote?(headline)
+          = render partial: "headlines/headline_downvotebox", locals: {headline: headline, vote_statuses: vote_statuses}
   %td.headline= link_to headline.name, headline
   %td.permalink.hidden-xs
     = link_to(headline, abbr: "Permalink") do

@@ -8,7 +8,7 @@
       = @headline.vote_count != 1 ? "votes" : "vote"
 
     - unless VOTING_DISABLED
-      .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline}
+      .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
 .row
   .col-md-6
     .well

@@ -1,1 +1,1 @@
-$(".headline-row-<%= @headline.id %>").replaceWith("<%=j render @headline %>");
+$(".headline-row-<%= @headline.id %>").replaceWith("<%=j render partial: 'headlines/headline', locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])} %>");
