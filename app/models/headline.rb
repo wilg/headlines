@@ -28,7 +28,11 @@ class Headline < ActiveRecord::Base
 
   before_save do
     self.name_hash = Headline.name_hash(self.name)
-    self.vote_count = self.votes.sum(:value)
+    calculate_vote_count!
+  end
+
+  def calculate_vote_count!
+    self.vote_count = self.votes.upvotes.sum(:value)
   end
 
   def self.name_hash(name)
@@ -63,7 +67,7 @@ class Headline < ActiveRecord::Base
   end
 
   def downvote_count
-    @downvote_count ||= votes.downvotes.sum(:value)
+    @downvote_count ||= votes.downvotes.sum(:value).abs
   end
 
   def upvote_count

@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   scope :top, -> { order("karma desc") }
 
   before_save do
+    calculate_karma!
+  end
+
+  def calculate_karma!
     self.karma = self.headlines.sum(:vote_count) - self.headlines.count
   end
 

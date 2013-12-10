@@ -5,7 +5,7 @@ module VoteHelper
   end
 
   def can_downvote?(headline)
-    user_signed_in?
+    false # user_signed_in?
   end
 
   def did_downvote?(headline)
