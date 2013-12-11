@@ -24,6 +24,8 @@ Headlines::Application.configure do
   config.static_cache_control = "public, max-age=31536000"
   config.action_controller.asset_host = "http://d260rnacdi07m9.cloudfront.net"
 
+  config.font_assets.origin = "http://www.headlinesmasher.com"
+
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
