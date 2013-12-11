@@ -27,8 +27,6 @@ gem 'squeel'
 
 gem 'newrelic_rpm'
 
-gem 'gruber-case'
-
 # Dev
 group :development do
   gem "better_errors"
