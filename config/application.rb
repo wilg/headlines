@@ -23,5 +23,7 @@ module Headlines
 
     config.assets.version = '2.0'
 
+    config.i18n.enforce_available_locales = false
+
   end
 end
