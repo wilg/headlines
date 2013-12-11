@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/wilg/font_assets.git
-  revision: 7009207fd0d70bb39186bf18e7a1b356ba855b95
+  revision: 6f612432dd7cbf7313ca5439c6e807cca661caf7
   specs:
     font_assets (0.1.10)
       rack
