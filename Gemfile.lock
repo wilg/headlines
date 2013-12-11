@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/wilg/font_assets.git
+  revision: 7009207fd0d70bb39186bf18e7a1b356ba855b95
+  specs:
+    font_assets (0.1.10)
+      rack
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,8 +64,6 @@ GEM
     execjs (2.0.2)
     font-awesome-rails (4.0.3.0)
       railties (>= 3.2, < 5.0)
-    font_assets (0.1.10)
-      rack
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -167,7 +172,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   font-awesome-rails
-  font_assets
+  font_assets!
   foreman
   gruber-case
   haml
