@@ -16,6 +16,7 @@ gem 'bootstrap-sass-rails'
 gem 'font-awesome-rails'
 gem 'will_paginate-bootstrap'
 gem 'handlebars_assets'
+gem 'font_assets'
 
 gem "tweet-button"
 
