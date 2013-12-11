@@ -29,7 +29,12 @@ class HeadlinesController < ApplicationController
 
   def index
     @user = User.find_by_login(params[:user_id])
-    @headlines = @user.headlines.newest.paginate(:page => params[:page], :per_page => 40)
+    @headlines = @user.headlines.paginate(:page => params[:page], :per_page => 40)
+    if params[:order].present? && params[:order].to_sym == :top
+      @headlines = @headlines.top
+    else
+      @headlines = @headlines.newest
+    end
   end
 
   def show
