@@ -1,0 +1,21 @@
+- if @user
+  - @title = "User | #{@user.login} | Comments"
+  %h2= link_to @user.login, @user
+  .clearfix
+    .pull-left
+      .lead.text-muted
+        Comments
+- else
+  - @title = "Recent Comments"
+  %h2 Recent Comments
+
+- @comments.group_by{|c| c.headline}.each do |headline, comments|
+  %h3= link_to headline.name, headline
+  - comments.each do |comment|
+    = render partial: 'comments/comment', locals: {comment: comment}
+
+- if @comments.length < 1
+  .well
+    No comments found.
+
+= will_paginate @comments, renderer: BootstrapPagination::Rails

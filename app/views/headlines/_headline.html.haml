@@ -8,10 +8,21 @@
         = render partial: "headlines/headline_votebox", locals: {headline: headline, vote_statuses: vote_statuses}
         - if can_downvote?(headline) || vote_statuses.did_downvote?(headline)
           = render partial: "headlines/headline_downvotebox", locals: {headline: headline, vote_statuses: vote_statuses}
-  %td.headline= link_to headline.name, headline
+  %td.headline
+    = link_to headline.name, headline, class: 'headline-link'
+    - if headline.comments_count > 0
+      .visible-xs
+        = link_to(headline, abbr: "Comments", class: 'comment-link') do
+          %i.fa.fa-comment
+          = headline.comments_count
+  %td.comments.hidden-xs{class: headline.comments_count > 0 ? 'has-comments' : 'no-comments'}
+    = link_to(headline, abbr: "Comments") do
+      %i.fa.fa-comment
+      - if headline.comments_count > 0
+        = headline.comments_count
   %td.permalink.hidden-xs
     = link_to(headline, abbr: "Permalink") do
       %i.fa.fa-link
   %td.permalink.hidden-xs
-    = link_to(tweet_url(headline), abbr: "Permalink", target: "_blank") do
+    = link_to(tweet_url(headline), abbr: "Tweet", target: "_blank") do
       %i.fa.fa-twitter

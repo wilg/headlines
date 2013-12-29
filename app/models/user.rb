@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :headlines, foreign_key: :creator_id, dependent: :nullify
   has_many :voted_headlines, through: :votes, source: :headline
 
+  has_many :comments, dependent: :destroy
+
   scope :top, -> { order("karma desc") }
 
   before_save do

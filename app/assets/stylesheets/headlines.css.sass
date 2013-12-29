@@ -91,8 +91,11 @@ table.headlines-table
     vertical-align: middle !important
     &.headline
       font-size: 16px
-      a
+      .headline-link
         color: #333333
+      .comment-link
+        font-weight: bold
+        color: $gray-light
     &.votebox
       width: 80px
       .btn-group
@@ -109,6 +112,17 @@ table.headlines-table
       font-weight: bold
     &.sources
       max-width: 100px
+    &.permalink, &.comments.no-comments
+      a
+        color: $gray-light
+        &:hover
+          color: $gray-dark
+    &.comments
+      font-weight: bold
+      white-space: nowrap
+      text-align: right
+      a:hover
+        text-decoration: none
 
 .source-checkbox-block
   display: inline-block
@@ -158,3 +172,11 @@ table.headlines-table
 
 .tooltip-inner
   max-width: 850px !important
+
+td.karma
+  .more-info
+    font-size: 16px
+
+.comment
+  .tools
+    padding-right: 5px

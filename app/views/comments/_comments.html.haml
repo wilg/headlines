@@ -1,0 +1,9 @@
+= render headline.comments
+- if headline.comments.size < 1
+  %p.text-muted Nobody's commented on this headline yet.
+.well
+  = form_for [headline, Comment.new], remote: true do |f|
+    .form-group
+      = f.text_area :body, class: 'form-control'
+    .text-right
+      = f.submit "Comment", class: 'btn btn-primary', data: {disable_with: "Commenting..."}

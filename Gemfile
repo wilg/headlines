@@ -17,6 +17,8 @@ gem 'font-awesome-rails'
 gem 'will_paginate-bootstrap'
 gem 'handlebars_assets'
 gem 'font_assets'
+gem 'rails_autolink'
+gem 'rails-timeago', '~> 2.0'
 
 gem "tweet-button"
 
@@ -24,6 +26,8 @@ gem 'devise'
 
 gem 'nokogiri'
 gem 'squeel'
+
+gem 'rakismet'
 
 gem 'newrelic_rpm'
 

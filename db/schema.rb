@@ -11,20 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202061550) do
+ActiveRecord::Schema.define(version: 20131229195741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "comments", force: true do |t|
+    t.integer  "headline_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "headlines", force: true do |t|
     t.string   "name"
-    t.integer  "vote_count", default: 0, null: false
+    t.integer  "vote_count",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "sources"
     t.string   "name_hash"
-    t.integer  "depth",      default: 2
+    t.integer  "depth",          default: 2
     t.integer  "creator_id"
+    t.integer  "comments_count", default: 0, null: false
   end
 
   create_table "users", force: true do |t|
@@ -40,6 +49,7 @@ ActiveRecord::Schema.define(version: 20131202061550) do
     t.datetime "updated_at"
     t.integer  "vote_count",          default: 0,  null: false
     t.integer  "karma",               default: 0,  null: false
+    t.integer  "comments_count",      default: 0,  null: false
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree

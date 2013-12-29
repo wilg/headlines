@@ -13,10 +13,13 @@
     = @user.karma
     karma
     .pull-right.text-muted
-      signed up #{time_ago_in_words @user.created_at} ago
+      signed up #{timeago_tag @user.created_at}
   .karma
     %span.text-muted
       = link_to pluralize(@user.headlines.size, 'saved headline'), user_headlines_url(@user)
   .karma
     %span.text-muted
       = link_to pluralize(@user.votes_count, 'vote'), user_votes_url(@user)
+  .karma
+    %span.text-muted
+      = link_to pluralize(@user.comments_count, 'comment'), user_comments_url(@user)

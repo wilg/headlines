@@ -2,7 +2,10 @@ Headlines::Application.routes.draw do
 
   devise_for :users
 
+  resources :comments
+
   resources :headlines do
+    resources :comments
     collection do
       get :best
     end
@@ -14,6 +17,7 @@ Headlines::Application.routes.draw do
   resources :users do
     resources :headlines
     resources :votes
+    resources :comments
   end
 
   get "leaderboard", to: "users#index"

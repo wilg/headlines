@@ -19,7 +19,8 @@ class Headline < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_many :votes
+  has_many :votes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   belongs_to :creator, class_name: "User"
 
   def source_objects

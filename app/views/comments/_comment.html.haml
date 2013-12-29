@@ -1,0 +1,10 @@
+.comment
+  .body
+    %span.date.pull-right.text-muted
+      - if comment.user == current_user
+        %span.tools
+          = link_to url_for(comment), method: :delete, confirm: "Are you sure you want to delete this comment?" do
+            %i.fa.fa-trash-o
+      = timeago_tag comment.created_at
+    %strong.user= link_to comment.user.login, comment.user
+    = auto_link(simple_format(comment.body), html: {target: "_blank", rel: 'nofollow'})

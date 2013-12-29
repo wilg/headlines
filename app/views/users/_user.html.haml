@@ -1,15 +1,16 @@
 %tr{class: "user-#{user.id} lead"}
   %td
-    %strong ##{user_counter+1}
-  %td.login{style:"width:50%"}
+    %strong ##{user_counter + 1 + (((params[:page] || 1).to_i - 1) * @users.per_page)}
+  %td.login
     = link_to user.login, user
   %td.karma.text-left
     %i.fa.fa-trophy
     = number_with_delimiter user.karma
     karma
-  %td.karma.text-left.hidden-xs
-    %span.text-muted
-      = link_to pluralize(user.headlines.size, 'saved headline'), user_headlines_url(user)
-  %td.karma.text-left.hidden-xs
-    %span.text-muted
-      = link_to pluralize(user.votes_count, 'vote'), user_votes_url(user)
+    .more-info.hidden-xs
+      %span.text-muted
+        = link_to pluralize(user.headlines.size, 'headline'), user_headlines_url(user)
+        \/
+        = link_to pluralize(user.votes_count, 'vote'), user_votes_url(user)
+        \/
+        = link_to pluralize(user.comments_count, 'comment'), user_comments_url(user)
