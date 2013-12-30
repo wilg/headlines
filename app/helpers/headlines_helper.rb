@@ -1,5 +1,9 @@
 module HeadlinesHelper
 
+  def tooltipped_headline(headline)
+    render partial: 'headlines/tooltips/outer', locals: {headline: headline}
+  end
+
   def selected_sources_includes?(source)
     @sources.present? && @sources.include?(source.id)
   end

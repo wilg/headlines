@@ -1,7 +1,7 @@
 - @title = @headline.name
 
 .jumbotron.single-headline
-  %h1= @headline.name
+  %h1= tooltipped_headline @headline
   %h2
     .count.text-muted
       %span.vote-count= @headline.vote_count

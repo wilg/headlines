@@ -1,5 +1,7 @@
 $ ->
 
+  $('.headline-fragment').tooltip()
+
   $(document).on "click", ".save-headline-button", ->
     $(@).closest('form').submit()
 
