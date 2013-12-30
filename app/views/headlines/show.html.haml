@@ -21,13 +21,14 @@
     .well
       = link_to "Make Your Own Mashup", generator_url, class: "btn btn-warning btn-lg btn-block"
       = link_to "View The Best Headlines", best_url, class: "btn btn-primary btn-lg btn-block"
-    %h4.text-muted
-      This stupid thing is a mashup of headlines from:
-    %ul
-    - @headline.sources.each do |source|
-      %li.source
-        = source_image_tag source
-        = source.name
+    - if @headline.sources.length > 0
+      %h4.text-muted
+        This stupid thing is a mashup of headlines from:
+      %ul
+      - @headline.sources.each do |source|
+        %li.source
+          = source_image_tag source
+          = source.name
 
     %p.text-muted
       %small

@@ -1,7 +1,11 @@
 module HeadlinesHelper
 
   def tooltipped_headline(headline)
-    render partial: 'headlines/tooltips/outer', locals: {headline: headline}
+    if headline.source_headline_fragments.length > 0
+      render partial: 'headlines/tooltips/outer', locals: {headline: headline}
+    else
+      headline.name
+    end
   end
 
   def selected_sources_includes?(source)
