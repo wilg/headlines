@@ -20,7 +20,9 @@ class GeneratorController < ApplicationController
       @headline.depth = params[:depth]
       @headline.creator = current_user
       @headline.save!
+    end
 
+    if @headline.new_record? || @headline.source_headline_fragments.size == 0
       @headline.create_sources!(sources)
     end
 
