@@ -7,19 +7,21 @@ class GeneratorController < ApplicationController
   def save
     head :ok and return if GENERATOR_DISABLED || GENERATOR_SAVING_DISABLED
 
+    sources = JSON.parse(params[:sources_json])
+
     if Headline.salted_hash(params[:headline]) != params[:hash]
       head :forbidden
       return
     end
 
-    sources = JSON.parse(params[:sources_json])
-
     @headline = Headline.where(name: params[:headline]).first_or_initialize
+
     if @headline.new_record?
-      @headline.sources = sources.map{|s| s['source_id'] }.uniq
       @headline.depth = params[:depth]
       @headline.creator = current_user
       @headline.save!
+
+      @headline.create_sources!(sources)
     end
 
     current_user.upvote_headline! @headline

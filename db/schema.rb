@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131229195741) do
+ActiveRecord::Schema.define(version: 20131230061035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,35 @@ ActiveRecord::Schema.define(version: 20131229195741) do
     t.integer  "vote_count",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "sources"
+    t.text     "source_names"
     t.string   "name_hash"
     t.integer  "depth",          default: 2
     t.integer  "creator_id"
     t.integer  "comments_count", default: 0, null: false
   end
+
+  create_table "source_headline_fragments", force: true do |t|
+    t.integer  "source_headline_id"
+    t.integer  "headline_id"
+    t.integer  "source_headline_start"
+    t.integer  "source_headline_end"
+    t.integer  "index"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "source_headline_fragments", ["headline_id"], name: "index_source_headline_fragments_on_headline_id", using: :btree
+  add_index "source_headline_fragments", ["source_headline_id"], name: "index_source_headline_fragments_on_source_headline_id", using: :btree
+
+  create_table "source_headlines", force: true do |t|
+    t.string   "source_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "source_headlines", ["source_id"], name: "index_source_headlines_on_source_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "login",               default: "", null: false

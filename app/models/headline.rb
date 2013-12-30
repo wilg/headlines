@@ -15,17 +15,14 @@ class Headline < ActiveRecord::Base
     where{sources.like_any cat_sources}
   }
 
-  serialize :sources, Array
-
   validates_presence_of :name
 
   has_many :votes, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :creator, class_name: "User"
 
-  def source_objects
-    Source.find_all(sources)
-  end
+  has_many :source_headline_fragments, dependent: :destroy
+  has_many :source_headlines, through: :source_headline_fragments
 
   before_save do
     self.name_hash = Headline.name_hash(self.name)
@@ -73,6 +70,26 @@ class Headline < ActiveRecord::Base
 
   def upvote_count
     @upvote_count ||= votes.upvotes.sum(:value)
+  end
+
+  def sources
+    source_headlines.map(&:source).uniq
+  end
+
+  def create_sources!(sources_json_array)
+    sources_json_array.each_with_index do |source_hash, i|
+
+      source_headline = SourceHeadline.where(name: source_hash['source_phrase'], source_id: source_hash['source_id']).first_or_create
+
+      fragment = SourceHeadlineFragment.new
+      fragment.headline = self
+      fragment.source_headline = source_headline
+      fragment.source_headline_start = source_headline.name.downcase.index(source_hash['fragment'].downcase)
+      fragment.source_headline_end = fragment.source_headline_start + source_hash['fragment'].length
+      fragment.index = i
+      fragment.save!
+
+    end
   end
 
 end

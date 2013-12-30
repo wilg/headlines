@@ -24,7 +24,7 @@
     %h4.text-muted
       This stupid thing is a mashup of headlines from:
     %ul
-    - @headline.source_objects.each do |source|
+    - @headline.sources.each do |source|
       %li.source
         = source_image_tag source
         = source.name
