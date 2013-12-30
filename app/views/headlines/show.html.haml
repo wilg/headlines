@@ -18,28 +18,31 @@
       = render partial: 'comments/comments', locals: {headline: @headline}
   .col-md-6
     .well
-      = link_to "Make Your Own Mashup", generator_url, class: "btn btn-warning btn-lg btn-block"
-      = link_to "View The Best Headlines", best_url, class: "btn btn-primary btn-lg btn-block"
-    - if @headline.sources.length > 0
-      %h4.text-muted
-        This stupid thing is a mashup of headlines from:
-      %ul
-      - @headline.sources.each do |source|
-        %li.source
-          = source_image_tag source
-          = source.name
+      - if @headline.creator
+        %h4.text-muted
+          discovered by #{link_to @headline.creator.login, @headline.creator}
+          .pull-right #{timeago_tag @headline.created_at}
 
-    %p.text-muted
-      %small
-        %span.vote-count= @headline.upvote_count
-        = @headline.upvote_count != 1 ? "upvotes" : "upvote"
-        \/
-        %span.vote-count= @headline.downvote_count
-        = @headline.downvote_count != 1 ? "downvotes" : "downvote"
+    - if @headline.source_headlines.length > 0
+      .well
+        %h4.text-muted
+          Mashup Sources
+        %ul.source-headlines-list.list-unstyled
+          - @headline.source_headlines.each do |source_headline|
+            %li
+              .pull-right
+                = link_to source_headline, class: "btn btn-default btn-xs" do
+                  %i.fa.fa-globe
+                  Read
+                = link_to source_headline, class: "btn btn-default btn-xs" do
+                  %i.fa.fa-gear
+                  More Mashups
+              .source-headline
+                = link_to source_headline.name, source_headline.article_url
+              .source
+                = source_image_tag source_headline.source
+                = source_headline.source.name
 
-    %p.text-muted
-      %small
-        generated #{timeago_tag @headline.created_at}
-        - if @headline.creator
-          \ - discovered by #{link_to @headline.creator.login, @headline.creator}
-        \ - depth #{@headline.depth}
+      %p.text-muted
+        %small
+          discovered

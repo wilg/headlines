@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body
 
   before_save do
-    if self.spam?
+    if Rakismet.key && self.spam?
       errors.add :body, "looks like spam"
     end
   end
