@@ -31,7 +31,7 @@
           - @headline.source_headlines.each do |source_headline|
             %li
               .pull-right
-                = link_to source_headline, class: "btn btn-default btn-xs" do
+                = link_to source_headline.article_url, class: "btn btn-default btn-xs" do
                   %i.fa.fa-globe
                   Read
                 = link_to source_headline, class: "btn btn-default btn-xs" do
