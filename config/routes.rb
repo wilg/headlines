@@ -14,6 +14,8 @@ Headlines::Application.routes.draw do
     end
   end
 
+  resources :source_headlines
+
   resources :users do
     resources :headlines
     resources :votes

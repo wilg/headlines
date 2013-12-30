@@ -1,8 +1,9 @@
 module HeadlinesHelper
 
-  def tooltipped_headline(headline)
+  def tooltipped_headline(headline, options = {})
+    options = {linked: true}.merge(options)
     if headline.source_headline_fragments.length > 0
-      render partial: 'headlines/tooltips/outer', locals: {headline: headline}
+      render partial: 'headlines/tooltips/outer', locals: {headline: headline, linked: options[:linked]}
     else
       headline.name
     end

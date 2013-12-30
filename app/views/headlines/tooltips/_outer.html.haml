@@ -1,3 +1,4 @@
-- headline.source_headline_fragments.ordered.each do |fragment|
-  %span.headline-fragment{data: {toggle: :tooltip, html: 'true', title: render(partial: 'headlines/tooltips/inner', locals: {fragment: fragment})}}
-    = fragment.fragment
+%span.headline-with-fragments
+  - headline.source_headline_fragments.ordered.each do |fragment|
+    %span.headline-fragment{data: {toggle: :tooltip, html: 'true', title: render(partial: 'headlines/tooltips/inner', locals: {fragment: fragment})}}
+      = link_to_if linked, fragment.fragment, fragment.source_headline

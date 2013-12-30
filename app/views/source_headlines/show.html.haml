@@ -1,0 +1,20 @@
+- @title = "Fake Headlines Mashed Up From \"#{@source_headline.name}\" Headline on #{@source_headline.source.name}"
+
+
+.lead
+  .text-muted Source Headline
+  %p
+    %strong &ldquo;#{@source_headline.name}&rdquo;
+    from #{@source_headline.source.name}
+
+%hr/
+
+.clearfix
+  %h3
+    .sort-tools.pull-right
+      .btn-group.source-picker
+        = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new, true)
+        = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top)
+    Mashups Created From This Headline
+
+= render partial: 'headlines/headlines_table', locals: {headlines: @headlines}
