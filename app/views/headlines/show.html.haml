@@ -3,12 +3,11 @@
 .jumbotron.single-headline
   %h1= tooltipped_headline @headline
   %h2
-    .count.text-muted
-      %span.vote-count= @headline.vote_count
-      = @headline.vote_count != 1 ? "votes" : "vote"
+    #show-vote-count.count.text-muted
+      = pluralize @headline.vote_count, "vote"
 
     - unless VOTING_DISABLED
-      .votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
+      #show-vote-box.votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
 .row
   .col-md-6
     %h3.comments-title
