@@ -6,7 +6,13 @@ class SourceHeadlineFragment < ActiveRecord::Base
   scope :ordered, -> { order("index asc") }
 
   def fragment
-    source_headline.name[source_headline_start...source_headline_end]
+    f = source_headline.name[source_headline_start...source_headline_end]
+
+    # Try to get the original capitalization
+    i = headline.name.downcase.index(f.downcase)
+    return headline.name[i...(i + f.length)] if i
+
+    f
   end
 
   def source
