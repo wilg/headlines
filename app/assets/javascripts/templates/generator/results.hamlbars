@@ -8,7 +8,15 @@
           {{fragment}}
         {{/each}}
         %td.text-right
-          %a.btn.btn-success.upvote-button{"data-disable-with" => "Saving", "data-remote" => "true", href: "{{save_url}}"}
-            %i.fa.fa-thumbs-up
-            Save + Vote
+          %form{"accept-charset" => "UTF-8", action: "{{save_url}}", method: "post", data: {remote: true}}
+            %div{style: "margin:0;padding:0;display:inline"}
+              %input{name: "utf8", type: "hidden", value: "✓"}
+              %input{name: "authenticity_token", type: "hidden", value: "{{authenticity_token}}"}
+              %input{name: "headline", type: "hidden", value: "{{headline}}"}
+              %input{name: "hash", type: "hidden", value: "{{hash}}"}
+              %input{name: "sources_json", type: "hidden", value: "{{sources_json}}"}
+              %input{name: "sources_hash", type: "hidden", value: "{{sources_hash}}"}
+            %a.btn.btn-success.upvote-button.save-headline-button{"data-disable-with" => "Saving"}
+              %i.fa.fa-thumbs-up
+              Save + Vote
     {{/each}}

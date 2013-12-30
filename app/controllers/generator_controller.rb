@@ -12,9 +12,11 @@ class GeneratorController < ApplicationController
       return
     end
 
+    sources = JSON.parse(params[:sources_json])
+
     @headline = Headline.where(name: params[:headline]).first_or_initialize
     if @headline.new_record?
-      @headline.sources = params[:sources].split(",")
+      @headline.sources = sources.map{|s| s['source_id'] }.uniq
       @headline.depth = params[:depth]
       @headline.creator = current_user
       @headline.save!

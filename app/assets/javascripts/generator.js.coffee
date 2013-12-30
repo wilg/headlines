@@ -1,5 +1,8 @@
 $ ->
 
+  $(document).on "click", ".save-headline-button", ->
+    $(@).closest('form').submit()
+
   window.userSignedIn = -> $("body").hasClass('logged-in')
 
   generate_new = ->
@@ -41,12 +44,12 @@ $ ->
   $("#invent-button").on 'click', ->
     generate_new()
 
-Handlebars.registerHelper 'save_url', (person) ->
 
-  query = $.param
-    depth: window.generator_last_depth
-    headline: @headline
-    hash: @hash
-    sources: window.generator_last_source_names.join(",")
+Handlebars.registerHelper 'authenticity_token', ->
+  $('meta[name="csrf-token"]').attr('content')
 
-  $("#generate-form").data('save-url') + "?" + query
+Handlebars.registerHelper 'sources_json', ->
+  JSON.stringify @sources
+
+Handlebars.registerHelper 'save_url', ->
+  $("#generate-form").data('save-url')
