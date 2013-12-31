@@ -42,3 +42,7 @@
               .source
                 = source_image_tag source_headline.source
                 = source_headline.source.name
+
+    - if @headline.vote_count < 2 && @headline.creator == current_user
+      .text-right
+        %small= link_to "Delete Headline", @headline, method: :delete, confirm: "Are you sure you want to delete this headline?", class: 'text-muted'
