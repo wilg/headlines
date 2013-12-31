@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 gem 'unicorn'
 
+gem 'headline_sources', github: 'wilg/headline-sources'
+
 gem 'pg'
 gem 'haml'
 gem 'sass-rails', '~> 4.0.0'

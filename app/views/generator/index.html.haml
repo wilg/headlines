@@ -20,7 +20,7 @@
           Advanced Options
         .source-box.collapse
           %h5.text-muted Sources to Mash
-          - Source.categories.each do |category_name, sources|
+          - HeadlineSources::Source.categories.each do |category_name, sources|
             .source-category
               %h6 #{category_name}
               - sources.each do |source|

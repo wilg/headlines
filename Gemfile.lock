@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/wilg/headline-sources.git
+  revision: 97602231b0757d92c7d8164f613c9fecec415644
+  specs:
+    headline_sources (0.0.1)
+      activesupport
+      colorize
+      nokogiri
+      snoo
+      thor
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,6 +56,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    colorize (0.6.0)
     debug_inspector (0.0.2)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
@@ -70,6 +82,9 @@ GEM
       sprockets (>= 2.0.3)
       tilt
     hike (1.2.3)
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -83,6 +98,7 @@ GEM
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
+    multi_xml (0.5.5)
     newrelic_rpm (3.7.1.180)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -125,6 +141,9 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    snoo (0.1.2)
+      httparty
+      nokogiri
     sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -174,6 +193,7 @@ DEPENDENCIES
   foreman
   haml
   handlebars_assets
+  headline_sources!
   jquery-rails
   newrelic_rpm
   nokogiri

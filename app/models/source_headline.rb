@@ -4,7 +4,7 @@ class SourceHeadline < ActiveRecord::Base
   has_many :headlines, through: :source_headline_fragments
 
   def source
-    Source.find(source_id)
+    HeadlineSources::Source.find(source_id)
   end
 
   def article_url

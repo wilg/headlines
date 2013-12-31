@@ -9,7 +9,7 @@ class Headline < ActiveRecord::Base
   scope :newest, -> { order("created_at desc") }
 
   scope :in_category, -> (category) {
-    cat_sources = Source.categories[category].map{|s|
+    cat_sources = HeadlineSources::Source.categories[category].map{|s|
       "%#{s.id}%"
     }
     where{sources.like_any cat_sources}
