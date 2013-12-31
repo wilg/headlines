@@ -1,4 +1,4 @@
-%tr{class: "headline-row-#{headline.id}"}
+%tr{class: "headline-row-#{headline.id} #{'shitty' if headline.shitty?}"}
   %td.count.hidden-xs
     %span.lead.vote-count= headline.vote_count
   - unless VOTING_DISABLED

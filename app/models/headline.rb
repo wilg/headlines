@@ -93,4 +93,8 @@ class Headline < ActiveRecord::Base
     end
   end
 
+  def shitty?
+    vote_count < 1
+  end
+
 end
