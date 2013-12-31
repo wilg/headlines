@@ -11,6 +11,8 @@ class HeadlinesController < ApplicationController
       if params[:timeframe].present? && params[:timeframe].to_sym == :all
       elsif params[:timeframe].present? && params[:timeframe].to_sym == :yesterday
         @headlines = @headlines.yesterday
+      elsif params[:timeframe].present? && params[:timeframe].to_sym == :this_week
+        @headlines = @headlines.this_week
       else
         @headlines = @headlines.today
       end

@@ -5,6 +5,7 @@ class Headline < ActiveRecord::Base
   scope :top, -> { order("vote_count desc, created_at desc") }
   scope :hot, -> { order("(vote_count / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 20.minutes.ago).where("vote_count > 1 AND vote_count < 50") }
   scope :today, -> { where("created_at > ?", 1.day.ago) }
+  scope :this_week, -> { where("created_at > ?", 7.days.ago) }
   scope :yesterday, -> { where("created_at > ? AND created_at < ?", 2.days.ago, 1.day.ago) }
   scope :newest, -> { order("created_at desc") }
 
