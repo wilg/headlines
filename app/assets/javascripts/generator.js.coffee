@@ -1,5 +1,22 @@
 $ ->
 
+  # Group Selection Checkboxes
+  update_checkbox_statuses = ->
+    $('.source-category').each (index, category) ->
+      category = $(category)
+      if category.find(".source-check-box:checked").length is 0
+        category.find(".group-check-box").prop("indeterminate", false).prop("checked", false)
+      else if category.find(".source-check-box:not(:checked)").length is 0
+        category.find(".group-check-box").prop("indeterminate", false).prop("checked", true)
+      else
+        category.find(".group-check-box").prop("indeterminate", true)
+
+  update_checkbox_statuses()
+  $(".source-check-box").change -> update_checkbox_statuses()
+
+  $(".group-check-box").change ->
+    $(this).closest('.source-category').find(".source-check-box").prop("checked", $(this).is(":checked"))
+
   $('.headline-fragment').tooltip()
 
   $(document).on "click", ".save-headline-button", ->
