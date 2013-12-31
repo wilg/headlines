@@ -10,9 +10,7 @@ $ ->
   generate_new = ->
 
     $("#invent-button").addClass 'disabled'
-    $("#invent-button i").addClass 'fa-spin'
-    normal_title = $("#invent-button span").html()
-    $("#invent-button span").html($("#invent-button").data('disable-with'))
+    $("#invent-button").removeClass 'enabled'
 
     $("#generate-form .alert").addClass('hidden')
 
@@ -36,8 +34,7 @@ $ ->
     .always ->
       $('.headline-fragment').tooltip()
       $("#invent-button").removeClass 'disabled'
-      $("#invent-button i").removeClass 'fa-spin'
-      $("#invent-button span").html(normal_title)
+      $("#invent-button").addClass 'enabled'
 
   # Auto-generate when opening generator page
   if $("#invent-button").length > 0

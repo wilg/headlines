@@ -9,9 +9,10 @@
         The generator is currently offline. Pardon our dust.
     - else
       %form#generate-form{data: {generator_url: GENERATOR_URL, save_url: save_url}}
-        %a#invent-button.btn.btn-primary.btn-lg{data: {disable_with: "Generating Comedy"} }
-          %i.fa.fa-refresh
-          %span Generate Hilarious Headlines
+        %a#invent-button.btn.btn-primary.btn-lg
+          %i.fa.fa-refresh.fa-spin
+          %span.enabled-title Generate Hilarious Headlines
+          %span.disabled-title Generating Headlines
         .alert.alert-warning.hidden{style: 'margin-top: 10px'}
           %strong Couldn't Generate Headlines
           .swamp We might be getting swamped, try again!

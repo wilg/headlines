@@ -74,6 +74,15 @@ footer
 
 #invent-button
   width: 100%
+  i, span.disabled-title
+    display: none
+  &.disabled
+    span.disabled-title
+      display: inline
+    i
+      display: inline-block
+    span.enabled-title
+      display: none
 
 .source-box
   padding: 10px
