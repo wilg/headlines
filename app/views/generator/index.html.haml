@@ -24,9 +24,9 @@
             .source-category{id: "source-category-#{category_name.parameterize}"}
               %h5
                 %a.toggler{data: {toggle: :collapse, target: "#source-category-#{category_name.parameterize} .sources"}, href: '#'}
-                  %i.fa.fa-caret-right
+                  %i.fa.fa-fw.fa-caret-right
                   #{category_name}
-                .pull-right.btn-group
+                .pull-right
                   %input.group-check-box{type: :checkbox, indeterminate: true}
               .sources.collapse
                 - sources.each do |source|

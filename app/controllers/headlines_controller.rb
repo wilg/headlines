@@ -67,7 +67,10 @@ class HeadlinesController < ApplicationController
   def destroy
     @headline = Headline.find(params[:id])
     @headline.destroy! if @headline.vote_count < 2 && @headline.creator == current_user
-    redirect_to root_url
+    respond_to do |format|
+      format.html {redirect_to root_url}
+      format.js
+    end
   end
 
 end

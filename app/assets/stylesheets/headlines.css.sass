@@ -1,7 +1,5 @@
-@import twitter/bootstrap/variables
 @import helpers
-
-$accent: #962020
+@import generator
 
 header
   background-color: #F9F9F9
@@ -48,14 +46,6 @@ footer
     .col-md-6
       text-align: center !important
 
-.generate-form
-  margin-top: 30px
-  margin-bottom: 30px
-
-  label
-    font-weight: normal
-    padding-right: 15px
-
 #login-box
   margin-top: 20px
   margin-bottom: 10px
@@ -71,21 +61,6 @@ footer
 .modal-sign-in
   width: 250px
   float: right
-
-#invent-button
-  width: 100%
-  i, span.disabled-title
-    display: none
-  &.disabled
-    span.disabled-title
-      display: inline
-    i
-      display: inline-block
-    span.enabled-title
-      display: none
-
-.source-box
-  padding: 10px
 
 img.source-icon
   width: 16px
@@ -136,15 +111,6 @@ table.headlines-table
 .shitty
   opacity: 0.5
 
-.source-checkbox-block
-  display: inline-block
-  background: #eee
-  margin-bottom: 4px
-  padding: 0 4px
-  border-radius: 3px
-  label
-    font-weight: normal
-
 .best-toolbar
   margin-bottom: 20px
 
@@ -173,7 +139,6 @@ table.headlines-table
   &:active
     color: $gray-dark
 
-
 .headline-fragment
   &:hover
     background-color: darken(lightyellow, 20%)
@@ -197,18 +162,6 @@ td.karma
   a
     color: $gray-dark
     text-decoration: none
-
-.source-category a.toggler
-  color: $gray
-  text-decoration: none
-  &:hover
-    color: $gray
-  &:active
-    color: $gray-dark
-
-.source-headlines-list
-  li
-    margin-bottom: 12px
 
 span.hidden-xs
   display: inline !important

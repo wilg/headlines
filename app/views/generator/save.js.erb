@@ -1,1 +1,2 @@
 $(".generated-headline-<%= @headline.salted_hash %>").replaceWith("<%=j render partial: "generator/result", locals: {headline: @headline } %>");
+$('.headline-fragment').tooltip();

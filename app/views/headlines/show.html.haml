@@ -1,7 +1,7 @@
 - @title = @headline.name
 
 .jumbotron.single-headline
-  %h1= tooltipped_headline @headline
+  %h1= tooltipped_headline @headline, inner_linked: true
   %h2
     #show-vote-count.count.text-muted
       = pluralize @headline.vote_count, "vote"

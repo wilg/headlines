@@ -27,6 +27,8 @@ class GeneratorController < ApplicationController
     end
 
     current_user.upvote_headline! @headline
+
+    @headline.reload
   end
 
 private

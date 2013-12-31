@@ -1,0 +1,72 @@
+@import helpers
+
+#invent-button
+  width: 100%
+  i, span.disabled-title
+    display: none
+  &.disabled
+    span.disabled-title
+      display: inline
+    i
+      display: inline-block
+    span.enabled-title
+      display: none
+
+.source-box
+  margin-top: 10px
+
+.source-category
+
+  h5
+    margin: 0
+
+  margin: 0
+  padding: 10px
+
+  .sources
+    margin-top: 10px
+    .source-checkbox-block
+      display: inline-block
+      background: darken($table-bg-accent, 5%)
+      margin-bottom: 4px
+      padding: 0 4px
+      border-radius: 3px
+      border: 1px solid $table-border-color
+      label
+        font-weight: normal
+
+  input
+    margin-right: 10px
+
+  &:nth-child(odd)
+    background-color: $table-bg-accent
+
+  a.toggler
+    color: $gray
+    text-decoration: none
+    &:hover
+      color: $gray
+    &:active
+      color: $gray-dark
+
+#generated-headlines
+  td.tools
+    width: 150px
+  td.headline
+    a
+      color: $gray-dark
+
+.source-headlines-list
+  li
+    margin-bottom: 12px
+
+.headline-generator-delete-link
+  color: $gray
+
+.generate-form
+  margin-top: 30px
+  margin-bottom: 30px
+
+  label
+    font-weight: normal
+    padding-right: 15px

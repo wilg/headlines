@@ -7,7 +7,7 @@
         %span.headline-fragment{data: {toggle: :tooltip, html: 'true', title: "<span class='sourcename'>{{source_id}}:</span> {{source_phrase}}"}}
           {{fragment}}
         {{/each}}
-        %td.text-right
+        %td.text-right.tools
           %form{"accept-charset" => "UTF-8", action: "{{save_url}}", method: "post", data: {remote: true}}
             %div{style: "margin:0;padding:0;display:inline"}
               %input{name: "utf8", type: "hidden", value: "✓"}

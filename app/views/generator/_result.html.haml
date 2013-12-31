@@ -1,20 +1,13 @@
 %tr{class: "generated-headline-#{Headline.salted_hash(headline.name)}"}
   %td.headline
-    - if headline.persisted?
-      = link_to headline.name, headline
-    - else
-      = headline.name
-  - unless GENERATOR_SAVING_DISABLED
-    %td.text-right
-      - if headline.persisted?
-        = link_to headline, class: "btn btn-default disabled" do
-          %i.fa.fa-thumbs-up
-          Saved
-      - elsif !user_signed_in?
-        %button.btn.btn-success.upvote-button{data:{toggle: 'modal', target: '#modal-login-form'}}
-          %i.fa.fa-thumbs-up
-          Save + Vote
-      - else
-        = link_to save_path(headline: headline.name, sources: @sources.join(","), hash: Headline.salted_hash(headline.name), depth: @depth), remote: true, class: "btn btn-success upvote-button", data: {disable_with: "Voting..."}  do
-          %i.fa.fa-thumbs-up
-          Save + Vote
+    = link_to headline, target: "_blank" do
+      = tooltipped_headline headline, link: url_for(@headline), link_options: {target: "_blank"}
+  %td.tools.text-right
+    - if @headline.vote_count < 2 && @headline.creator == current_user
+      = link_to @headline, method: :delete, confirm: "Are you sure you want to unsave this headline?", class: 'btn btn-xs btn-link headline-generator-delete-link', remote: true do
+        %i.fa.fa-times
+    .btn-group
+      = link_to headline, class: "btn btn-default disabled", target: "_blank" do
+        Saved
+      = link_to headline, class: "btn btn-primary", target: "_blank" do
+        %i.fa.fa-comment
