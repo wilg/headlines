@@ -22,6 +22,22 @@ $ ->
   $(document).on "click", ".save-headline-button", ->
     $(@).closest('form').submit()
 
+  $('.source-category .toggler').click (event) ->
+    $(@).find('i').toggleClass('fa-caret-down')
+    $(@).find('i').toggleClass('fa-caret-right')
+    event.preventDefault()
+
+  mobile_generator_layout = ->
+    if $(window).width() > 992
+      $("#collapse-generate-options").hide()
+      $("#generate-form .source-box").removeClass("collapse")
+    else
+      $("#collapse-generate-options").show()
+
+  if $("#collapse-generate-options").length > 0
+    mobile_generator_layout()
+    $(window).resize -> mobile_generator_layout()
+
   window.userSignedIn = -> $("body").hasClass('logged-in')
 
   generate_new = ->
