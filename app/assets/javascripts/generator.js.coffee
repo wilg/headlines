@@ -53,9 +53,10 @@ $ ->
     ).get()
     window.generator_last_source_names = source_names
     window.generator_last_depth = 2 #$("#generate-form input:radio[name=depth]:checked").val();
+    seed_word = $("#generate-form input[name=seed_word]").val().split(' ')[0]
 
     # Build query string
-    query = $.param({depth:window.generator_last_depth, sources:source_names.join(",")})
+    query = $.param({depth:window.generator_last_depth, seed_word:seed_word, sources:source_names.join(",")})
 
     # Build URL
     url = $("#generate-form").data('generator-url') + "?" + query
@@ -69,12 +70,16 @@ $ ->
       $("#invent-button").removeClass 'disabled'
       $("#invent-button").addClass 'enabled'
 
+  $("#generate-form").submit (event) ->
+    generate_new();
+    event.preventDefault()
+
   # Auto-generate when opening generator page
   if $("#invent-button").length > 0
-    generate_new()
+    generate_new();
 
   $("#invent-button").on 'click', ->
-    generate_new()
+    $("#generate-form").submit()
 
 
 Handlebars.registerHelper 'authenticity_token', ->
