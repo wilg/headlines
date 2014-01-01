@@ -21,8 +21,5 @@
       - if headline.comments_count > 0
         = headline.comments_count
   %td.permalink.hidden-xs
-    = link_to(headline, abbr: "Permalink") do
-      %i.fa.fa-link
-  %td.permalink.hidden-xs
     = link_to(tweet_url(headline), abbr: "Tweet", target: "_blank") do
       %i.fa.fa-twitter
