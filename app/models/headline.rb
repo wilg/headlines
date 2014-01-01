@@ -25,6 +25,8 @@ class Headline < ActiveRecord::Base
   has_many :source_headline_fragments, dependent: :destroy
   has_many :source_headlines, through: :source_headline_fragments
 
+  serialize :source_names
+
   before_save do
     self.name_hash = Headline.name_hash(self.name)
     calculate_vote_count!

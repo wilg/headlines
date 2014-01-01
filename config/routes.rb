@@ -11,6 +11,7 @@ Headlines::Application.routes.draw do
     end
     member do
       post :vote
+      get :reconstruct
     end
   end
 

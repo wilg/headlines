@@ -43,6 +43,11 @@ class HeadlinesController < ApplicationController
     @headline = Headline.find(params[:id])
   end
 
+  def reconstruct
+    @headline = Headline.find(params[:id])
+    redirect_to generator_url(reconstruct_phrase: @headline.name, reconstruct_sources: @headline.source_names.join(","))
+  end
+
   def vote
     head :ok and return if VOTING_DISABLED
     @headline = Headline.find(params[:id])

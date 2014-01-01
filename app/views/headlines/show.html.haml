@@ -17,8 +17,8 @@
     #headline-comments
       = render partial: 'comments/comments', locals: {headline: @headline}
   .col-md-6
-    .well
-      - if @headline.creator
+    - if @headline.creator
+      .well
         %h4.text-muted
           discovered by #{link_to @headline.creator.login, @headline.creator}
           .pull-right #{timeago_tag @headline.created_at}
