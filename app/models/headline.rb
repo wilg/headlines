@@ -38,6 +38,14 @@ class Headline < ActiveRecord::Base
     name.parameterize
   end
 
+  validate :ensure_name_is_not_changed_significantly, on: :update
+
+  def ensure_name_is_not_changed_significantly
+    if self.name.parameterize != self.name_was.parameterize
+      errors.add :name, 'was changed too much'
+    end
+  end
+
   # def to_param
   #   "#{id}-#{name.parameterize}"
   # end

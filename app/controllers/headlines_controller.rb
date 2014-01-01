@@ -43,6 +43,20 @@ class HeadlinesController < ApplicationController
     @headline = Headline.find(params[:id])
   end
 
+  def edit
+    @headline = Headline.find(params[:id])
+  end
+
+  def update
+    @headline = Headline.find(params[:id])
+    @headline.name = params[:headline][:name]
+    if @headline.save
+      redirect_to @headline
+    else
+      render action: :edit
+    end
+  end
+
   def vote
     head :ok and return if VOTING_DISABLED
     @headline = Headline.find(params[:id])

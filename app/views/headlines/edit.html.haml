@@ -1,0 +1,17 @@
+- @title = "Edit Headline | #{@headline.name}"
+
+%h2
+  Edit Punctuation &amp; Capitalization
+%h4.text-muted= @headline.name
+%br/
+
+- @headline.errors.full_messages.each do |msg|
+  .alert.alert-danger= msg
+
+= form_for @headline, class: 'form-horizontal' do |f|
+  .form-group
+    = f.text_area :name, class: 'form-control'
+
+  .form-group
+    = f.submit "Update Punctuation & Capitalization", class: 'btn btn-primary'
+    = link_to "Cancel", @headline, class: 'btn btn-default'
