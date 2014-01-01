@@ -14,9 +14,10 @@ class GeneratorController < ApplicationController
       return
     end
 
-    @headline = Headline.where(name: params[:headline]).first_or_initialize
+    @headline = Headline.with_name(params[:headline]).first_or_initialize
 
     if @headline.new_record?
+      @headline.name = params[:headline]
       @headline.depth = params[:depth]
       @headline.creator = current_user
       @headline.save!

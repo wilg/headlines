@@ -16,7 +16,10 @@ class Headline < ActiveRecord::Base
     where{sources.like_any cat_sources}
   }
 
+  scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
+
   validates_presence_of :name
+  validates_uniqueness_of :name_hash
 
   has_many :votes, dependent: :destroy
   has_many :comments, dependent: :destroy
