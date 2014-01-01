@@ -3,10 +3,9 @@ class Reconstruct
   require 'colorize'
 
   def self.export
-    no_metadata = Headline.includes(:source_headline_fragments).where(:source_headline_fragments => {:headline_id =>nil} )
-    puts "Count: #{no_metadata.count}"
-    no_metadata.each do |h|
-      puts h.name
+    puts "Count: #{Headline.no_metadata.count}"
+    Headline.no_metadata.top.pluck(:name).each do |n|
+      puts n
     end
     true
   end
@@ -24,17 +23,21 @@ class Reconstruct
 
     array_from_json.each do |headline_hash|
 
-      @headline = Headline.with_name(headline_hash['headline']).first
+      @headline = Headline.with_name(headline_hash['headline']).includes(:source_headline_fragments).first
 
       if @headline
-        if @headline.source_headline_fragments.size == 0
-          @headline.create_sources!(headline_hash['sources'])
-          puts "Headline #{@headline.id} - Added souces".green
-        else
-          puts "Headline #{@headline.id} - FAILED - Already had sources".red
+        begin
+          if @headline.source_headline_fragments.size == 0
+            @headline.create_sources!(headline_hash['sources'])
+            puts "[SUCCESS] Headline #{@headline.id} - Added souces".green
+          else
+            puts "[ERROR] [ALREADY_DONE] Headline #{@headline.id} - Already had sources".red
+          end
+        rescue Exception => e
+          puts "[ERROR] [EXCEPTION] #{e}".red
         end
       else
-        puts "Couldn't find headline for name #{headline_hash['headline']}".red
+        puts "[ERROR] [NO_HEADLINE] Couldn't find headline for name #{headline_hash['headline']}".red
       end
 
     end
