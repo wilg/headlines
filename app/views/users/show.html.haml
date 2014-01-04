@@ -23,3 +23,13 @@
   .karma
     %span.text-muted
       = link_to pluralize(@user.comments_count, 'comment'), user_comments_url(@user)
+
+- if @user == current_user
+  %hr/
+  .text-muted
+    %small
+      %strong API Key:
+      = current_user.api_key
+      .pull-right
+        %strong API Requests:
+        = number_with_delimiter current_user.api_requests

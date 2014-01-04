@@ -8,6 +8,7 @@ Headlines::Application.routes.draw do
     resources :comments
     collection do
       get :best
+      get :random
     end
     member do
       post :vote

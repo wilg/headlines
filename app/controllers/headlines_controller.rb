@@ -1,5 +1,7 @@
 class HeadlinesController < ApplicationController
 
+  before_filter :protect_api, only: [:random, :show]
+
   def best
     if params[:order].present? && params[:order].to_sym == :new
       @headlines = Headline.newest
@@ -41,6 +43,18 @@ class HeadlinesController < ApplicationController
 
   def show
     @headline = Headline.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json {render partial: "headlines/headline", locals: {headline: @headline}}
+    end
+  end
+
+  def random
+    @headline = Headline.where("vote_count > ?", params[:minimum] || 2).order('random()').first
+    respond_to do |format|
+      format.html { redirect_to @headline }
+      format.json {render partial: "headlines/headline", locals: {headline: @headline}}
+    end
   end
 
   def reconstruct
