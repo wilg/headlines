@@ -1,0 +1,8 @@
+- @title = "Source | #{@source.name}"
+
+%h2
+  = @source.name
+
+%h3.text-muted Most Popular Mashups
+- @headline_table_show_sources = true
+= render partial: 'headlines/headlines_table', locals: {headlines: @headlines}

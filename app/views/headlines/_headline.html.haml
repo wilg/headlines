@@ -15,6 +15,9 @@
         = link_to(headline, abbr: "Comments", class: 'comment-link') do
           %i.fa.fa-comment
           = headline.comments_count
+  - if @headline_table_show_sources
+    %td.sources
+      = headline.sources.map(&:name)
   %td.comments.hidden-xs{class: headline.comments_count > 0 ? 'has-comments' : 'no-comments'}
     = link_to(headline, abbr: "Comments") do
       %i.fa.fa-comment

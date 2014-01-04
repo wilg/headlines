@@ -23,6 +23,7 @@
           discovered by #{link_to @headline.creator.login, @headline.creator}
           .pull-right #{timeago_tag @headline.created_at}
 
+    = @headline.sources.map(&:name)
     - if @headline.source_headlines.length > 0
       .well
         %h4.text-muted

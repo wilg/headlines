@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/wilg/headline-sources.git
-  revision: 9decfe04730a5d4acbfedda845fe4bd5357e65af
+  revision: c312e95f9f282b8d407ba7139bfdb1f5cb49ee56
   specs:
     headline_sources (0.0.1)
       activesupport
