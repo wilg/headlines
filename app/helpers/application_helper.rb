@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def og_tags
-    default = {"og:site_name" => "Headline Smasher"}
+    default = {"og:site_name" => "Headline Smasher", "og:image" => image_url("logo.png")}
     @open_graph_tags ? default.merge(@open_graph_tags) : default
   end
 

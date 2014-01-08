@@ -1,6 +1,7 @@
 - @title = @headline.name
 - og! "og:title", @headline.name
 - og! "og:url", headline_url(@headline)
+- og! "og:description", "Fake headlines created by mashing up real headlines."
 
 .jumbotron.single-headline
   %h1= tooltipped_headline @headline, inner_linked: true
@@ -10,12 +11,15 @@
       - unless VOTING_DISABLED
         #show-vote-box.votebox.pull-left= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
       #headline-show-social.pull-right
-        = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary') do
-          %i.fa.fa-twitter
-          Tweet
-        = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary') do
-          %i.fa.fa-facebook-square
-          Share
+        .btn-toolbar
+          .btn-group
+            = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary') do
+              %i.fa.fa-twitter
+              Tweet
+          .btn-group
+            = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary') do
+              %i.fa.fa-facebook-square
+              Share
 
 .row
   .col-md-6
