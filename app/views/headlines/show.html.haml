@@ -1,19 +1,26 @@
 - @title = @headline.name
+- og! "og:title", @headline.name
+- og! "og:url", headline_url(@headline)
 
 .jumbotron.single-headline
   %h1= tooltipped_headline @headline, inner_linked: true
   %h2
-    #show-vote-count.count.text-muted
-      = pluralize @headline.vote_count, "vote"
+    .count.text-muted
+      %span#show-vote-count= pluralize @headline.vote_count, "vote"
+      - unless VOTING_DISABLED
+        #show-vote-box.votebox.pull-left= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
+      #headline-show-social.pull-right
+        = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary') do
+          %i.fa.fa-twitter
+          Tweet
+        = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary') do
+          %i.fa.fa-facebook-square
+          Share
 
-    - unless VOTING_DISABLED
-      #show-vote-box.votebox= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
 .row
   .col-md-6
     %h3.comments-title
       Comments
-      .pull-right
-        = tweet_button url: headline_url(@headline), text: @headline.name, lang: 'en', via: nil, dnt: true, size: 'large', no_js: true
     #headline-comments
       = render partial: 'comments/comments', locals: {headline: @headline}
   .col-md-6

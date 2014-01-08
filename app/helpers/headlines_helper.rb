@@ -41,6 +41,10 @@ module HeadlinesHelper
     "https://twitter.com/intent/tweet?text=#{CGI.escape headline.name}&source=#{CGI.escape "Headline Smasher"}&url=#{headline_url(headline)}"
   end
 
+  def facebook_share_url(headline)
+    "https://www.facebook.com/sharer/sharer.php?u=#{headline_url(headline)}"
+  end
+
   def loading_icon
     "..."
   end

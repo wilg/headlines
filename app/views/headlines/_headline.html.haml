@@ -23,3 +23,6 @@
   %td.permalink.hidden-xs
     = link_to(tweet_url(headline), abbr: "Tweet", target: "_blank") do
       %i.fa.fa-twitter
+  %td.permalink.hidden-xs
+    = link_to(facebook_share_url(headline), abbr: "Share on Facebook", target: "_blank") do
+      %i.fa.fa-facebook-square
