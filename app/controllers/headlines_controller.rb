@@ -2,43 +2,15 @@ class HeadlinesController < ApplicationController
 
   before_filter :protect_api, only: [:random, :show]
 
-  def best
-    if params[:order].present? && params[:order].to_sym == :new
-      @headlines = Headline.newest
-    elsif params[:order].present? && params[:order].to_sym == :trending
-      @headlines = Headline.hot
-    else
-      @sorting_top = true
-      @headlines = Headline.top
-      if params[:timeframe].present? && params[:timeframe].to_sym == :all
-      elsif params[:timeframe].present? && params[:timeframe].to_sym == :yesterday
-        @headlines = @headlines.yesterday
-      elsif params[:timeframe].present? && params[:timeframe].to_sym == :this_week
-        @headlines = @headlines.this_week
-      else
-        @headlines = @headlines.today
-      end
-    end
-    if params[:filter].present? && params[:filter].to_sym != :all
-      @headlines = @headlines.where(["sources ILIKE ?", "%#{params[:filter]}%"])
-    end
-    if params[:category].present? && params[:category].to_sym != :all
-      @headlines = @headlines.in_category(params[:category].to_s)
-    end
-    if params[:q].present?
-      @headlines = @headlines.where("name ilike (?)", "%#{params[:q]}%")
-    end
-    @headlines = @headlines.paginate(:page => params[:page], :per_page => 40)
-  end
-
   def index
-    @user = User.find_by_login(params[:user_id])
-    @headlines = @user.headlines.paginate(:page => params[:page], :per_page => 40)
-    if params[:order].present? && params[:order].to_sym == :top
-      @headlines = @headlines.top
+    if params[:user_id]
+      @user = User.find_by_login(params[:user_id])
+      @headlines = headlines_sorted_by_params @user.headlines
     else
-      @headlines = @headlines.newest
+      @is_main_browse_page = true
+      @headlines = headlines_sorted_by_params Headline.all, {order: :top, timeframe: :today, q: nil}
     end
+    @headlines = default_pagination @headlines
   end
 
   def show

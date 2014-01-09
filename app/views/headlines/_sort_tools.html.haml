@@ -1,0 +1,20 @@
+.sort-tools
+  - if @sorting_top
+    .btn-group.source-picker
+      = link_to "Today", merge_sort_url({page: 1, timeframe: :today}), class: default_button_toggle(:timeframe, :today, true)
+      = link_to "Yesterday", merge_sort_url({page: 1, timeframe: :yesterday}), class: default_button_toggle(:timeframe, :yesterday)
+      = link_to merge_sort_url({page: 1, timeframe: :this_week}), class: default_button_toggle(:timeframe, :this_week) do
+        %span.hidden-xs This
+        Week
+      = link_to "All Time", merge_sort_url({page: 1, timeframe: :all}), class: default_button_toggle(:timeframe, :all)
+
+  = form_tag params, class: 'searchbar hidden-xs', method: :get do
+    %span.input-group
+      %span.input-group-addon
+        %i.fa.fa-search
+      = hidden_field_tag :timeframe, params[:timeframe].presence || :all
+      = text_field_tag :q, params[:q], placeholder: "Search", class: "form-control"
+      - if params[:q].present?
+        %span.input-group-btn
+          = link_to merge_sort_url(q: nil), class: "btn btn-default input" do
+            %i.fa.fa-times

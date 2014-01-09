@@ -3,11 +3,11 @@ require 'digest/sha1'
 class Headline < ActiveRecord::Base
 
   scope :top, -> { order("headlines.vote_count desc, headlines.created_at desc") }
-  scope :hot, -> { order("(vote_count / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 20.minutes.ago).where("vote_count > 1 AND vote_count < 50") }
-  scope :today, -> { where("created_at > ?", 1.day.ago) }
-  scope :this_week, -> { where("created_at > ?", 7.days.ago) }
-  scope :yesterday, -> { where("created_at > ? AND created_at < ?", 2.days.ago, 1.day.ago) }
-  scope :newest, -> { order("created_at desc") }
+  scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
+  scope :today, -> { where("headlines.created_at > ?", 1.day.ago) }
+  scope :this_week, -> { where("headlines.created_at > ?", 7.days.ago) }
+  scope :yesterday, -> { where("headlines.created_at > ? AND headlines.created_at < ?", 2.days.ago, 1.day.ago) }
+  scope :newest, -> { order("headlines.created_at desc") }
 
   scope :no_metadata, -> { includes(:source_headline_fragments).where(source_headline_fragments: {headline_id: nil}) }
 
