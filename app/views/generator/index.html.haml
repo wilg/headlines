@@ -35,6 +35,10 @@
                     = label_tag source.id do
                       = source_image_tag source
                       = source.name
+          .form-group
+            .text-center
+              %a.btn.btn-xs.btn-link.link-muted#select-all Select All
+              %a.btn.btn-xs.btn-link.link-muted#select-none Select None
         .form-group.seed-word-area{style: "display:none"}
           %input.input-sm.form-control{type: :text, placeholder: "Seed Word", name: :seed_word, id: "seed-word-input"}
   .col-md-8
