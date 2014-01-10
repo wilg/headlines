@@ -23,31 +23,32 @@
 
 .row
   .col-md-6
-    %h3.comments-title
-      Comments
     #headline-comments
       = render partial: 'comments/comments', locals: {headline: @headline}
   .col-md-6
     - if @headline.creator
       .well
-        %h4.text-muted
+        %h4.text-muted{style: 'margin:0'}
           discovered by #{link_to @headline.creator.login, @headline.creator}
           .pull-right #{timeago_tag @headline.created_at}
 
     - if @headline.source_headlines.length > 0
       .well
-        %h4.text-muted
-          Mashup Sources
-        %ul.source-headlines-list.list-unstyled
+        %h4.text-muted{style: 'margin-top:0'}
+          Mashed Up From These Stories
+        %ul#show-headline-source-headline-list.list-unstyled
           - @headline.source_headlines.each do |source_headline|
             %li
               .pull-right
-                = link_to source_headline.article_url, class: "btn btn-default btn-xs" do
-                  %i.fa.fa-globe
-                  Read
-                = link_to source_headline, class: "btn btn-default btn-xs" do
-                  %i.fa.fa-gear
-                  More Mashups
+                .btn-toolbar
+                  .btn-group
+                    = link_to source_headline.article_url, class: "btn btn-success btn-xs" do
+                      %i.fa.fa-globe
+                      Read
+                  .btn-group
+                    = link_to source_headline, class: "btn btn-default btn-xs" do
+                      %i.fa.fa-gear
+                      Mashups
               .source-headline
                 = link_to source_headline.name, source_headline.article_url
               .source
