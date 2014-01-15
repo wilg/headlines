@@ -54,7 +54,7 @@ module HeadlinesHelper
   end
 
   def source_image_tag(source)
-    image_tag("#{source.id}.png", class: 'source-icon', alt: source.name)
+    image_tag("headline_sources/#{source.id}.png", class: 'source-icon', alt: source.name)
   end
 
   def active_if_param(param_name, param_value, also_if_blank = false)
