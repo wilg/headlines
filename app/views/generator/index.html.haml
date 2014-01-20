@@ -20,7 +20,7 @@
           %i.fa.fa-gear
           Pick Sources
         .source-box.collapse
-          - HeadlineSources::Source.categories.each do |category_name, sources|
+          - generator_sources.each do |category_name, sources|
             .source-category{id: "source-category-#{category_name.parameterize}"}
               %h5
                 %a.toggler{data: {toggle: :collapse, target: "#source-category-#{category_name.parameterize} .sources"}, href: '#'}
