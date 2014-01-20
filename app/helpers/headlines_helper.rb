@@ -54,6 +54,7 @@ module HeadlinesHelper
   end
 
   def source_image_tag(source)
+    return nil unless source
     image_tag("headline_sources/#{source.id}.png", class: 'source-icon', alt: source.name)
   end
 

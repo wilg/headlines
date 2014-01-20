@@ -51,9 +51,10 @@
                       Mashups
               .source-headline
                 = link_to source_headline.name, source_headline.article_url
-              .source
-                = source_image_tag source_headline.source
-                = source_headline.source.name
+              - if source_headline.source
+                .source
+                  = source_image_tag source_headline.source
+                  = source_headline.source.name
 
     %small.text-muted
       - if current_user.present? && current_user.login == "wil" && @headline.source_headlines.length == 0

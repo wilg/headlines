@@ -1,4 +1,4 @@
-- @title = "Fake Headlines Mashed Up From \"#{@source_headline.name}\" Headline on #{@source_headline.source.name}"
+- @title = "Fake Headlines Mashed Up From \"#{@source_headline.name}\" Headline on #{@source_headline.source.try :name}"
 
 
 .lead
@@ -10,7 +10,8 @@
         Read Article
     = source_image_tag @source_headline.source
     %strong &ldquo;#{@source_headline.name}&rdquo;
-    from #{@source_headline.source.name}
+    - if @source_headline.source
+      from #{@source_headline.source.name}
 
 %hr/
 
