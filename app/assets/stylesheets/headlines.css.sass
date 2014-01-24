@@ -66,6 +66,12 @@ img.source-icon
   width: 16px
   height: 16px
 
+#show-headline-source-headline-list
+  li
+    margin-bottom: 12px
+  .btn-toolbar
+    margin-left: 10px
+
 .searchbar
   width: 200px
   float: right
@@ -123,6 +129,28 @@ table.headlines-table
 .single-headline .votebox
   margin-top: 10px
 
+=color-and-a-color($color)
+  color: $color
+  a
+    color: $color !important
+
+.colored-fragments
+  .headline-fragment
+    &:nth-of-type(1n)
+      +color-and-a-color($brand-primary)
+    &:nth-of-type(2n)
+      +color-and-a-color($brand-success)
+    &:nth-of-type(3n)
+      +color-and-a-color($brand-info)
+    &:nth-of-type(4n)
+      +color-and-a-color($brand-warning)
+    &:nth-of-type(5n)
+      +color-and-a-color($brand-danger)
+
+.single-headline h1
+  &:hover
+    @extend .colored-fragments
+
 .source-picker
   margin-bottom: 20px
 
@@ -167,3 +195,11 @@ span.hidden-xs
   display: inline !important
   +phone
     display: none !important
+
+#show-vote-box
+  margin-top: -3px
+  margin-right: 15px
+
+#headline-show-social
+  +phone
+    float: none !important

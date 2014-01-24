@@ -8,7 +8,7 @@ class SourceHeadline < ActiveRecord::Base
   end
 
   def article_url
-    q = "#{name} #{source.name}"
+    q = "#{name} #{source.name if source}"
     url || "https://www.google.com/search?btnI&q=#{CGI.escape(q)}&safe=off"
   end
 

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/wilg/headline-sources.git
-  revision: c312e95f9f282b8d407ba7139bfdb1f5cb49ee56
+  revision: 924d0dbf89bf98b6abfb50472e7679ab64d4f58d
   specs:
     headline_sources (0.0.1)
       activesupport
@@ -67,14 +67,14 @@ GEM
     dotenv (0.9.0)
     erubis (2.7.0)
     execjs (2.0.2)
-    font-awesome-rails (4.0.3.0)
+    font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
     font_assets (0.1.10)
       rack
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
-    haml (4.0.4)
+    haml (4.0.5)
       tilt
     handlebars_assets (0.15)
       execjs (>= 1.2.9)
@@ -86,6 +86,9 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
+    jbuilder (2.0.2)
+      activesupport (>= 3.0.0)
+      multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -97,9 +100,9 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     multi_xml (0.5.5)
-    newrelic_rpm (3.7.1.180)
+    newrelic_rpm (3.7.1.182)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
@@ -169,7 +172,7 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.7.0)
+    unicorn (4.8.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -194,6 +197,7 @@ DEPENDENCIES
   haml
   handlebars_assets
   headline_sources!
+  jbuilder
   jquery-rails
   newrelic_rpm
   nokogiri

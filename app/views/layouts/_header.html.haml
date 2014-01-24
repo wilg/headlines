@@ -13,13 +13,13 @@
 
       .btn-toolbar.hidden-xs
         .btn-group
-          = link_to best_url, class: main_button_best_toggle(:order, :top, true) do
+          = link_to root_url, class: main_button_best_toggle(:top, true) do
             %i.fa.fa-star
             Best Headlines
-          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :trending}), class: main_button_best_toggle(:order, :trending) do
+          = link_to hot_url, class: main_button_best_toggle(:trending) do
             %i.fa.fa-flash
             Hot
-          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :new}), class: main_button_best_toggle(:order, :new) do
+          = link_to recent_url, class: main_button_best_toggle(:new) do
             %i.fa.fa-clock-o
             Recent
         - unless GENERATOR_DISABLED
@@ -33,13 +33,13 @@
 
       .btn-toolbar.visible-xs
         .btn-group
-          = link_to best_url, class: main_button_best_toggle_phone(:order, :top, true) do
+          = link_to root_url, class: main_button_best_toggle_phone(:order, :top, true) do
             %i.fa.fa-star
             Best
-          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :trending}), class: main_button_best_toggle_phone(:order, :trending) do
+          = link_to hot_url, class: main_button_best_toggle_phone(:order, :trending) do
             %i.fa.fa-flash
             Hot
-          = link_to params.merge({action: :best, controller: '/headlines', page: 1, order: :new}), class: main_button_best_toggle_phone(:order, :new) do
+          = link_to recent_url, class: main_button_best_toggle_phone(:order, :new) do
             %i.fa.fa-clock-o
         - unless GENERATOR_DISABLED
           .btn-group.pull-right

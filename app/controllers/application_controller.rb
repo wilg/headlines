@@ -6,6 +6,18 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_if_old
 
   include VoteHelper
+  include HeadlinesHelper
+
+  def protect_api
+    if request.format.to_sym == :json
+      @api_key_user = User.find_by_api_key(params[:api_key])
+      unless @api_key_user
+        render json: {error: "No API key provided."}, status: :unauthorized
+      else
+        User.increment_counter(:api_requests, @api_key_user.id)
+      end
+    end
+  end
 
   protected
 

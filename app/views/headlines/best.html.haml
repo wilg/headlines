@@ -15,6 +15,7 @@
     %span.input-group
       %span.input-group-addon
         %i.fa.fa-search
+      = hidden_field_tag :timeframe, params[:timeframe].presence || :all
       = text_field_tag :q, params[:q], placeholder: "Search", class: "form-control"
       - if params[:q].present?
         %span.input-group-btn

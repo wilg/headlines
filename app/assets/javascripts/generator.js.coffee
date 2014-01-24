@@ -17,6 +17,14 @@ $ ->
   $(".group-check-box").change ->
     $(this).closest('.source-category').find(".source-check-box").prop("checked", $(this).is(":checked"))
 
+  $(document).on "click", "#select-all", ->
+    $('.group-check-box').prop("checked", true).prop("indeterminate", false)
+    $('.source-check-box').prop("checked", true)
+
+  $(document).on "click", "#select-none", ->
+    $('.group-check-box').prop("checked", false).prop("indeterminate", false)
+    $('.source-check-box').prop("checked", false)
+
   $('.headline-fragment').tooltip()
 
   $(document).on "click", ".save-headline-button", ->
