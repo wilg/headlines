@@ -26,6 +26,7 @@ $ ->
     $('.source-check-box').prop("checked", false)
 
   $('.headline-fragment').tooltip()
+  $('.source-icon-link').tooltip()
 
   $(document).on "click", ".save-headline-button", ->
     $(@).closest('form').submit()
