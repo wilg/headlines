@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.lazyload
 //= require rails-timeago
 //= require twitter/bootstrap/modal
 //= require twitter/bootstrap/tooltip

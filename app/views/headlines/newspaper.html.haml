@@ -1,0 +1,71 @@
+!!!
+%html
+  %head
+    %title The Serendipity Times | All The News Mixed Together
+    = stylesheet_link_tag    "newspaper", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    = favicon_link_tag 'favicon.ico'
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    %meta{name: 'apple-mobile-web-app-title', content: 'Smasher'}
+    %link{rel: 'apple-touch-icon-precomposed', href: image_url('apple-touch-icon-precomposed.png') }
+    %meta{charset: 'utf-8'}
+    - og_tags.each do |k, v|
+      %meta{property: k, content: v}
+    %script{src: "//use.typekit.net/dav1uoq.js", type: "text/javascript"}
+    :javascript
+      try{Typekit.load();}catch(e){}
+  %body#newspaper
+    .container
+      #header.row
+        %h1#newspaper-name= link_to "The Serendipity Times", paper_url
+        .logline
+          %span.tag All The News Mixed Together
+          %span.tools
+            = link_to paper_url do
+              %i.fa.fa-refresh
+              More News
+            = link_to generator_url do
+              %i.fa.fa-gears
+              Discover New Stories
+          %span.date= Date.today.strftime("%A, %B %e, %Y")
+
+      - main_story = @headlines.shift
+      .row
+        #main-story
+          = link_to main_story do
+            = headline_image_tag main_story, id: "main-image", class: "headline-image", width: 600, height: 350
+          %h1= link_to main_story.name, main_story
+          = render partial: 'headlines/byline', locals: {headline: main_story}
+
+        - @headlines.shift(3).in_groups_of(3, false) do |headlines|
+          #small-stories
+            - headlines.each do |headline|
+              .small-story
+                = headline_image_tag headline, alt: headline.name, class: "headline-image", width: 80, height: 80
+                %h3= link_to headline.name, headline
+              = render partial: 'headlines/byline', locals: {headline: headline}
+
+      #modules
+        - @headlines.in_groups_of(3, false) do |headlines|
+          .row
+            - headlines.each do |headline|
+              .module
+                .small-headline
+                  %h2= link_to headline.name, headline
+                  = render partial: 'headlines/byline', locals: {headline: headline}
+
+      .row
+        #explain
+          %h2
+            A Product Of
+            %span.smasher
+              %i.fa.fa-gavel
+              Headline Smasher
+          %h3 Fake headlines created by mashing up real headlines.
+          %p Our amazing computers mash up headlines, then you vote on the best ones.
+          = link_to root_url, class: 'btn btn-lg btn-success' do
+            %i.fa.fa-gears
+            Smash Your Own Headlines
+
+    = render 'layouts/analytics'

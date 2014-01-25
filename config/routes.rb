@@ -28,6 +28,8 @@ Headlines::Application.routes.draw do
     resources :comments
   end
 
+  get 'paper', to: "headlines#newspaper"
+
   get "leaderboard", to: "users#index"
 
   get "hot", to: "headlines#index", order: :trending, user_id: nil

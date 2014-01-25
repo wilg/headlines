@@ -2,6 +2,8 @@ class HeadlinesController < ApplicationController
 
   before_filter :protect_api, only: [:random, :show]
 
+  layout false, only: :newspaper
+
   def index
     if params[:user_id]
       @user = User.find_by_login(params[:user_id])
@@ -27,6 +29,10 @@ class HeadlinesController < ApplicationController
       format.html { redirect_to @headline }
       format.json {render partial: "headlines/headline", locals: {headline: @headline}}
     end
+  end
+
+  def newspaper
+    @headlines = Headline.where("vote_count > ?", params[:minimum] || 2).order('random()').limit(19)
   end
 
   def reconstruct

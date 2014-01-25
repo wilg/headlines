@@ -106,4 +106,20 @@ class Headline < ActiveRecord::Base
     vote_count < 1
   end
 
+  TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler']
+
+  def to_tag
+    short_name = name.split(" ").map{|w| w.parameterize.gsub("-", '') }.compact
+    short_name_string = short_name.join(" ")
+    last_trump = nil
+    if TRUMP_WORDS.any?{ |o| last_trump = o; short_name_string.include?(o) }
+      return last_trump.split("-").join("+")
+    end
+    return short_name.compact.sort{|a, b| b.length <=> a.length}.first
+  end
+
+  def image_url(options = {})
+    "http://pixelholdr.com/#{to_tag}/#{options[:width]}x#{options[:height]}/dimensions:hide"
+  end
+
 end

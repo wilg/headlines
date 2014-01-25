@@ -1,0 +1,2 @@
+$ ->
+  $("img.headline-image").lazyload();
