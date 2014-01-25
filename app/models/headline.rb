@@ -35,8 +35,11 @@ class Headline < ActiveRecord::Base
 
   before_save do
     self.name_hash = Headline.name_hash(self.name)
-    find_photo! if needs_photo_load?
     calculate_vote_count!
+  end
+
+  after_create do
+    find_photo! if needs_photo_load?
   end
 
   def calculate_vote_count!
