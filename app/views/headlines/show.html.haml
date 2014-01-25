@@ -72,6 +72,6 @@
               = link_to "Find Sources", reconstruct_headline_url(@headline)
             %p
               = @headline.to_tag.split(",").join(", ")
-              = link_to "Change Photo", rephoto_headline_url(@headline)
+              = link_to "Change Photo", pick_photo_headline_url(@headline)
           - if @headline.vote_count < 2 && @headline.creator == current_user
             .pull-right= link_to "Delete Headline", @headline, method: :delete, confirm: "Are you sure you want to delete this headline?", class: 'text-muted'

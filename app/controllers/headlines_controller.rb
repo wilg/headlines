@@ -40,10 +40,15 @@ class HeadlinesController < ApplicationController
     redirect_to generator_url(reconstruct_phrase: @headline.name, reconstruct_sources: @headline.source_names.join(","))
   end
 
-  def rephoto
+  def pick_photo
     @headline = Headline.find(params[:id])
-    @headline.clear_photo!
-    @headline.find_photo!
+    @search = params[:search].presence || @headline.to_tag
+    @photos = flickr.photos.search(tags: @search, per_page: 50, sort: 'relevance', media: 'photos', extras: "owner_name,license")
+  end
+
+  def update_photo
+    @headline = Headline.find(params[:id])
+    @headline.set_photo! JSON.parse(params[:json])
     redirect_to @headline
   end
 
