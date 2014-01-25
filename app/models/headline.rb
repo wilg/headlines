@@ -111,16 +111,18 @@ class Headline < ActiveRecord::Base
     vote_count < 1
   end
 
-  TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler', 'stripper', 'sex', 'baby', 'babies', 'bacon', 'god']
+  TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler', 'stripper', 'sex', 'baby', 'babies', 'bacon', 'god', 'jesus', 'mario']
+
+  IGNORED_WORDS = ['announcement', 'this', 'please', 'his', 'hers', 'him', 'her', 'a', 'the', 'them', 'of', 'your', 'on', 'an', 'i', 'but', 'here', 'cant', 'can', 'continues', 'continue', 'another', 'remarkable', 'example', 'in', 'into', 'now', 'is', 'story', 'many', 'actually', 'really', 'you']
 
   def to_tag
-    short_name = name.split(" ").map{|w| w.parameterize.gsub("-", '') }.compact
-    short_name_string = short_name.join(" ")
-    last_trump = nil
-    if TRUMP_WORDS.any?{ |o| last_trump = o; short_name_string.include?(o) }
-      return last_trump.split("-").join("+")
+    short_name = name.parameterize.gsub("-s-", "s-").gsub("-t-", "t-").split("-").reject{|w| IGNORED_WORDS.include?(w) }.uniq
+    def length_with_bonus(str)
+      bonus = 0
+      bonus = 5 if TRUMP_WORDS.include?(str) || TRUMP_WORDS.include?(str.pluralize)
+      str.length + bonus
     end
-    return short_name.compact.sort{|a, b| b.length <=> a.length}.first
+    return short_name.compact.sort{|a, b| length_with_bonus(b) <=> length_with_bonus(a)}.first(3).join(",")
   end
 
   def has_photo?
@@ -132,7 +134,7 @@ class Headline < ActiveRecord::Base
   end
 
   def find_photo!(search = to_tag)
-    photo = flickr.photos.search(text: search, per_page: 20, sort: 'interestingness-desc').to_a.sample
+    photo = flickr.photos.search(tags: search, per_page: 20, sort: 'relevance', media: 'photos').to_a.sample
     if photo
       photo_data['flickr'] = photo.to_hash
     else
