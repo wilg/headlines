@@ -149,9 +149,10 @@ class Headline < ActiveRecord::Base
   end
 
   def image_url(size = 'q')
+    size = size.nil? ? "" : "_#{size}"
     if has_photo?
       r = photo_data['flickr']
-      FlickRaw::PHOTO_SOURCE_URL % [r['farm'], r['server'], r['id'], r['secret'], "_#{size}", "jpg"]
+      FlickRaw::PHOTO_SOURCE_URL % [r['farm'], r['server'], r['id'], r['secret'], size, "jpg"]
     else
       return "http://lorempixel.com/150/150" if size == 'q'
       "http://lorempixel.com/400/200"

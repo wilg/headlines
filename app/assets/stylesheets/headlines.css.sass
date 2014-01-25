@@ -149,7 +149,7 @@ table.headlines-table
     &:nth-of-type(5n)
       +color-and-a-color($brand-danger)
 
-.single-headline h1
+#headline-show h1
   &:hover
     @extend .colored-fragments
 
@@ -205,3 +205,20 @@ span.hidden-xs
 #headline-show-social
   +phone
     float: none !important
+
+#headline-show
+  margin-top: 10px
+  h1
+    font-size: 42px
+    margin-top: 0
+    border-bottom: 1px solid #ececec
+    padding-bottom: 10px
+  h2
+    border-bottom: 1px solid #ececec
+    padding-bottom: 25px
+    margin-bottom: 25px
+  .photo-column
+    text-align: right
+    img
+      width: 100%
+      height: auto

@@ -1,63 +1,68 @@
 - @title = @headline.name
 - og! "og:title", @headline.name
+- og! "og:image", @headline.image_url!('n')
 - og! "og:url", headline_url(@headline)
 - og! "og:description", "Fake headlines created by mashing up real headlines."
 
-.jumbotron.single-headline
-  %h1= tooltipped_headline @headline, inner_linked: true
-  %h2
-    .count.text-muted
-      %span#show-vote-count= pluralize @headline.vote_count, "vote"
-      - unless VOTING_DISABLED
-        #show-vote-box.votebox.pull-left= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
-      #headline-show-social.pull-right
-        .btn-toolbar
-          .btn-group
-            = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary') do
-              %i.fa.fa-twitter
-              Tweet
-          .btn-group
-            = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary') do
-              %i.fa.fa-facebook-square
-              Share
 
-.row
-  .col-md-6
-    #headline-comments
-      = render partial: 'comments/comments', locals: {headline: @headline}
-  .col-md-6
-    - if @headline.creator
-      .well
-        %h4.text-muted{style: 'margin:0'}
-          discovered by #{link_to @headline.creator.login, @headline.creator}
-          .pull-right #{timeago_tag @headline.created_at}
+#headline-show.row
+  .photo-column.col-md-3
+    = image_tag @headline.image_url!(nil), alt: @headline.name, class: "headline-image"
+  .main-column.col-md-9
+    %h1= tooltipped_headline @headline, inner_linked: true
+    %h2
+      .count.text-muted
+        %span#show-vote-count= pluralize @headline.vote_count, "vote"
+        - unless VOTING_DISABLED
+          #show-vote-box.votebox.pull-left= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
+        #headline-show-social.pull-right
+          .btn-toolbar
+            .btn-group
+              = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary') do
+                %i.fa.fa-twitter
+                Tweet
+            .btn-group
+              = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary') do
+                %i.fa.fa-facebook-square
+                Share
 
-    - if @headline.source_headlines.length > 0
-      .well
-        %h4.text-muted{style: 'margin-top:0'}
-          Mashed Up From These Stories
-        %ul#show-headline-source-headline-list.list-unstyled
-          - @headline.source_headlines.each do |source_headline|
-            %li
-              .pull-right
-                .btn-toolbar
-                  .btn-group
-                    = link_to source_headline.article_url, class: "btn btn-success btn-xs" do
-                      %i.fa.fa-globe
-                      Read
-                  .btn-group
-                    = link_to source_headline, class: "btn btn-default btn-xs" do
-                      %i.fa.fa-gear
-                      Mashups
-              .source-headline
-                = link_to source_headline.name, source_headline.article_url
-              - if source_headline.source
-                .source
-                  = source_image_tag source_headline.source
-                  = link_to source_headline.source.name, source_url(source_headline.source.id)
+    .row
+      .col-md-6
+        #headline-comments
+          = render partial: 'comments/comments', locals: {headline: @headline}
+      .col-md-6
+        - if @headline.creator
+          .well
+            %h4.text-muted{style: 'margin:0'}
+              discovered by #{link_to @headline.creator.login, @headline.creator}
+              .pull-right #{timeago_tag @headline.created_at}
 
-    %small.text-muted
-      - if current_user.present? && current_user.login == "wil" && @headline.source_headlines.length == 0
-        = link_to "Find Sources", reconstruct_headline_url(@headline)
-      - if @headline.vote_count < 2 && @headline.creator == current_user
-        .pull-right= link_to "Delete Headline", @headline, method: :delete, confirm: "Are you sure you want to delete this headline?", class: 'text-muted'
+        - if @headline.source_headlines.length > 0
+          .well
+            %h4.text-muted{style: 'margin-top:0'}
+              Mashed Up From These Stories
+            %ul#show-headline-source-headline-list.list-unstyled
+              - @headline.source_headlines.each do |source_headline|
+                %li
+                  .pull-right
+                    .btn-toolbar
+                      .btn-group
+                        = link_to source_headline.article_url, class: "btn btn-success btn-xs" do
+                          %i.fa.fa-globe
+                          Read
+                      .btn-group
+                        = link_to source_headline, class: "btn btn-default btn-xs" do
+                          %i.fa.fa-gear
+                          Mashups
+                  .source-headline
+                    = link_to source_headline.name, source_headline.article_url
+                  - if source_headline.source
+                    .source
+                      = source_image_tag source_headline.source
+                      = link_to source_headline.source.name, source_url(source_headline.source.id)
+
+        %small.text-muted
+          - if current_user.present? && current_user.login == "wil" && @headline.source_headlines.length == 0
+            = link_to "Find Sources", reconstruct_headline_url(@headline)
+          - if @headline.vote_count < 2 && @headline.creator == current_user
+            .pull-right= link_to "Delete Headline", @headline, method: :delete, confirm: "Are you sure you want to delete this headline?", class: 'text-muted'
