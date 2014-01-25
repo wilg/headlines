@@ -31,9 +31,11 @@ class Headline < ActiveRecord::Base
   has_many :source_headlines, through: :source_headline_fragments
 
   serialize :source_names
+  serialize :photo_data, Hash
 
   before_save do
     self.name_hash = Headline.name_hash(self.name)
+    find_photo! if needs_photo_load?
     calculate_vote_count!
   end
 
@@ -106,7 +108,7 @@ class Headline < ActiveRecord::Base
     vote_count < 1
   end
 
-  TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler']
+  TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler', 'stripper', 'sex', 'baby', 'babies', 'bacon', 'god']
 
   def to_tag
     short_name = name.split(" ").map{|w| w.parameterize.gsub("-", '') }.compact
@@ -118,8 +120,37 @@ class Headline < ActiveRecord::Base
     return short_name.compact.sort{|a, b| b.length <=> a.length}.first
   end
 
-  def image_url(options = {})
-    "http://pixelholdr.com/#{to_tag}/#{options[:width]}x#{options[:height]}/dimensions:hide"
+  def has_photo?
+    photo_data.present? && photo_data['flickr'].present?
+  end
+
+  def needs_photo_load?
+    photo_data.present? && photo_data['flickr'] != false
+  end
+
+  def find_photo!(search = to_tag)
+    photo = flickr.photos.search(text: search, per_page: 20, sort: 'interestingness-desc').to_a.sample
+    if photo
+      photo_data['flickr'] = photo.to_hash
+    else
+      photo_data['flickr'] = false
+    end
+    save!
+  end
+
+  def image_url!(*args)
+    find_photo! unless needs_photo_load?
+    image_url(*args)
+  end
+
+  def image_url(size = 'q')
+    if has_photo?
+      r = photo_data['flickr']
+      FlickRaw::PHOTO_SOURCE_URL % [r['farm'], r['server'], r['id'], r['secret'], "_#{size}", "jpg"]
+    else
+      return "http://lorempixel.com/150/150" if size == 'q'
+      "http://lorempixel.com/400/200"
+    end
   end
 
 end

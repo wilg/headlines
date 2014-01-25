@@ -67,6 +67,9 @@ GEM
     dotenv (0.9.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    flickraw (0.9.7)
+    flickraw-cached (20120701)
+      flickraw (>= 0.9)
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
     font_assets (0.1.10)
@@ -191,6 +194,7 @@ DEPENDENCIES
   bootstrap-sass-rails
   coffee-rails (~> 4.0.0)
   devise
+  flickraw-cached
   font-awesome-rails
   font_assets
   foreman

@@ -25,26 +25,23 @@
             = link_to paper_url do
               %i.fa.fa-refresh
               More News
-            = link_to generator_url do
+            = link_to root_url do
               %i.fa.fa-gears
-              Discover New Stories
+              Headline Smasher
           %span.date= Date.today.strftime("%A, %B %e, %Y")
 
       - main_story = @headlines.shift
       .row
         #main-story
           = link_to main_story do
-            = headline_image_tag main_story, id: "main-image", class: "headline-image", width: 600, height: 350
+            #main-image{style: "background-image:url('#{main_story.image_url!('z')}')"}
+              &nbsp;
           %h1= link_to main_story.name, main_story
-          = render partial: 'headlines/byline', locals: {headline: main_story}
+          = render partial: 'headlines/newspaper/byline', locals: {headline: main_story}
 
         - @headlines.shift(3).in_groups_of(3, false) do |headlines|
           #small-stories
-            - headlines.each do |headline|
-              .small-story
-                = headline_image_tag headline, alt: headline.name, class: "headline-image", width: 80, height: 80
-                %h3= link_to headline.name, headline
-              = render partial: 'headlines/byline', locals: {headline: headline}
+            = render partial: 'headlines/newspaper/story_small', collection: headlines, as: :headline
 
       #modules
         - @headlines.in_groups_of(3, false) do |headlines|
@@ -53,15 +50,16 @@
               .module
                 .small-headline
                   %h2= link_to headline.name, headline
-                  = render partial: 'headlines/byline', locals: {headline: headline}
+                  = render partial: 'headlines/newspaper/byline', locals: {headline: headline}
 
       .row
         #explain
           %h2
             A Product Of
             %span.smasher
+              Headline
               %i.fa.fa-gavel
-              Headline Smasher
+              Smasher
           %h3 Fake headlines created by mashing up real headlines.
           %p Our amazing computers mash up headlines, then you vote on the best ones.
           = link_to root_url, class: 'btn btn-lg btn-success' do

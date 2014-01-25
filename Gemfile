@@ -32,6 +32,8 @@ gem 'rakismet'
 
 gem 'newrelic_rpm'
 
+gem 'flickraw-cached'
+
 # Dev
 group :development do
   gem "better_errors"
