@@ -40,6 +40,13 @@ class HeadlinesController < ApplicationController
     redirect_to generator_url(reconstruct_phrase: @headline.name, reconstruct_sources: @headline.source_names.join(","))
   end
 
+  def rephoto
+    @headline = Headline.find(params[:id])
+    @headline.clear_photo!
+    @headline.find_photo!
+    redirect_to @headline
+  end
+
   def vote
     head :ok and return if VOTING_DISABLED
     @headline = Headline.find(params[:id])

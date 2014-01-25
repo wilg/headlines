@@ -113,7 +113,7 @@ class Headline < ActiveRecord::Base
 
   TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler', 'stripper', 'sex', 'baby', 'babies', 'bacon', 'god', 'jesus', 'mario']
 
-  IGNORED_WORDS = ['announcement', 'this', 'please', 'his', 'hers', 'him', 'her', 'a', 'the', 'them', 'of', 'your', 'on', 'an', 'i', 'but', 'here', 'cant', 'can', 'continues', 'continue', 'another', 'remarkable', 'example', 'in', 'into', 'now', 'is', 'story', 'many', 'actually', 'really', 'you']
+  IGNORED_WORDS = ['announcement', 'this', 'please', 'his', 'hers', 'him', 'her', 'a', 'the', 'them', 'of', 'your', 'on', 'an', 'i', 'but', 'here', 'cant', 'can', 'continues', 'continue', 'another', 'remarkable', 'example', 'in', 'into', 'now', 'is', 'story', 'many', 'actually', 'really', 'you', 'seriously', 'new', 'by', 'before', 'does', 'turning', 'that', 'will', 'all', 'us', 'something','resembles','basically','about','might','have', 'we', 'may', 'be', 'fact']
 
   def to_tag
     short_name = name.parameterize.gsub("-s-", "s-").gsub("-t-", "t-").split("-").reject{|w| IGNORED_WORDS.include?(w) }.uniq
@@ -122,7 +122,7 @@ class Headline < ActiveRecord::Base
       bonus = 5 if TRUMP_WORDS.include?(str) || TRUMP_WORDS.include?(str.pluralize)
       str.length + bonus
     end
-    return short_name.compact.sort{|a, b| length_with_bonus(b) <=> length_with_bonus(a)}.first(3).join(",")
+    return short_name.compact.sort{|a, b| length_with_bonus(b) <=> length_with_bonus(a)}.first(6).join(",")
   end
 
   def has_photo?
@@ -140,6 +140,11 @@ class Headline < ActiveRecord::Base
     else
       photo_data['flickr'] = false
     end
+    save!
+  end
+
+  def clear_photo!
+    photo_data = {}
     save!
   end
 
