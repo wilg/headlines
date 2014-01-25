@@ -134,7 +134,7 @@ class Headline < ActiveRecord::Base
   end
 
   def find_photo!(search = to_tag)
-    photo = flickr.photos.search(tags: search, per_page: 20, sort: 'relevance', media: 'photos').to_a.sample
+    photo = flickr.photos.search(tags: search, per_page: 20, sort: 'relevance', media: 'photos', extras: "owner_name,license").to_a.sample
     if photo
       photo_data['flickr'] = photo.to_hash
     else
@@ -157,6 +157,14 @@ class Headline < ActiveRecord::Base
       return "http://lorempixel.com/150/150" if size == 'q'
       "http://lorempixel.com/400/200"
     end
+  end
+
+  def image_owner
+    photo_data['flickr']['ownername'] if has_photo? && photo_data['flickr']['ownername'].present?
+  end
+
+  def image_info_url
+    FlickRaw.url_photopage FlickRaw::Response.build(photo_data['flickr'], 'photo')
   end
 
 end
