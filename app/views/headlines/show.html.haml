@@ -1,19 +1,19 @@
 - @title = @headline.name
 - og! "og:title", @headline.name
-- og! "og:image", @headline.image_url!('n')
+- og! "og:image", @headline.image_url('n')
 - og! "og:url", headline_url(@headline)
 - og! "og:description", "Fake headlines created by mashing up real headlines."
 
 
 #headline-show.row
-  .photo-column.col-md-3
-    = link_to @headline.image_info_url do
-      = image_tag @headline.image_url!(nil), alt: @headline.name, class: "headline-image"
-    %small.text-muted.photo-credit
-      - if @headline.image_owner.present?
-        by #{link_to @headline.image_owner, @headline.image_info_url}
-      via #{link_to "Flickr", @headline.image_info_url}
-  .main-column.col-md-9
+  / .photo-column.col-md-3
+  /   = link_to @headline.image_info_url do
+  /     = image_tag @headline.image_url!(nil), alt: @headline.name, class: "headline-image"
+  /   %small.text-muted.photo-credit
+  /     - if @headline.image_owner.present?
+  /       by #{link_to @headline.image_owner, @headline.image_info_url}
+  /     via #{link_to "Flickr", @headline.image_info_url}
+  .main-column.col-md-10.col-md-offset-1
     %h1= tooltipped_headline @headline, inner_linked: true
     %h2
       .count.text-muted

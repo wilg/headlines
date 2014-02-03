@@ -39,9 +39,9 @@ class Headline < ActiveRecord::Base
     calculate_vote_count!
   end
 
-  after_create do
-    find_photo! if needs_photo_load?
-  end
+  # after_create do
+  #   find_photo! if needs_photo_load?
+  # end
 
   def calculate_vote_count!
     self.vote_count = self.votes.upvotes.sum(:value)
