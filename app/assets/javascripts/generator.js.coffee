@@ -51,6 +51,8 @@ $ ->
 
   generate_new = ->
 
+    mixpanel.track("Generate")
+
     $("#invent-button").addClass 'disabled'
     $("#invent-button").removeClass 'enabled'
 
