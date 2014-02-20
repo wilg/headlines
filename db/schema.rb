@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125025500) do
+ActiveRecord::Schema.define(version: 20140220213423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,21 +61,22 @@ ActiveRecord::Schema.define(version: 20140125025500) do
   add_index "source_headlines", ["source_id"], name: "index_source_headlines_on_source_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "login",               default: "", null: false
-    t.string   "encrypted_password",  default: "", null: false
+    t.string   "login",                 default: "", null: false
+    t.string   "encrypted_password",    default: "", null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",       default: 0,  null: false
+    t.integer  "sign_in_count",         default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "vote_count",          default: 0,  null: false
-    t.integer  "karma",               default: 0,  null: false
-    t.integer  "comments_count",      default: 0,  null: false
+    t.integer  "vote_count",            default: 0,  null: false
+    t.integer  "karma",                 default: 0,  null: false
+    t.integer  "comments_count",        default: 0,  null: false
     t.string   "api_key"
-    t.integer  "api_requests",        default: 0,  null: false
+    t.integer  "api_requests",          default: 0,  null: false
+    t.integer  "saved_headlines_count", default: 0,  null: false
   end
 
   add_index "users", ["api_key"], name: "index_users_on_api_key", unique: true, using: :btree

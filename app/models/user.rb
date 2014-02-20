@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of   :password, :on=>:create
   validates_length_of :password, :within => Devise.password_length, :allow_blank => true
 
-  has_many :votes, counter_cache: true, dependent: :destroy
-  has_many :headlines, foreign_key: :creator_id, dependent: :nullify
+  has_many :votes, dependent: :destroy
+  has_many :headlines, foreign_key: :creator_id, dependent: :nullify, counter_cache: :saved_headlines_count
   has_many :voted_headlines, through: :votes, source: :headline
 
   has_many :comments, dependent: :destroy
@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 
   def calculate_karma!
     self.karma = self.headlines.sum(:vote_count) - self.headlines.count
+    self.vote_count = voted_headlines_without_self.count
   end
 
   def upvote_headline!(headline)
@@ -37,6 +38,7 @@ class User < ActiveRecord::Base
     headline.votes.create(user: self, value: 1)
     headline.save!
     headline.creator.save! if headline.creator
+    self.save!
   end
 
   def downvote_headline!(headline)
@@ -44,12 +46,14 @@ class User < ActiveRecord::Base
     headline.votes.create(user: self, value: -1)
     headline.save!
     headline.creator.save! if headline.creator
+    self.save!
   end
 
   def clear_votes!(headline)
     clear_votes headline
     headline.save!
     headline.creator.save! if headline.creator
+    self.save!
   end
 
   def clear_votes(headline)
@@ -62,10 +66,6 @@ class User < ActiveRecord::Base
 
   def voted_headlines_without_self
     voted_headlines.where("headlines.creator_id is null or headlines.creator_id != ?", id)
-  end
-
-  def votes_count
-    voted_headlines_without_self.size
   end
 
   def vote_statuses(headlines)
