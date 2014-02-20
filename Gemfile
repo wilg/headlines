@@ -13,7 +13,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder'
 
-gem 'bootstrap-sass-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-rails'
 gem 'will_paginate-bootstrap'
 gem 'handlebars_assets'

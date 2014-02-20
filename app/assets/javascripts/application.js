@@ -14,10 +14,10 @@
 //= require jquery_ujs
 //= require jquery.lazyload
 //= require rails-timeago
-//= require twitter/bootstrap/modal
-//= require twitter/bootstrap/tooltip
-//= require twitter/bootstrap/collapse
-//= require twitter/bootstrap/button
+//= require bootstrap/modal
+//= require bootstrap/tooltip
+//= require bootstrap/collapse
+//= require bootstrap/button
 //= require handlebars.runtime
 // require turbolinks
 //= require_tree ./templates
