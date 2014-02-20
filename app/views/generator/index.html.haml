@@ -43,6 +43,15 @@
           %input.input-sm.form-control{type: :text, placeholder: "Seed Word", name: :seed_word, id: "seed-word-input"}
   .col-md-8
 
+    - unless user_signed_in?
+      #generator-sign-in-ask.well
+        %button.btn.btn-warning.pull-right{data:{toggle: 'modal', target: '#modal-login-form'}}
+          Make a Free Account
+        %h4
+          :erb
+            <span class='text-success'>Save Headlines</span>, <span class='text-info'>Vote</span>, and <span class='text-warning'>Earn Karma</span>!
+        %p Free! Fun! No email address or personal information required.
+
     #generated-headlines
       .well.text-center.text-muted.hidden-xs
         %i.fa-3x.fa.fa-refresh.fa-spin
