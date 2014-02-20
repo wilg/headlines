@@ -5,6 +5,7 @@ $ ->
     mixpanel.identify(username)
     mixpanel.people.set
       "$username": username
+      "$name": username
       "$created": $('body').data('created')
       "$last_login": $('body').data('signed_in')
       "karma": parseInt($('body').data('karma'), 10)
