@@ -12,7 +12,7 @@
     %meta{charset: 'utf-8'}
     - og_tags.each do |k, v|
       %meta{property: k, content: v}
-  %body{class: user_signed_in? ? 'logged-in' : 'logged-out', data: {username: user_signed_in? ? current_user.login : nil}}
+  %body{class: user_signed_in? ? 'logged-in' : 'logged-out', data: user_data}
     = render 'layouts/header'
 
     .container
