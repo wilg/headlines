@@ -2,7 +2,12 @@ $ ->
 
   username = $('body').data('username')
   if username?
-    mixpanel.identify(username)
+
+    if $('body').data('newly-registered')?
+      mixpanel.alias(username)
+    else
+      mixpanel.identify(username)
+
     mixpanel.people.set
       "$username": username
       "$name": username

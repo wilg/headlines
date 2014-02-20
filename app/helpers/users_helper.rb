@@ -8,7 +8,8 @@ module UsersHelper
       karma: current_user.karma,
       comments: current_user.comments_count,
       votes: current_user.votes_count,
-      signed_in: current_user.current_sign_in_at
+      signed_in: current_user.current_sign_in_at,
+      newly_registered: flash[:newly_registered] ? 'true' : nil
     }
   end
 

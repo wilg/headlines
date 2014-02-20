@@ -4,7 +4,7 @@ Headlines::Application.routes.draw do
   get '/headlines/best' => redirect('/')
   get '/best(/today)' => redirect('/')
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   resources :comments
 
