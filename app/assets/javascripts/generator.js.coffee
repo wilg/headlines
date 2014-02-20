@@ -51,8 +51,6 @@ $ ->
 
   generate_new = ->
 
-    mixpanel.track("Generate")
-
     $("#invent-button").addClass 'disabled'
     $("#invent-button").removeClass 'enabled'
 
@@ -77,6 +75,8 @@ $ ->
 
     # Build URL
     url = $("#generate-form").data('generator-url') + "?" + query
+
+    mixpanel.track("Generate", {"Sources" : source_names, "Depth":  window.generator_last_depth, "Seed Word" : seed_word })
 
     $.getJSON url, (data) ->
       $("#generated-headlines").html HandlebarsTemplates[if window.userSignedIn() then 'generator/results' else 'generator/results_signed_out'](data)
