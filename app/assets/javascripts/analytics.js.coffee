@@ -5,6 +5,7 @@ $ ->
 
     if $('body').data('newly-registered')?
       mixpanel.alias(username)
+      mixpanel.track("Sign Up")
     else
       mixpanel.identify(username)
 
