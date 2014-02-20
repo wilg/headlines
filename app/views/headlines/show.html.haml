@@ -23,11 +23,11 @@
         #headline-show-social.pull-right
           .btn-toolbar
             .btn-group
-              = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary') do
+              = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary social-share-link twitter-share-link') do
                 %i.fa.fa-twitter
                 Tweet
             .btn-group
-              = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary') do
+              = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary social-share-link facebook-share-link') do
                 %i.fa.fa-facebook-square
                 Share
 

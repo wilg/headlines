@@ -1,6 +1,11 @@
 = render headline.comments
-= form_for [headline, Comment.new], remote: true do |f|
-  .form-group
-    = f.text_area :body, class: 'form-control', placeholder: "Comment on this headline"
-  .text-right
-    = f.submit "Comment", class: 'btn btn-primary', data: {disable_with: "Commenting..."}
+- if user_signed_in?
+  = form_for [headline, Comment.new], remote: true do |f|
+    .form-group
+      = f.text_area :body, class: 'form-control', placeholder: "Comment on this headline"
+    .text-right
+      = f.submit "Comment", class: 'btn btn-primary', data: {disable_with: "Commenting..."}
+- else
+  %button.btn.btn-primary{data:{toggle: 'modal', target: '#modal-login-form'}}
+    %i.fa.fa-comment
+    Sign In To Comment

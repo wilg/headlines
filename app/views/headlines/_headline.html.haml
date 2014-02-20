@@ -26,8 +26,8 @@
       - if headline.comments_count > 0
         = headline.comments_count
   %td.permalink.hidden-xs
-    = link_to(tweet_url(headline), abbr: "Tweet", target: "_blank") do
+    = link_to(tweet_url(headline), abbr: "Tweet", target: "_blank", class: 'social-share-link twitter-share-link') do
       %i.fa.fa-twitter
   %td.permalink.hidden-xs
-    = link_to(facebook_share_url(headline), abbr: "Share on Facebook", target: "_blank") do
+    = link_to(facebook_share_url(headline), abbr: "Share on Facebook", target: "_blank", class: 'social-share-link facebook-share-link') do
       %i.fa.fa-facebook-square
