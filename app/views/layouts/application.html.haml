@@ -37,7 +37,7 @@
                 this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
             .col-md-6.text-right
               %p
-                = link_to random_headlines_url do
+                = link_to random_headlines_url, class: 'random-headline-link' do
                   %i.fa.fa-refresh
                   random headline
                 %br/

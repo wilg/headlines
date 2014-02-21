@@ -23,11 +23,11 @@
         #headline-show-social.pull-right
           .btn-toolbar
             .btn-group
-              = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary social-share-link twitter-share-link') do
+              = link_to(tweet_url(@headline), abbr: "Tweet", target: "_blank", class: 'btn btn-primary social-share-link twitter-share-link', data: {headline_id: @headline.id}) do
                 %i.fa.fa-twitter
                 Tweet
             .btn-group
-              = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary social-share-link facebook-share-link') do
+              = link_to(facebook_share_url(@headline), abbr: "Share on Facebook", target: "_blank", class: 'btn btn-primary social-share-link facebook-share-link', data: {headline_id: @headline.id}) do
                 %i.fa.fa-facebook-square
                 Share
 
@@ -40,7 +40,9 @@
           .well
             %h4.text-muted{style: 'margin:0'}
               discovered by #{link_to @headline.creator.login, @headline.creator}
-              .pull-right #{timeago_tag @headline.created_at}
+              .pull-right.hidden-md #{timeago_tag @headline.created_at}
+            .visible-md
+              .text-muted #{timeago_tag @headline.created_at}
 
         - if @headline.source_headlines.length > 0
           .well
@@ -52,7 +54,7 @@
                   .pull-right
                     .btn-toolbar
                       .btn-group
-                        = link_to source_headline.article_url, class: "btn btn-success btn-xs" do
+                        = link_to source_headline.article_url, class: "btn read-article-link btn-success btn-xs", data: read_link_data(source_headline) do
                           %i.fa.fa-globe
                           Read
                       .btn-group
@@ -60,7 +62,7 @@
                           %i.fa.fa-gear
                           Mashups
                   .source-headline
-                    = link_to source_headline.name, source_headline.article_url
+                    = link_to source_headline.name, source_headline.article_url, class: 'read-article-link', data: read_link_data(source_headline)
                   - if source_headline.source
                     .source
                       = source_image_tag source_headline.source

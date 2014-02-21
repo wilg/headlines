@@ -19,11 +19,18 @@ $ ->
       "saved": parseInt($('body').data('saved'), 10)
       "votes": parseInt($('body').data('votes'), 10)
 
-  $(document).on 'click', '.twitter-share-link', ->
-    mixpanel.track("Twitter Share")
+  mixpanel.track_links '.twitter-share-link', 'Twitter Share', (link) ->
+    'Headline ID': $(link).data('headline-id')
 
-  $(document).on 'click', '.facebook-share-link', ->
-    mixpanel.track("Facebook Share")
+  mixpanel.track_links '.facebook-share-link', 'Facebook Share', (link) ->
+    'Headline ID': $(link).data('headline-id')
 
   $(document).on 'show.bs.modal', '#modal-login-form', ->
     mixpanel.track("Signup Form Presented")
+
+  mixpanel.track_links '.read-article-link', 'Read Original Article', (link) ->
+    'Headline ID': $(link).data('headline-id')
+    'Source Headline ID': $(link).data('id')
+    'Source Name': $(link).data('source')
+
+  mixpanel.track_links '.random-headline-link', 'View Random'

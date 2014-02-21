@@ -10,7 +10,7 @@
   %p
     %strong &ldquo;#{@source_headline.name}&rdquo;
   .tools
-    = link_to @source_headline.article_url, class: "btn btn-primary" do
+    = link_to @source_headline.article_url, class: "btn btn-primary read-article-link", data: read_link_data(@source_headline) do
       %i.fa.fa-globe
       Read Article
     - if @source_headline.source
