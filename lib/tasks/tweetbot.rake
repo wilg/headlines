@@ -1,10 +1,16 @@
 namespace :tweetbot do
 
   task tweet: :environment do
-    headlines = Headline.where(bot_shared_at: nil).where("vote_count > 5").order('random()').limit(5)
-    headlines.each do |headline|
+
+    tweet_every = 4.hours
+
+    if Headline.last_bot_tweet > tweet_every.ago
+      puts "Too soon for a tweet!"
+    else
+      headline = Headline.where(bot_shared_at: nil).where("vote_count > 10").order('random()').first
       headline.tweet_from_bot!
     end
+
   end
 
 end

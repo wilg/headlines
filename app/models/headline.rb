@@ -113,6 +113,10 @@ class Headline < ActiveRecord::Base
     vote_count < 1
   end
 
+  def self.last_bot_tweet
+    Headline.where("bot_shared_at is not null").order("bot_shared_at desc").first.bot_shared_at
+  end
+
   def tweeted_from_bot?
     bot_shared_at.present?
   end
