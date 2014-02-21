@@ -17,6 +17,7 @@ Headlines::Application.routes.draw do
       post :vote
       get :reconstruct
       get :pick_photo
+      get :tweet_from_bot
       post :update_photo
     end
   end

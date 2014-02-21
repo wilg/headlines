@@ -2,6 +2,7 @@ require 'digest/sha1'
 
 class Headline < ActiveRecord::Base
   include HeadlinePhotoConcern
+  include Rails.application.routes.url_helpers
 
   scope :top, -> { order("headlines.vote_count desc, headlines.created_at desc") }
   scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("headlines.created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
@@ -110,6 +111,22 @@ class Headline < ActiveRecord::Base
 
   def shitty?
     vote_count < 1
+  end
+
+  def tweeted_from_bot?
+    bot_shared_at.present?
+  end
+
+  def bot_tweet_url
+    "https://twitter.com/headlinesmasher/status/#{bot_share_tweet_id}"
+  end
+
+  def tweet_from_bot!
+    text = "#{name} #{Rails.application.routes.url_helpers.headline_url(self, :host => "www.headlinesmasher.com")}"
+    tweet = TWITTER_BOT_CLIENT.update(text)
+    self.bot_shared_at = Time.now
+    self.bot_share_tweet_id = tweet.id
+    self.save!
   end
 
 end

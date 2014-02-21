@@ -40,6 +40,13 @@ class HeadlinesController < ApplicationController
     redirect_to generator_url(reconstruct_phrase: @headline.name, reconstruct_sources: @headline.source_names.join(","))
   end
 
+  def tweet_from_bot
+    raise unless current_user.login == 'wil'
+    @headline = Headline.find(params[:id])
+    @headline.tweet_from_bot!
+    redirect_to @headline.bot_tweet_url
+  end
+
   def pick_photo
     @headline = Headline.find(params[:id])
     @search = params[:search].presence || @headline.to_tag
