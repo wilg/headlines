@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220213423) do
+ActiveRecord::Schema.define(version: 20140221194314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,15 +26,17 @@ ActiveRecord::Schema.define(version: 20140220213423) do
 
   create_table "headlines", force: true do |t|
     t.string   "name"
-    t.integer  "vote_count",     default: 0, null: false
+    t.integer  "vote_count",         default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "source_names"
     t.string   "name_hash"
-    t.integer  "depth",          default: 2
+    t.integer  "depth",              default: 2
     t.integer  "creator_id"
-    t.integer  "comments_count", default: 0, null: false
+    t.integer  "comments_count",     default: 0, null: false
     t.text     "photo_data"
+    t.datetime "bot_shared_at"
+    t.string   "bot_share_tweet_id"
   end
 
   create_table "source_headline_fragments", force: true do |t|

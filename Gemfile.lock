@@ -36,6 +36,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     arel (4.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
@@ -46,6 +47,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
+    buftok (0.2.0)
     builder (3.1.4)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -64,8 +66,11 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     dotenv (0.9.0)
+    equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.0.2)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     flickraw (0.9.7)
     flickraw-cached (20120701)
       flickraw (>= 0.9)
@@ -84,6 +89,9 @@ GEM
       sprockets (>= 2.0.3)
       tilt
     hike (1.2.3)
+    http (0.5.0)
+      http_parser.rb
+    http_parser.rb (0.6.0)
     httparty (0.13.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -99,11 +107,15 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memoizable (0.4.0)
+      thread_safe (~> 0.1.3)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.4)
     multi_xml (0.5.5)
+    multipart-post (2.0.0)
+    naught (1.0.0)
     newrelic_rpm (3.7.2.195)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -146,6 +158,7 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    simple_oauth (0.2.0)
     snoo (0.1.2)
       httparty
       nokogiri
@@ -170,6 +183,17 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tweet-button (0.1.0)
+    twitter (5.7.1)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      equalizer (~> 0.0.9)
+      faraday (~> 0.9.0)
+      http (~> 0.5.0)
+      http_parser.rb (~> 0.6.0)
+      json (~> 1.8)
+      memoizable (~> 0.4.0)
+      naught (~> 1.0)
+      simple_oauth (~> 0.2.0)
     tzinfo (0.3.38)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
@@ -213,6 +237,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   squeel
   tweet-button
+  twitter
   uglifier (>= 1.3.0)
   unicorn
   will_paginate-bootstrap

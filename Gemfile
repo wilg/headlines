@@ -22,6 +22,7 @@ gem 'rails_autolink'
 gem 'rails-timeago', '~> 2.0'
 
 gem "tweet-button"
+gem "twitter"
 
 gem 'devise'
 
