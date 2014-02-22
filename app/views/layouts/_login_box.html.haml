@@ -17,6 +17,6 @@
     .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
       %i.fa.fa-user
       Sign Up
-    .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
+    = link_to new_user_session_url, class: 'btn btn-default btn-sm' do
       %i.fa.fa-sign-in
       Sign In

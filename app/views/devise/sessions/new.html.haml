@@ -1,12 +1,16 @@
-%h2 Sign in
-= form_for(User.new(remember_me: true), :as => :user, :url => session_path(:user), class: "form-horizontal") do |f|
-  = f.hidden_field :remember_me
-  .form-group
-    = f.label :login, "Username"
-    = f.text_field :login, :autofocus => true, class: 'form-control'
-  .form-group
-    = f.label :password
-    = f.password_field :password, class: 'form-control'
-  .form-group
-    = f.submit "Sign In", class: 'btn btn-primary'
-= render "devise/shared/links"
+.row
+  .col-md-6.col-md-offset-3
+    .well
+      %h2{style: "margin-top:0"} Sign in
+      = form_for(User.new(remember_me: true), :as => :user, :url => session_path(:user), class: "form-horizontal") do |f|
+        = f.hidden_field :remember_me
+        .form-group
+          = f.label :login, "Username"
+          = f.text_field :login, :autofocus => true, class: 'form-control'
+        .form-group
+          = f.label :password
+          = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.submit "Sign In", class: 'btn btn-primary'
+          .pull-right.btn.btn-default{data:{toggle: 'modal', target: '#modal-login-form'}}
+            I Don't Have An Account

@@ -55,12 +55,18 @@ footer
       background: white
       border-radius: 6px
 
-.modal-sign-up,
+#login-column-left
   width: 250px
   float: left
-.modal-sign-in
+  +phone
+    width: auto
+    float: none
+#login-column-right
   width: 250px
   float: right
+  +phone
+    width: auto
+    float: none
 
 img.source-icon
   width: 16px
@@ -225,7 +231,11 @@ span.hidden-xs
 
 .new-feature
   margin-top: 8px
+  margin-left: 10px
+  &:hover
+    background-color: darken($brand-success, 10%)
   a
     color: white
     &:hover
+      color: white
       background: transparent !important
