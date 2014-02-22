@@ -84,7 +84,7 @@ module HeadlinesHelper
   end
 
   def tweet_url(headline)
-    "https://twitter.com/intent/tweet?text=#{CGI.escape headline.name}&source=#{CGI.escape "Headline Smasher"}&url=#{headline_url(headline)}"
+    "https://twitter.com/intent/tweet?text=#{CGI.escape headline.name}&source=#{CGI.escape "Headline Smasher"}&url=#{headline_url(headline)}&related=HeadlineSmasher"
   end
 
   def facebook_share_url(headline)

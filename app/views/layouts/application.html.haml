@@ -27,24 +27,8 @@
 
       %hr/
 
-      %footer
-        %small.text-muted
-          .row
-            .col-md-6
-              %p
-                a weird side project thing by #{link_to "Wil Gieseler", "http://github.com/wilg"} (#{link_to "@wilgieseler", "http://twitter.com/wilgieseler"})
-                %br/
-                this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
-            .col-md-6.text-right
-              %p
-                = link_to random_headlines_url, class: 'random-headline-link' do
-                  %i.fa.fa-refresh
-                  random headline
-                %br/
-                #{link_to "report a bug", "https://github.com/wilg/headlines/issues"} or #{link_to "suggest a feature", "https://github.com/wilg/headlines/issues"}
-        %p
-          %a{href: "https://mixpanel.com/f/partner"}
-            %img{alt: "Mobile Analytics", src: "//cdn.mxpnl.com/site_media/images/partner/badge_light.png"}/
+      = render 'layouts/footer'
+
     #upvoted-button{style: "display:none"}
       %button.btn.disabled{type: :button}
         %i.fa.fa-thumbs-up
