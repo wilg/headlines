@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of   :password, :on=>:create
   validates_length_of :password, :within => Devise.password_length, :allow_blank => true
 
+  validates_format_of :login, with: /\A[a-z0-9_-]+\Z/i, on: :create
+
   has_many :votes, dependent: :destroy
   has_many :headlines, foreign_key: :creator_id, dependent: :nullify, counter_cache: :saved_headlines_count
   has_many :voted_headlines, through: :votes, source: :headline
