@@ -125,6 +125,10 @@ class Headline < ActiveRecord::Base
     "https://twitter.com/headlinesmasher/status/#{bot_share_tweet_id}"
   end
 
+  def formatted_name
+    name.squish
+  end
+
   def tweet_from_bot!
     text = "#{name} #{Rails.application.routes.url_helpers.headline_url(self, :host => "www.headlinesmasher.com")}"
     tweet = TWITTER_BOT_CLIENT.update(text)
