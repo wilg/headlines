@@ -130,7 +130,7 @@ class Headline < ActiveRecord::Base
   end
 
   def tweet_from_bot!
-    text = "#{name} #{Rails.application.routes.url_helpers.headline_url(self, :host => "www.headlinesmasher.com")}"
+    text = "#{formatted_name} #{Rails.application.routes.url_helpers.headline_url(self, :host => "www.headlinesmasher.com")}"
     tweet = TWITTER_BOT_CLIENT.update(text)
     self.bot_shared_at = Time.now
     self.bot_share_tweet_id = tweet.id
