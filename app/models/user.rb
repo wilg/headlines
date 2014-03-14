@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
   validates_format_of :login, with: /\A[a-z0-9_-]+\Z/i, on: :create
 
   has_many :votes, dependent: :destroy
+  has_many :upvotes, -> { upvotes }, class_name: 'Vote'
   has_many :headlines, foreign_key: :creator_id, dependent: :nullify, counter_cache: :saved_headlines_count
   has_many :voted_headlines, through: :votes, source: :headline
+  has_many :upvoted_headlines, through: :upvotes, source: :headline
 
   has_many :comments, dependent: :destroy
 
