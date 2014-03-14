@@ -19,6 +19,7 @@ class Headline < ActiveRecord::Base
     }
     where{sources.like_any cat_sources}
   }
+  scope :tweeted, -> { where("bot_shared_at is not null") }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
 
