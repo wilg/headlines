@@ -1,1 +1,2 @@
 $("#headline-comments").html("<%=j render partial: "comments/comments", locals: {headline: @headline } %>");
+mixpanel.track("Comment", {'Headline ID' : <%= @headline.id %>, 'Comment ID' : <%= @comment.id %>});

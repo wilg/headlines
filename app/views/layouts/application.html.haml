@@ -7,8 +7,12 @@
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    %meta{name: 'apple-mobile-web-app-title', content: 'Smasher'}
+    %link{rel: 'apple-touch-icon-precomposed', href: image_url('apple-touch-icon-precomposed.png') }
     %meta{charset: 'utf-8'}
-  %body{class: user_signed_in? ? 'logged-in' : 'logged-out'}
+    - og_tags.each do |k, v|
+      %meta{property: k, content: v}
+  %body{class: user_signed_in? ? 'logged-in' : 'logged-out', data: user_data}
     = render 'layouts/header'
 
     .container
@@ -23,19 +27,7 @@
 
       %hr/
 
-      %footer
-        %small.text-muted
-          .row
-            .col-md-6
-              %p
-                made really quickly by #{link_to "Wil Gieseler", "http://github.com/wilg"} (#{link_to "@wilgieseler", "http://twitter.com/wilgieseler"})
-                %br/
-                inspired by #{link_to "this awesome thing", "http://grantslatton.com/hngen/?lookback=2"} that I didn't make
-            .col-md-6.text-right
-              %p
-                #{link_to "report a bug", "https://github.com/wilg/headlines/issues"} or #{link_to "suggest a feature", "https://github.com/wilg/headlines/issues"}
-                %br/
-                this app's #{link_to "source code on GitHub", "https://github.com/wilg/headlines"}
+      = render 'layouts/footer'
 
     #upvoted-button{style: "display:none"}
       %button.btn.disabled{type: :button}
@@ -43,11 +35,4 @@
         Voted
     = render 'layouts/login_apology'
 
-  :javascript
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', '#{ ENV['GOOGLE_ANALYTICS_ID'] }', '#{ ENV['GOOGLE_ANALYTICS_URL'] }');
-    ga('send', 'pageview');
+  = render 'layouts/analytics'

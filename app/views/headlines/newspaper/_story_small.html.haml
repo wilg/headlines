@@ -1,0 +1,4 @@
+.small-story
+  = image_tag headline.image_url!, alt: headline.name, class: "headline-image", width: 80, height: 80
+  %h3= link_to headline.name, headline
+= render partial: 'headlines/newspaper/byline', locals: {headline: headline}

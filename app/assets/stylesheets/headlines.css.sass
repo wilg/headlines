@@ -55,16 +55,30 @@ footer
       background: white
       border-radius: 6px
 
-.modal-sign-up,
+#login-column-left
   width: 250px
   float: left
-.modal-sign-in
+  +phone
+    width: auto
+    float: none
+#login-column-right
   width: 250px
   float: right
+  +phone
+    width: auto
+    float: none
 
 img.source-icon
   width: 16px
   height: 16px
+
+#show-headline-source-headline-list
+  li
+    margin-bottom: 12px
+  .btn-toolbar
+    margin-left: 10px
+  .source a
+    color: $gray-dark
 
 .searchbar
   width: 200px
@@ -123,6 +137,28 @@ table.headlines-table
 .single-headline .votebox
   margin-top: 10px
 
+=color-and-a-color($color)
+  color: $color
+  a
+    color: $color !important
+
+.colored-fragments
+  .headline-fragment
+    &:nth-of-type(1n)
+      +color-and-a-color($brand-primary)
+    &:nth-of-type(2n)
+      +color-and-a-color($brand-success)
+    &:nth-of-type(3n)
+      +color-and-a-color($brand-info)
+    &:nth-of-type(4n)
+      +color-and-a-color($brand-warning)
+    &:nth-of-type(5n)
+      +color-and-a-color($brand-danger)
+
+#headline-show h1
+  &:hover
+    @extend .colored-fragments
+
 .source-picker
   margin-bottom: 20px
 
@@ -167,3 +203,39 @@ span.hidden-xs
   display: inline !important
   +phone
     display: none !important
+
+#show-vote-box
+  margin-top: -3px
+  margin-right: 15px
+
+#headline-show-social
+  +phone
+    float: none !important
+
+#headline-show
+  margin-top: 10px
+  h1
+    font-size: 42px
+    margin-top: 0
+    border-bottom: 1px solid #ececec
+    padding-bottom: 10px
+  h2
+    border-bottom: 1px solid #ececec
+    padding-bottom: 25px
+    margin-bottom: 25px
+  .photo-column
+    text-align: right
+    img
+      width: 100%
+      height: auto
+
+.new-feature
+  margin-top: 8px
+  margin-left: 10px
+  &:hover
+    background-color: darken($brand-success, 10%)
+  a
+    color: white
+    &:hover
+      color: white
+      background: transparent !important

@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require rails-timeago
-//= require twitter/bootstrap/modal
-//= require twitter/bootstrap/tooltip
-//= require twitter/bootstrap/collapse
-//= require twitter/bootstrap/button
+//= require jquery.lazyload
+//= require jquery.hoverIntent
+//= require bootstrap/modal
+//= require bootstrap/tooltip
+//= require bootstrap/collapse
+//= require bootstrap/button
 //= require handlebars.runtime
 // require turbolinks
 //= require_tree ./templates

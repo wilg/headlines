@@ -1,0 +1,17 @@
+%h3= link_to @headline.name, @headline
+%h1 Pick Photo
+
+= form_tag url_for, {method: :get} do
+  = text_field_tag  :search, @search
+  = submit_tag "Search", class: "btn btn-primary"
+
+%table.table
+  - @photos.to_a.in_groups_of(4, false) do |photos|
+    %tr
+      - photos.each do |photo|
+        %td
+          = image_tag FlickRaw.url_m(photo)
+          %p
+            = form_tag update_photo_headline_url(@headline) do |f|
+              = hidden_field_tag :json, photo.to_json
+              = submit_tag "Select", :class => "btn btn-default"

@@ -1,46 +1,63 @@
 class HeadlinesController < ApplicationController
 
-  def best
-    if params[:order].present? && params[:order].to_sym == :new
-      @headlines = Headline.newest
-    elsif params[:order].present? && params[:order].to_sym == :trending
-      @headlines = Headline.hot
-    else
-      @sorting_top = true
-      @headlines = Headline.top
-      if params[:timeframe].present? && params[:timeframe].to_sym == :all
-      elsif params[:timeframe].present? && params[:timeframe].to_sym == :yesterday
-        @headlines = @headlines.yesterday
-      elsif params[:timeframe].present? && params[:timeframe].to_sym == :this_week
-        @headlines = @headlines.this_week
-      else
-        @headlines = @headlines.today
-      end
-    end
-    if params[:filter].present? && params[:filter].to_sym != :all
-      @headlines = @headlines.where(["sources ILIKE ?", "%#{params[:filter]}%"])
-    end
-    if params[:category].present? && params[:category].to_sym != :all
-      @headlines = @headlines.in_category(params[:category].to_s)
-    end
-    if params[:q].present?
-      @headlines = @headlines.where("name ilike (?)", "%#{params[:q]}%")
-    end
-    @headlines = @headlines.paginate(:page => params[:page], :per_page => 40)
-  end
+  before_filter :protect_api, only: [:random, :show]
+
+  layout false, only: :newspaper
 
   def index
-    @user = User.find_by_login(params[:user_id])
-    @headlines = @user.headlines.paginate(:page => params[:page], :per_page => 40)
-    if params[:order].present? && params[:order].to_sym == :top
-      @headlines = @headlines.top
+    if params[:user_id]
+      @user = User.find_by_login(params[:user_id])
+      @headlines = headlines_sorted_by_params @user.headlines
     else
-      @headlines = @headlines.newest
+      @is_main_browse_page = true
+      @headlines = headlines_sorted_by_params Headline.all, {order: :top, timeframe: :today, q: nil}
     end
+    @headlines = default_pagination @headlines
   end
 
   def show
     @headline = Headline.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+      format.json {render partial: "headlines/headline", locals: {headline: @headline}}
+    end
+  end
+
+  def random
+    @headline = Headline.where("vote_count > ?", params[:minimum] || 2).order('random()').first
+    respond_to do |format|
+      format.html { redirect_to @headline }
+      format.json {render partial: "headlines/headline", locals: {headline: @headline}}
+    end
+  end
+
+  def newspaper
+    @headlines = Headline.where("vote_count > ?", params[:minimum] || 2).order('random()').limit(19)
+  end
+
+  def reconstruct
+    @headline = Headline.find(params[:id])
+    redirect_to generator_url(reconstruct_phrase: @headline.name, reconstruct_sources: @headline.source_names.join(","))
+  end
+
+  def tweet_from_bot
+    raise unless current_user.login == 'wil'
+    @headline = Headline.find(params[:id])
+    @headline.tweet_from_bot!
+    redirect_to @headline.bot_tweet_url
+  end
+
+  def pick_photo
+    @headline = Headline.find(params[:id])
+    @search = params[:search].presence || @headline.to_tag
+    @photos = flickr.photos.search(tags: @search, per_page: 50, sort: 'relevance', media: 'photos', extras: "owner_name,license")
+  end
+
+  def update_photo
+    @headline = Headline.find(params[:id])
+    @headline.set_photo! JSON.parse(params[:json])
+    redirect_to @headline
   end
 
   def edit

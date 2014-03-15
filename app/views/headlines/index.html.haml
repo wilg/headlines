@@ -1,14 +1,29 @@
-- @title = "User | #{@user.login} | Saved Headlines"
-
-%h2= link_to @user.login, @user
-.clearfix
-  .pull-left
-    .lead.text-muted
-      Saved Headlines
-
+- if @user
+  - @title = "User | #{@user.login} | Saved Headlines"
+  %h2= link_to @user.login, @user
+  .clearfix
+    .pull-left
+      .lead.text-muted
+        Saved Headlines
   .sort-tools.pull-right
     .btn-group.source-picker
-      = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new, true)
-      = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top)
+      = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true)
+      = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new)
+- else
+  - if params[:order] == :trending
+    - @title = "Hot Mashups"
+  - elsif params[:order] == :new
+    - @title = "Recent Mashups"
+  - else
+    - if params[:timeframe] == 'all'
+      - @title = "Best Mashups of All Time"
+    - elsif params[:timeframe] == 'this_week'
+      - @title = "Best Mashups of This Week"
+    - elsif params[:timeframe] == 'yesterday'
+      - @title = "Best Mashups from Yesterday"
+    - else
+      - @title = "Stupidly Funny Computer-Generated Fake Headlines"
+      - @short_title = :best
+  = render 'headlines/sort_tools'
 
 = render partial: 'headlines/headlines_table', locals: {headlines: @headlines}

@@ -2,7 +2,7 @@ class SourceHeadlinesController < ApplicationController
 
   def show
     @source_headline = SourceHeadline.find(params[:id])
-    @headlines = @source_headline.headlines.paginate(:page => params[:page], :per_page => 40)
+    @headlines = default_pagination headlines_sorted_by_params @source_headline.headlines
   end
 
 end

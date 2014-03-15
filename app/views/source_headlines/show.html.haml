@@ -1,16 +1,21 @@
-- @title = "Fake Headlines Mashed Up From \"#{@source_headline.name}\" Headline on #{@source_headline.source.name}"
-
+- @title = "Fake Headlines Mashed Up From \"#{@source_headline.name}\" Headline on #{@source_headline.source.try :name}"
 
 .lead
-  .text-muted Source Headline
+  .text-muted
+    Original Headline
+    - if @source_headline.source
+      from
+      = source_image_tag @source_headline.source
+      = link_to @source_headline.source.name, source_url(@source_headline.source.id)
   %p
-    .pull-right
-      = link_to @source_headline.article_url, class: "btn btn-primary" do
-        %i.fa.fa-globe
-        Read Article
-    = source_image_tag @source_headline.source
     %strong &ldquo;#{@source_headline.name}&rdquo;
-    from #{@source_headline.source.name}
+  .tools.btn-toolbar
+    = link_to @source_headline.article_url, class: "btn btn-primary read-article-link", data: read_link_data(@source_headline) do
+      %i.fa.fa-globe
+      Read Article
+    - if @source_headline.source
+      = link_to source_url(@source_headline.source.id), class: "btn btn-default" do
+        More Mashups From #{@source_headline.source.name}
 
 %hr/
 
@@ -18,8 +23,8 @@
   %h3
     .sort-tools.pull-right
       .btn-group.source-picker
-        = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new, true)
-        = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top)
+        = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true)
+        = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new)
     Mashups Created From This Headline
 
 = render partial: 'headlines/headlines_table', locals: {headlines: @headlines}

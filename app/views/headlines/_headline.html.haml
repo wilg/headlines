@@ -1,4 +1,4 @@
-%tr{class: "headline-row-#{headline.id} #{'shitty' if headline.shitty?}"}
+%tr{class: "headline-row-#{headline.id} #{'shitty' if headline.shitty?}", data: {headline_id: headline.id, details_url: headline_url(headline, format: :js)}}
   %td.count.hidden-xs
     %span.lead.vote-count= headline.vote_count
   - unless VOTING_DISABLED
@@ -9,20 +9,29 @@
         - if can_downvote?(headline) || vote_statuses.did_downvote?(headline)
           = render partial: "headlines/headline_downvotebox", locals: {headline: headline, vote_statuses: vote_statuses}
   %td.headline
-    = link_to headline.name, headline, class: 'headline-link'
+    - if @headline_show_tooltips
+      = link_to headline, class: 'headline-link' do
+        = tooltipped_headline headline, inner_linked: false
+    - else
+      = link_to headline.name, headline, class: 'headline-link'
     - if headline.comments_count > 0
       .visible-xs
         = link_to(headline, abbr: "Comments", class: 'comment-link') do
           %i.fa.fa-comment
           = headline.comments_count
+  - if @headline_table_show_sources
+    %td.sources
+      - Headline.uncached do
+        - headline.sources.uniq.sort{|a, b| a.id <=> b.id}.each do |source|
+          = source_image_tag source, true
   %td.comments.hidden-xs{class: headline.comments_count > 0 ? 'has-comments' : 'no-comments'}
     = link_to(headline, abbr: "Comments") do
       %i.fa.fa-comment
       - if headline.comments_count > 0
         = headline.comments_count
   %td.permalink.hidden-xs
-    = link_to(headline, abbr: "Permalink") do
-      %i.fa.fa-link
-  %td.permalink.hidden-xs
-    = link_to(tweet_url(headline), abbr: "Tweet", target: "_blank") do
+    = link_to(tweet_url(headline), abbr: "Tweet", target: "_blank", class: 'social-share-link twitter-share-link', data: {headline_id: headline.id}) do
       %i.fa.fa-twitter
+  %td.permalink.hidden-xs
+    = link_to(facebook_share_url(headline), abbr: "Share on Facebook", target: "_blank", class: 'social-share-link facebook-share-link', data: {headline_id: headline.id}) do
+      %i.fa.fa-facebook-square

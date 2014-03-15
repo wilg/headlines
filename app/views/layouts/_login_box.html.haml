@@ -1,4 +1,8 @@
 #login-box.text-muted
+  %span.label.label-success.pull-right.new-feature
+    = link_to "https://twitter.com/HeadlineSmasher" do
+      %strong New!
+      Twitter Bot
   - if user_signed_in?
     = link_to destroy_user_session_path, method: :delete, class: 'btn btn-link btn-autohide link-muted' do
       %i.fa.fa-sign-out
@@ -13,8 +17,6 @@
     .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
       %i.fa.fa-user
       Sign Up
-    .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
+    = link_to new_user_session_url, class: 'btn btn-default btn-sm' do
       %i.fa.fa-sign-in
       Sign In
-  .label.label-success
-    New feature: Comments!

@@ -1,13 +1,17 @@
 require 'digest/sha1'
 
 class Headline < ActiveRecord::Base
+  include HeadlinePhotoConcern
+  include Rails.application.routes.url_helpers
 
-  scope :top, -> { order("vote_count desc, created_at desc") }
-  scope :hot, -> { order("(vote_count / (extract(epoch from now()) - extract(epoch from created_at))) desc").where("created_at < ?", 20.minutes.ago).where("vote_count > 1 AND vote_count < 50") }
-  scope :today, -> { where("created_at > ?", 1.day.ago) }
-  scope :this_week, -> { where("created_at > ?", 7.days.ago) }
-  scope :yesterday, -> { where("created_at > ? AND created_at < ?", 2.days.ago, 1.day.ago) }
-  scope :newest, -> { order("created_at desc") }
+  scope :top, -> { order("headlines.vote_count desc, headlines.created_at desc") }
+  scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("headlines.created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
+  scope :today, -> { where("headlines.created_at > ?", 1.day.ago) }
+  scope :this_week, -> { where("headlines.created_at > ?", 7.days.ago) }
+  scope :yesterday, -> { where("headlines.created_at > ? AND headlines.created_at < ?", 2.days.ago, 1.day.ago) }
+  scope :newest, -> { order("headlines.created_at desc") }
+
+  scope :no_metadata, -> { includes(:source_headline_fragments).where(source_headline_fragments: {headline_id: nil}) }
 
   scope :in_category, -> (category) {
     cat_sources = HeadlineSources::Source.categories[category].map{|s|
@@ -15,8 +19,12 @@ class Headline < ActiveRecord::Base
     }
     where{sources.like_any cat_sources}
   }
+  scope :tweeted, -> { where("bot_shared_at is not null") }
+
+  scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
 
   validates_presence_of :name
+  validates_uniqueness_of :name_hash
 
   has_many :votes, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -25,10 +33,17 @@ class Headline < ActiveRecord::Base
   has_many :source_headline_fragments, dependent: :destroy
   has_many :source_headlines, through: :source_headline_fragments
 
+  serialize :source_names
+  serialize :photo_data, Hash
+
   before_save do
     self.name_hash = Headline.name_hash(self.name)
     calculate_vote_count!
   end
+
+  # after_create do
+  #   find_photo! if needs_photo_load?
+  # end
 
   def calculate_vote_count!
     self.vote_count = self.votes.upvotes.sum(:value)
@@ -82,27 +97,53 @@ class Headline < ActiveRecord::Base
   end
 
   def sources
-    source_headlines.map(&:source).uniq
+    source_headlines.map(&:source)
   end
 
   def create_sources!(sources_json_array)
-    sources_json_array.each_with_index do |source_hash, i|
+    SourceHeadlineFragment.transaction do
+      sources_json_array.each_with_index do |source_hash, i|
 
-      source_headline = SourceHeadline.where(name: source_hash['source_phrase'], source_id: source_hash['source_id']).first_or_create
+        source_headline = SourceHeadline.where(name: source_hash['source_phrase'], source_id: source_hash['source_id']).first_or_create
 
-      fragment = SourceHeadlineFragment.new
-      fragment.headline = self
-      fragment.source_headline = source_headline
-      fragment.source_headline_start = source_headline.name.downcase.index(source_hash['fragment'].downcase)
-      fragment.source_headline_end = fragment.source_headline_start + source_hash['fragment'].length
-      fragment.index = i
-      fragment.save!
+        fragment = SourceHeadlineFragment.new
+        fragment.headline = self
+        fragment.source_headline = source_headline
+        fragment.source_headline_start = source_headline.name.downcase.index(source_hash['fragment'].downcase)
+        fragment.source_headline_end = fragment.source_headline_start + source_hash['fragment'].length
+        fragment.index = i
+        fragment.save!
 
+      end
     end
   end
 
   def shitty?
     vote_count < 1
+  end
+
+  def self.last_bot_tweet
+    Headline.where("bot_shared_at is not null").order("bot_shared_at desc").first.bot_shared_at
+  end
+
+  def tweeted_from_bot?
+    bot_shared_at.present?
+  end
+
+  def bot_tweet_url
+    "https://twitter.com/headlinesmasher/status/#{bot_share_tweet_id}"
+  end
+
+  def formatted_name
+    name.squish
+  end
+
+  def tweet_from_bot!
+    text = "#{formatted_name} #{Rails.application.routes.url_helpers.headline_url(self, :host => "www.headlinesmasher.com")}"
+    tweet = TWITTER_BOT_CLIENT.update(text)
+    self.bot_shared_at = Time.now
+    self.bot_share_tweet_id = tweet.id
+    self.save!
   end
 
 end

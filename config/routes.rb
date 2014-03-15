@@ -1,20 +1,29 @@
 Headlines::Application.routes.draw do
 
-  devise_for :users
+  # Legacy redirects for URLs that are commonly in use
+  get '/headlines/best' => redirect('/')
+  get '/best(/today)' => redirect('/')
+
+  devise_for :users, controllers: { registrations: "registrations" }
 
   resources :comments
 
   resources :headlines do
     resources :comments
     collection do
-      get :best
+      get :random
     end
     member do
       post :vote
+      get :reconstruct
+      get :pick_photo
+      get :tweet_from_bot
+      post :update_photo
     end
   end
 
   resources :source_headlines
+  resources :sources
 
   resources :users do
     resources :headlines
@@ -22,13 +31,18 @@ Headlines::Application.routes.draw do
     resources :comments
   end
 
+  get 'paper', to: "headlines#newspaper"
+
   get "leaderboard", to: "users#index"
 
-  get "best", to: "headlines#best"
+  get "hot", to: "headlines#index", order: :trending, user_id: nil
+  get "recent", to: "headlines#index", order: :new, user_id: nil
 
   get "generator", to: "generator#index"
   post "generator/save", to: "generator#save", as: :save
 
-  root to: redirect("best")
+  get 'best/:timeframe', to: 'headlines#index'
+
+  root to: "headlines#index"
 
 end

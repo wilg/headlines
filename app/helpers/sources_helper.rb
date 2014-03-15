@@ -1,0 +1,12 @@
+module SourcesHelper
+
+  def read_link_data(source_headline)
+    d = {
+      id: source_headline.id,
+      source: source_headline.source.id
+    }
+    d[:headline_id] = @headline.id if @headline
+    d
+  end
+
+end

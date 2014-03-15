@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.3'
 gem 'unicorn'
 
 gem 'headline_sources', github: 'wilg/headline-sources'
@@ -11,16 +11,19 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jbuilder'
 
-gem 'bootstrap-sass-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-rails'
 gem 'will_paginate-bootstrap'
 gem 'handlebars_assets'
 gem 'font_assets'
 gem 'rails_autolink'
 gem 'rails-timeago', '~> 2.0'
+gem 'jquery-hoverIntent-rails'
 
 gem "tweet-button"
+gem "twitter"
 
 gem 'devise'
 
@@ -30,6 +33,8 @@ gem 'squeel'
 gem 'rakismet'
 
 gem 'newrelic_rpm'
+
+gem 'flickraw-cached'
 
 # Dev
 group :development do

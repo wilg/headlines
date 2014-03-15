@@ -2,33 +2,54 @@
   .modal-dialog
     .modal-content
       .modal-body
-        %h2{style: "margin-top:0"} Sign up to vote on headlines, add new ones, and earn karma!
-        %p.text-success
-          %strong We don't need your email address, and we won't (and can't) spam you!
-        .clearfix
-          .modal-sign-up
-            %h4 Sign Up
-            = form_for(User.new, :as => :user, :url => registration_path(:user), class: "form-horizontal") do |f|
-              .form-group
-                = f.label :login, "Username"
-                = f.text_field :login, :autofocus => true, class: 'form-control'
-              .form-group
-                = f.label :password
-                = f.password_field :password, class: 'form-control'
-              .form-group
-                = f.label :password_confirmation
-                = f.password_field :password_confirmation, class: 'form-control'
-              .form-group
-                = f.submit "Sign Up", class: 'btn btn-primary'
-          .modal-sign-in
-            %h4 Existing users sign in
-            = form_for(User.new(remember_me: true), :as => :user, :url => session_path(:user), class: "form-horizontal") do |f|
-              = f.hidden_field :remember_me
-              .form-group
-                = f.label :login, "Username"
-                = f.text_field :login, :autofocus => true, class: 'form-control'
-              .form-group
-                = f.label :password
-                = f.password_field :password, class: 'form-control'
-              .form-group
-                = f.submit "Sign In", class: 'btn btn-primary'
+        .clearfix#sign-up-collapses
+          #login-column-left
+            #register-form.collapse.in
+              %h3{style: "margin-top:0"} Sign Up
+              %p
+                %strong.text-success No personal information required.
+              = form_for(User.new, :as => :user, :url => registration_path(:user), class: "form-horizontal") do |f|
+                .form-group
+                  = f.label :login, "Username"
+                  = f.text_field :login, :autofocus => true, class: 'form-control'
+                .form-group
+                  = f.label :password
+                  = f.password_field :password, class: 'form-control'
+                .form-group
+                  = f.label :password_confirmation
+                  = f.password_field :password_confirmation, class: 'form-control'
+                .form-group
+                  = f.submit "Sign Up", class: 'btn btn-primary'
+            #sign-in-form.collapse
+              %h4 Existing users sign in
+              = form_for(User.new(remember_me: true), :as => :user, :url => session_path(:user), class: "form-horizontal") do |f|
+                = f.hidden_field :remember_me
+                .form-group
+                  = f.label :login, "Username"
+                  = f.text_field :login, :autofocus => true, class: 'form-control'
+                .form-group
+                  = f.label :password
+                  = f.password_field :password, class: 'form-control'
+                .form-group
+                  = f.submit "Sign In", class: 'btn btn-primary'
+          #login-column-right
+            %h4{style: "margin-top:0"} Why do I need an account? That is stupid and dumb!
+            %p You don't need an account to use the generator or browse around, but if you make one you can:
+            %ul
+              %li
+                %strong Save headlines
+                from the generator
+              %li
+                %strong Vote
+                on headlines
+              %li
+                Earn sweet, sweet
+                %strong karma
+            %p We tried to do it without accounts for a while, but a few people kept cheating and hacking and being rude.
+            %p
+              It's
+              %strong completely free
+              and we don't ask for any personal information so
+              %strong we can't spam you.
+            %hr/
+            = link_to "I Already Have An Account", new_user_session_url, class: 'btn btn-default btn-block'
