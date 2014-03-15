@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.lazyload
-//= require rails-timeago
+//= require jquery.hoverIntent
 //= require bootstrap/modal
 //= require bootstrap/tooltip
 //= require bootstrap/collapse

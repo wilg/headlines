@@ -19,6 +19,7 @@ class HeadlinesController < ApplicationController
     @headline = Headline.find(params[:id])
     respond_to do |format|
       format.html
+      format.js
       format.json {render partial: "headlines/headline", locals: {headline: @headline}}
     end
   end

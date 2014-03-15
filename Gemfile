@@ -20,6 +20,7 @@ gem 'handlebars_assets'
 gem 'font_assets'
 gem 'rails_autolink'
 gem 'rails-timeago', '~> 2.0'
+gem 'jquery-hoverIntent-rails'
 
 gem "tweet-button"
 gem "twitter"

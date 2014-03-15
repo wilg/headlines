@@ -9,7 +9,7 @@
       = link_to @source_headline.source.name, source_url(@source_headline.source.id)
   %p
     %strong &ldquo;#{@source_headline.name}&rdquo;
-  .tools
+  .tools.btn-toolbar
     = link_to @source_headline.article_url, class: "btn btn-primary read-article-link", data: read_link_data(@source_headline) do
       %i.fa.fa-globe
       Read Article
