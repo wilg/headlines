@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/wilg/headline-sources.git
-  revision: 73e9f4b01df3bab0c9aace8db2e3a8d89bbcee8b
+  revision: ace65460f73aec744239c9081f6c32b584a81c83
   specs:
     headline_sources (0.0.1)
       activesupport
@@ -38,7 +38,7 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     arel (4.0.2)
-    atomic (1.1.14)
+    atomic (1.1.16)
     bcrypt-ruby (3.1.2)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
@@ -57,7 +57,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    colorize (0.6.0)
+    colorize (0.7.0)
     debug_inspector (0.0.2)
     devise (3.2.3)
       bcrypt-ruby (~> 3.0)
@@ -113,7 +113,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.4)
+    multi_json (1.9.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.0.0)
@@ -176,7 +176,7 @@ GEM
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       polyamorous (~> 0.6.0)
-    thor (0.18.1)
+    thor (0.19.0)
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
@@ -195,7 +195,7 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.2.0)
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
