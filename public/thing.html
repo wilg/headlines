@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <title>Stats</title>
+</head>
+<body style="padding:0;margin:0;">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+d3.csv("wordcount.csv", function(data) {
+
+  data.forEach(function(d) {
+    d.vote_count = parseInt(d.vote_count);
+  })
+
+  data = data.filter(function(d){
+    return d.vote_count > 300 && d.vote_count < 4198 && d.word.length > 3;
+  });
+
+  var scale = d3.scale.linear()
+    .domain(d3.extent(data, function(d) { return d.vote_count; }))
+    .range([14, 60]);
+
+  var fontScale = d3.scale.linear()
+    .domain(d3.extent(data, function(d) { return d.vote_count; }))
+    .range([12, 32]);
+
+  data.forEach(function(d) {
+    d.radius = scale(d.vote_count);
+    d.originalRadius = d.radius;
+  });
+
+  console.log(data);
+
+  var nodes = data,
+      root = nodes[0],
+      color = d3.scale.category10();
+
+  // root.radius = 0;
+  // root.fixed = true;
+
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", '100%')
+      .attr("height", '100%');
+
+  var force = d3.layout.force()
+      .gravity(0.09)
+      // .charge(function(d, i) { return i ? 0 : 0; })
+      .nodes(nodes)
+      .charge(-60)
+      .size([
+        d3.select('svg')[0][0].offsetWidth,
+        d3.select('svg')[0][0].offsetHeight
+        ]);
+      // .linkDistance(1)
+
+  force.start();
+
+  window.onresize = function(event) {
+    force.size([
+      d3.select('svg')[0][0].offsetWidth,
+      d3.select('svg')[0][0].offsetHeight
+      ]);
+  };
+
+  var circles = svg.selectAll("circle")
+      .data(nodes)
+    .enter().append("circle")
+      .attr("r", function(d) { return d.selected ? 60 : d.radius; })
+      // .style("stroke", '#ececec')
+      .style("fill", 'white');
+
+  var labels = svg.selectAll("text")
+      .data(nodes)
+    .enter().append("text")
+      .attr('text-anchor', 'middle')
+      .style('dominant-baseline', 'middle')
+      .style('pointer-events', 'none')
+      .style('font-family', "Helvetica, sans-serif")
+      .style('font-size', function(d) {
+        return fontScale(d.vote_count) + "px";
+      })
+      .text(function(d) {
+        return d.word;
+      });
+
+  force.on("tick", function(e) {
+    var q = d3.geom.quadtree(nodes);
+
+    circles.each(function(d) {
+      q.visit(collide(d));
+    });
+
+    svg.selectAll("circle")
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+    svg.selectAll("text")
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+
+  circles.on("mouseover", function(d) {
+    if (d.animating) {
+      return;
+    }
+    d.animating = true;
+    // d.fixed = true;
+    // d.radius = 60;
+    d3.select(this).transition()
+      .style('fill', 'yellow')
+      .attr('r', 60)
+      .tween("saveRadius", function(d) {
+        var i = d3.interpolate(d.radius, 70);
+        return function(t) {
+          d.radius = i(t);
+        };
+      });
+    force.resume();
+  });
+
+  circles.on("mouseout", function(d) {
+    // setTimeout(function() {
+      d.animating = false;
+      d.radius = d.originalRadius;
+      d.fixed = false;
+      d3.select(this).transition()
+        .style('fill', 'white')
+        .attr("r", function(d) { return d.radius; })
+      force.resume();
+    // }, 500);
+  });
+
+  function collide(node) {
+    var r = node.radius + 16,
+        nx1 = node.x - r,
+        nx2 = node.x + r,
+        ny1 = node.y - r,
+        ny2 = node.y + r;
+    return function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== node)) {
+        var x = node.x - quad.point.x,
+            y = node.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y),
+            r = node.radius + quad.point.radius;
+        if (l < r) {
+          l = (l - r) / l * .5;
+          node.x -= x *= l;
+          node.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    };
+  }
+
+});
+
+</script>
+</body>
+</html>
