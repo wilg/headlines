@@ -1,0 +1,12 @@
+- @title = "Sources"
+%h2 Sources
+%hr/
+- @source_groups.each do |group, sources|
+  %h3= group
+  %table.table.table-striped#sources-table
+    - sources.each do |source|
+      %tr
+        %td.image
+          = source_image_tag source, true
+        %td.name
+          %h4= link_to source.name, source_url(source.id)

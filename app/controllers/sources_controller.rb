@@ -5,4 +5,8 @@ class SourcesController < ApplicationController
     @headlines = default_pagination headlines_sorted_by_params @source.headlines.top
   end
 
+  def index
+    @source_groups = HeadlineSource.all.sort_by{|s| s.category}.group_by{|s| s.category }
+  end
+
 end

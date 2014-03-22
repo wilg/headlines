@@ -1,0 +1,15 @@
+%strong= number_with_delimiter source.headlines.count
+= 'smash'.pluralize(source.headlines.count)
+
+%span.text-muted /
+
+- sum = source.votes.sum(:value)
+%strong= number_with_delimiter sum
+= 'upvote'.pluralize(sum)
+
+%span.text-muted /
+
+smashed from
+%strong= number_with_delimiter source.source_headlines.count
+real
+= 'headline'.pluralize(source.source_headlines.count)

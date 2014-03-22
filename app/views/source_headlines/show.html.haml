@@ -2,7 +2,7 @@
 
 .lead
   .text-muted
-    Original Headline
+    Real Headline
     - if @source_headline.source
       from
       = source_image_tag @source_headline.source
@@ -15,7 +15,7 @@
       Read Article
     - if @source_headline.source
       = link_to source_url(@source_headline.source.id), class: "btn btn-default" do
-        More Mashups From #{@source_headline.source.name}
+        More Smashes From #{@source_headline.source.name}
 
 %hr/
 
@@ -25,6 +25,6 @@
       .btn-group.source-picker
         = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true)
         = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new)
-    Mashups Created From This Headline
+    Smashes of This Headline
 
 = render partial: 'headlines/headlines_table', locals: {headlines: @headlines}

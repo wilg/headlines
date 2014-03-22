@@ -1,4 +1,4 @@
-%tr{class: "headline-row-#{headline.id} #{'shitty' if headline.shitty?}", data: {headline_id: headline.id, details_url: headline_url(headline, format: :js)}}
+%tr{class: "headline-row-#{headline.id} #{'shitty' if headline.shitty?}", data: {headline_id: headline.id, details_url: headline_url(headline, format: :js, sourced: !!@headline_table_show_sources)}}
   %td.count.hidden-xs
     %span.lead.vote-count= headline.vote_count
   - unless VOTING_DISABLED

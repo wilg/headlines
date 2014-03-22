@@ -33,7 +33,7 @@ class Headline < ActiveRecord::Base
   has_many :source_headline_fragments, dependent: :destroy
   has_many :source_headlines, through: :source_headline_fragments
 
-  serialize :source_names
+  serialize :source_names, Array
   serialize :photo_data, Hash
 
   before_save do
@@ -88,6 +88,11 @@ class Headline < ActiveRecord::Base
     @upvote_count ||= votes.upvotes.sum(:value)
   end
 
+  def set_source_names
+    names = source_headlines.map(&:source_id)
+    self.source_names = names if names.present?
+  end
+
   def sources
     source_headlines.map(&:source)
   end
@@ -108,6 +113,7 @@ class Headline < ActiveRecord::Base
 
       end
     end
+    set_source_names
   end
 
   def shitty?

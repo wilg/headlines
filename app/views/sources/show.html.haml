@@ -1,13 +1,16 @@
 - @title = "Source | #{@source.name}"
 
 %h2
+  = link_to "Sources", sources_url
+  %span.text-muted /
   = @source.name
   .sort-tools.pull-right
     .btn-group.source-picker
       = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true)
       = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new)
 
+%p= render partial: 'sources/source_stats', locals: {source: @source}
 
-%h3.text-muted Most Popular Mashups
+%h3.text-muted Most Popular Smashes
 - @headline_table_show_sources = true
 = render partial: 'headlines/headlines_table', locals: {headlines: @headlines}

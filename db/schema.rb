@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221194314) do
+ActiveRecord::Schema.define(version: 20140322233738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20140221194314) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["headline_id"], name: "index_comments_on_headline_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "headlines", force: true do |t|
     t.string   "name"
@@ -39,6 +42,8 @@ ActiveRecord::Schema.define(version: 20140221194314) do
     t.string   "bot_share_tweet_id"
   end
 
+  add_index "headlines", ["creator_id"], name: "index_headlines_on_creator_id", using: :btree
+
   create_table "source_headline_fragments", force: true do |t|
     t.integer  "source_headline_id"
     t.integer  "headline_id"
@@ -47,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140221194314) do
     t.integer  "index"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "text"
   end
 
   add_index "source_headline_fragments", ["headline_id"], name: "index_source_headline_fragments_on_headline_id", using: :btree
@@ -92,5 +98,8 @@ ActiveRecord::Schema.define(version: 20140221194314) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "votes", ["headline_id"], name: "index_votes_on_headline_id", using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
 end
