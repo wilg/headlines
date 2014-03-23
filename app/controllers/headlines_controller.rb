@@ -16,7 +16,7 @@ class HeadlinesController < ApplicationController
   end
 
   def show
-    @headline = Headline.find(params[:id])
+    @headline = Headline.includes(:source_headline_fragments, :source_headlines, :comments).find(params[:id])
     respond_to do |format|
       format.html
       format.js

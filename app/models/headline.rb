@@ -5,6 +5,7 @@ class Headline < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   scope :top, -> { order("headlines.vote_count desc, headlines.created_at desc") }
+  scope :bottom, -> { order("headlines.vote_count asc, headlines.created_at desc") }
   scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("headlines.created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
   scope :today, -> { where("headlines.created_at > ?", 1.day.ago) }
   scope :this_week, -> { where("headlines.created_at > ?", 7.days.ago) }
@@ -36,7 +37,7 @@ class Headline < ActiveRecord::Base
   serialize :source_names, Array
   serialize :photo_data, Hash
 
-  before_save do
+  before_validation do
     self.name_hash = Headline.name_hash(self.name)
     calculate_vote_count!
   end
