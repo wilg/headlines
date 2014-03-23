@@ -9,7 +9,13 @@
 
 %span.text-muted /
 
+- count = source.source_headlines.count
 smashed from
-%strong= number_with_delimiter source.source_headlines.count
+%strong= number_with_delimiter count
 real
-= 'headline'.pluralize(source.source_headlines.count)
+= 'headline'.pluralize(count)
+
+.pull-right.text-right
+  - avg = sum.to_f / count.to_f
+  %strong= number_with_delimiter avg.round(1)
+  average votes
