@@ -235,7 +235,7 @@ DEPENDENCIES
   rails_12factor
   rails_autolink
   rakismet
-  sass-rails (~> 4.0.0)
+  sass-rails (~> 4.0.3)
   spring
   tweet-button
   twitter
