@@ -17,10 +17,6 @@ after_fork do |server, worker|
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 
-  if defined?(ActiveRecord::Base)
-    config = Rails.application.config.database_configuration[Rails.env]
-    config['reaping_frequency'] = ENV['DB_REAP_FREQ'] || 10 # seconds
-    config['pool']            = ENV['DB_POOL'] || 5
-    ActiveRecord::Base.establish_connection(config)
-  end
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
 end
