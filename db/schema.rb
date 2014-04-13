@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20140322235147) do
     t.integer  "index"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "text"
   end
 
   add_index "source_headline_fragments", ["headline_id"], name: "index_source_headline_fragments_on_headline_id", using: :btree
