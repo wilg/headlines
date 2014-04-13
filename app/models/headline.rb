@@ -14,12 +14,6 @@ class Headline < ActiveRecord::Base
 
   scope :no_metadata, -> { includes(:source_headline_fragments).where(source_headline_fragments: {headline_id: nil}) }
 
-  scope :in_category, -> (category) {
-    cat_sources = HeadlineSources::Source.categories[category].map{|s|
-      "%#{s.id}%"
-    }
-    where{sources.like_any cat_sources}
-  }
   scope :tweeted, -> { where("bot_shared_at is not null") }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }

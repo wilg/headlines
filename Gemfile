@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
+ruby "2.0.0"
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.0'
 gem 'unicorn'
 
 gem 'headline_sources', github: 'wilg/headline-sources'
@@ -28,7 +29,6 @@ gem "twitter"
 gem 'devise'
 
 gem 'nokogiri'
-gem 'squeel'
 
 gem 'rakismet'
 
@@ -38,6 +38,7 @@ gem 'flickraw-cached'
 
 # Dev
 group :development do
+  gem 'spring'
   gem "better_errors"
   gem "binding_of_caller"
 end
@@ -45,4 +46,3 @@ end
 # Heroku Deploy
 gem 'foreman'
 gem 'rails_12factor', group: :production
-ruby "2.0.0"
