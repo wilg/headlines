@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531220955) do
+ActiveRecord::Schema.define(version: 20140531235134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140531220955) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "source_names"
-    t.string   "name_hash"
+    t.text     "name_hash"
     t.integer  "depth",              default: 2
     t.integer  "creator_id"
     t.integer  "comments_count",     default: 0, null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20140531220955) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name_hash"
+    t.text     "name_hash"
     t.datetime "published_at"
     t.string   "fetcher"
   end
