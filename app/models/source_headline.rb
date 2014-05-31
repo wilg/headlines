@@ -1,7 +1,13 @@
 class SourceHeadline < ActiveRecord::Base
 
+  require 'headline_sources/headline'
+
   has_many :source_headline_fragments, dependent: :nullify
   has_many :headlines, through: :source_headline_fragments
+
+  before_save do
+    self.name_hash = HeadlineSources::Headline.headline_hash(self.name)
+  end
 
   def source
     @source ||= HeadlineSource.find(source_id)
