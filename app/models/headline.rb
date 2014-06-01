@@ -96,7 +96,7 @@ class Headline < ActiveRecord::Base
     SourceHeadlineFragment.transaction do
       sources_json_array.each_with_index do |source_hash, i|
 
-        source_headline = SourceHeadline.where(name: source_hash['source_phrase'], source_id: source_hash['source_id']).first_or_create
+        source_headline = SourceHeadline.find(source_hash['source_headline_id'])
 
         fragment = SourceHeadlineFragment.new
         fragment.headline = self
