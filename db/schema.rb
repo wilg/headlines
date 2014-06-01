@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531235134) do
+ActiveRecord::Schema.define(version: 20140601061647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20140531235134) do
     t.text     "name_hash"
     t.datetime "published_at"
     t.string   "fetcher"
+    t.string   "author"
+    t.string   "section"
   end
 
   add_index "source_headlines", ["source_id", "name_hash"], name: "index_source_headlines_on_source_id_and_name_hash", using: :btree
