@@ -30,4 +30,17 @@ namespace :source_headlines do
     end
   end
 
+  task deduplicate: :environment do
+
+    duplicated_hashes = SourceHeadline.select(:name_hash).group(:name_hash).having("count(*) > 1").count
+    duplicated_hashes.each do |duped_hash, count|
+      puts "deduplicating #{duped_hash} (#{count})"
+      dupes = SourceHeadline.where(name_hash: duped_hash)
+      dupes.each do |dupe|
+        dupe.destroy unless dupe.headlines.count > 0
+      end
+    end
+
+  end
+
 end
