@@ -49,7 +49,7 @@ namespace :source_headlines do
         if count > 0
           puts "   -> Dupe #{index} - Has #{count} headlines".red
         elsif index > 0
-          dupe.destroy
+          dupe.destroy!
           deleted_here += 1
           puts "   -> Dupe #{index} - Deleted".green
         else
@@ -57,8 +57,9 @@ namespace :source_headlines do
         end
       end
 
-      varying = dupes.map{|d| d.name.downcase}.uniq.length > 1
-      unless varying
+      varying = dupes.map{|d| d.name.downcase.gsub(/\u00a0/, ' ')}.uniq.length > 1
+      varying_length = dupes.map{|d| d.name.length }.uniq.length > 1
+      if !varying || !varying_length
         alive = dupes.reject(&:destroyed?)
         if alive.length > 1
           puts "   -> Identical titles, combining".cyan
@@ -66,12 +67,14 @@ namespace :source_headlines do
           alive.each_with_index do |dupe, index|
             if index > 0
               dupe.source_headline_fragments.update_all(source_headline_id: canonical_dupe.id)
-              dupe.destroy
+              dupe.destroy!
               deleted_here += 1
               puts "   -> Merged #{dupe.id} into #{canonical_dupe.id}".green
             end
           end
         end
+      else
+        dupes.each{|d| puts d.name.downcase}
       end
 
       total_deleted += deleted_here
