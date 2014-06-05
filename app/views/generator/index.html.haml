@@ -29,7 +29,7 @@
                 .pull-right
                   %input.group-check-box{type: :checkbox, indeterminate: true}
               .sources.collapse
-                - sources.each do |source|
+                - sources.sort{|a,b| a.name.downcase <=> b.name.downcase}.each do |source|
                   %span.source-checkbox-block
                     = check_box_tag source.id, 1, selected_sources_includes?(source), class: 'source-check-box'
                     = label_tag source.id do
