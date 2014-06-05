@@ -11,10 +11,10 @@
       %form#generate-form{data: {generator_url: GENERATOR_URL, save_url: save_url, reconstruct_phrase: params[:reconstruct_phrase], reconstruct_sources: params[:reconstruct_sources]}}
         %a#invent-button.btn.btn-primary.btn-lg
           %i.fa.fa-refresh.fa-spin
-          %span.enabled-title Generate Hilarious Headlines
-          %span.disabled-title Generating Headlines
+          %span.enabled-title Smash Hilarious Headlines
+          %span.disabled-title Smashing Headlines
         .alert.alert-warning.hidden{style: 'margin-top: 10px'}
-          %strong Couldn't Generate Headlines
+          %strong Couldn't Smash Headlines
           .swamp We might be getting swamped, try again!
         %a.btn.btn-link.btn-block#collapse-generate-options{data: {toggle: :collapse, target: "#generate-form .source-box"}, style: "margin:10px 0"}
           %i.fa.fa-gear
@@ -54,8 +54,8 @@
 
     #generated-headlines
       .well.text-center.text-muted.hidden-xs
-        %i.fa-3x.fa.fa-refresh.fa-spin
-        %h4 Generating Fake Headlines
+        %i.fa-3x.fa.fa-gear.fa-spin
+        %h4 Smashing #{number_with_delimiter SourceHeadline.count} Headlines
 
     .text-muted
       %p
