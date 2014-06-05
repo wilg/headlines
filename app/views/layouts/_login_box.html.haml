@@ -1,8 +1,5 @@
 #login-box.text-muted
   %span.label.label-success.pull-right.new-feature
-    = link_to "https://twitter.com/HeadlineSmasher" do
-      %strong New!
-      Twitter Bot
   - if user_signed_in?
     = link_to destroy_user_session_path, method: :delete, class: 'btn btn-link btn-autohide link-muted' do
       %i.fa.fa-sign-out

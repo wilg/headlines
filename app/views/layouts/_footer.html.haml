@@ -1,20 +1,22 @@
 %footer
   .text-muted
+    .row.text-center
+      %p
+        = link_to "https://twitter.com/HeadlineSmasher" do
+          %i.fa.fa-twitter
+          Follow
+          %strong @HeadlineSmasher
+          on Twitter
+      .more Get the best smashes all up in your social business.
+    %hr/
     .row
       .col-md-6
-        %p
-          = link_to "https://twitter.com/HeadlineSmasher" do
-            %i.fa.fa-twitter
-            Follow
-            %strong @HeadlineSmasher
-            on Twitter
-
         %p
           Built by
           = link_to "http://www.wilgieseler.com/" do
             Wil Gieseler
           as a weird side project thing.
-          Follow me at #{link_to "@wilgieseler", "https://twitter.com/wilgieseler"}!
+        %p Follow me on Twitter at #{link_to "@wilgieseler", "https://twitter.com/wilgieseler"} if that's your jam.
         = link_to random_headlines_url, class: 'btn btn-primary random-headline-link' do
           %i.fa.fa-refresh
           Random Smash
