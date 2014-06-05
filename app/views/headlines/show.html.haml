@@ -47,7 +47,7 @@
         - if @headline.source_headlines.length > 0
           .well
             %h4.text-muted{style: 'margin-top:0'}
-              Mashed Up From These Stories
+              Smashed From These Stories
             %ul#show-headline-source-headline-list.list-unstyled
               - @headline.source_headlines.each do |source_headline|
                 %li
@@ -69,11 +69,22 @@
                       = link_to source_headline.source.name, source_url(source_headline.source.id)
 
         %small.text-muted
+          - if @headline.sources
+            %p
+              = link_to generate_url_like(@headline) do
+                %i.fa.fa-gears
+                Smash from these news sources
           - if current_user.present? && current_user.login == "wil"
             - if @headline.source_headlines.length == 0
               = link_to "Find Sources", reconstruct_headline_url(@headline)
-            %p
-              = @headline.to_tag.split(",").join(", ")
-              = link_to "Change Photo", pick_photo_headline_url(@headline)
+            - if @headline.tweeted_from_bot?
+              %p
+                = link_to @headline.bot_tweet_url do
+                  %i.fa.fa-twitter
+                  Auto-Tweeted on #{@headline.bot_shared_at.strftime("%A, %B %e, %Y")}
+              %p
+                = @headline.to_tag.split(",").join(", ")
+                = link_to "Change Photo", pick_photo_headline_url(@headline)
+
           - if @headline.vote_count < 2 && @headline.creator == current_user
             .pull-right= link_to "Delete Headline", @headline, method: :delete, confirm: "Are you sure you want to delete this headline?", class: 'text-muted'
