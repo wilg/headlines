@@ -4,6 +4,9 @@
   = link_to "Sources", sources_url
   %span.text-muted /
   = @source.name
+  = link_to generator_url(@source.id => 1), class: "btn btn-primary pull-right" do
+    %i.fa.fa-gears
+    Smash #{@source.name}
 
 .stats{style: 'clear:both'}
   = render partial: 'sources/source_stats', locals: {source: @source}
