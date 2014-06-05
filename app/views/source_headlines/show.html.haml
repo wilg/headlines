@@ -1,6 +1,6 @@
 - @title = "Fake Headlines Mashed Up From \"#{@source_headline.name}\" Headline on #{@source_headline.source.try :name}"
 
-.lead
+.lead{style: "margin-bottom: 0"}
   .text-muted
     Real Headline
     - if @source_headline.source
@@ -9,19 +9,26 @@
       = link_to @source_headline.source.name, source_url(@source_headline.source.id)
     - elsif @source_headline.source_id
       from #{@source_headline.source_id}
-  %p
+  .title
     %strong &ldquo;#{@source_headline.name}&rdquo;
-    %span.text-muted= @source_headline.pretty_author
-  .tools.btn-toolbar
-    = link_to @source_headline.article_url, class: "btn btn-primary read-article-link", data: read_link_data(@source_headline) do
-      %i.fa.fa-globe
-      Read Article
-    - if @source_headline.source
-      = link_to source_url(@source_headline.source.id), class: "btn btn-default" do
-        More Smashes From #{@source_headline.source.name}
-      = link_to generator_url(@source_headline.source.id => 1), class: "btn btn-default pull-right" do
-        %i.fa.fa-gears
-        Smash #{@source_headline.source.name}
+.byline{style: "margin-bottom: 1em"}
+  - if @source_headline.pretty_author
+    %span= @source_headline.pretty_author
+    - if @source_headline.published_at
+      &mdash;
+  - if @source_headline.published_at
+    %span= @source_headline.published_at.strftime("%B %e, %Y")
+.tools.btn-toolbar
+  = link_to @source_headline.article_url, class: "btn btn-success read-article-link", data: read_link_data(@source_headline) do
+    %i.fa.fa-globe
+    Read Article
+  - if @source_headline.source
+    = link_to generator_url(@source_headline.source.id => 1), class: "btn btn-default pull-right" do
+      %i.fa.fa-gears
+      Smash #{@source_headline.source.name}
+    = link_to source_url(@source_headline.source.id), class: "btn btn-default pull-right" do
+      %i.fa.fa-star
+      Smashes From #{@source_headline.source.name}
 
 %hr/
 
