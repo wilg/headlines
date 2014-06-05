@@ -19,7 +19,7 @@ class SourceHeadline < ActiveRecord::Base
   end
 
   def pretty_author
-    return nil if author.include?("@")
+    return nil if !author || author.include?("@")
     author.gsub(/By /i, '')
   end
 
