@@ -7,8 +7,11 @@
       from
       = source_image_tag @source_headline.source
       = link_to @source_headline.source.name, source_url(@source_headline.source.id)
+    - elsif @source_headline.source_id
+      from #{@source_headline.source_id}
   %p
     %strong &ldquo;#{@source_headline.name}&rdquo;
+    %span.text-muted= @source_headline.pretty_author
   .tools.btn-toolbar
     = link_to @source_headline.article_url, class: "btn btn-primary read-article-link", data: read_link_data(@source_headline) do
       %i.fa.fa-globe

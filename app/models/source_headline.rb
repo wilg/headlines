@@ -18,4 +18,9 @@ class SourceHeadline < ActiveRecord::Base
     url || "https://www.google.com/search?btnI&q=#{CGI.escape(q)}&safe=off"
   end
 
+  def pretty_author
+    return nil if author.include?("@")
+    author.gsub(/By /i, '')
+  end
+
 end
