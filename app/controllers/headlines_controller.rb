@@ -10,7 +10,7 @@ class HeadlinesController < ApplicationController
       @headlines = headlines_sorted_by_params @user.headlines
     else
       @is_main_browse_page = true
-      @headlines = headlines_sorted_by_params Headline.all, {order: :top, timeframe: :today, q: nil}
+      @headlines = headlines_sorted_by_params Headline.all, {order: :top, timeframe: :this_week, q: nil}
     end
     @headlines = default_pagination @headlines
   end

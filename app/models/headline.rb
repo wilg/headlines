@@ -9,6 +9,7 @@ class Headline < ActiveRecord::Base
   scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("headlines.created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
   scope :today, -> { where("headlines.created_at > ?", 1.day.ago) }
   scope :this_week, -> { where("headlines.created_at > ?", 7.days.ago) }
+  scope :this_month, -> { where("headlines.created_at > ?", 30.days.ago) }
   scope :yesterday, -> { where("headlines.created_at > ? AND headlines.created_at < ?", 2.days.ago, 1.day.ago) }
   scope :newest, -> { order("headlines.created_at desc") }
 
