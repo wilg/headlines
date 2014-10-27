@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/wilg/headline-sources.git
-  revision: ac91dd4f8b98f0789f66b94c1980a693e96b2b84
+  revision: 0c1e56f74e971657356786e2d6aab9f3d8f027f6
   specs:
     headline_sources (0.0.1)
       activerecord
@@ -63,7 +63,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     colorize (0.7.3)
-    curb (0.8.5)
+    curb (0.8.6)
     debug_inspector (0.0.2)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -79,10 +79,10 @@ GEM
     execjs (2.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    feedjira (1.3.0)
-      curb (~> 0.8.1)
-      loofah (~> 2.0.0)
-      sax-machine (~> 0.2.1)
+    feedjira (1.4.0)
+      curb (~> 0.8)
+      loofah (~> 2.0)
+      sax-machine (~> 1.0)
     flickraw (0.9.8)
     flickraw-cached (20120701)
       flickraw (>= 0.9)
@@ -90,7 +90,7 @@ GEM
       railties (>= 3.2, < 5.0)
     font_assets (0.1.11)
       rack
-    foreman (0.71.0)
+    foreman (0.75.0)
       dotenv (~> 0.11.1)
       thor (~> 0.19.1)
     haml (4.0.5)
@@ -107,7 +107,7 @@ GEM
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    i18n (0.6.9)
+    i18n (0.6.11)
     jbuilder (2.0.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -117,7 +117,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     kgio (2.9.2)
-    loofah (2.0.0)
+    loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -126,13 +126,13 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     mime-types (1.25.1)
     mini_portile (0.6.0)
-    minitest (5.3.4)
+    minitest (5.4.2)
     multi_json (1.9.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.0.0)
     newrelic_rpm (3.8.0.218)
-    nokogiri (1.6.2.1)
+    nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
@@ -174,8 +174,7 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
-    sax-machine (0.2.1)
-      nokogiri (~> 1.6.0)
+    sax-machine (1.0.2)
     simple_oauth (0.2.0)
     snoo (0.1.2)
       httparty
@@ -208,7 +207,7 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.2.0)
-    tzinfo (1.2.1)
+    tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
