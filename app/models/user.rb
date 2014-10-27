@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :upvotes, -> { upvotes }, class_name: 'Vote'
   has_many :downvotes, -> { downvotes }, class_name: 'Vote'
-  has_many :headlines, foreign_key: :creator_id, dependent: :nullify, counter_cache: :saved_headlines_count
+  has_many :headlines, foreign_key: :creator_id, dependent: :nullify
   has_many :voted_headlines, through: :votes, source: :headline
   has_many :upvoted_headlines, through: :upvotes, source: :headline
   has_many :downvoted_headlines, through: :downvotes, source: :headline
@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   end
 
   def calculate_karma!
-    self.karma = self.headlines.sum(:vote_count) - self.headlines.count
+    self.saved_headlines_count = self.headlines.count
+    self.karma = self.headlines.sum(:vote_count) - self.saved_headlines_count
     self.vote_count = voted_headlines_without_self.count
   end
 
