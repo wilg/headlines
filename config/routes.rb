@@ -33,7 +33,7 @@ Headlines::Application.routes.draw do
 
   get 'paper', to: "headlines#newspaper"
 
-  get "leaderboard", to: "users#index"
+  get "leaderboard(/:timeframe)", to: "users#index", as: :leaderboard
 
   get "hot", to: "headlines#index", order: :trending, user_id: nil
   get "recent", to: "headlines#index", order: :new, user_id: nil

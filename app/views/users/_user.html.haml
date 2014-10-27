@@ -5,12 +5,18 @@
     = link_to user.login, user
   %td.karma.text-left
     %i.fa.fa-trophy
-    = number_with_delimiter user.karma
+      = number_with_delimiter user.has_calculated_timeframe_karma? ? user.timeframe_karma : user.karma
     karma
     .more-info.hidden-xs
       %span.text-muted
-        = link_to pluralize(number_with_delimiter(user.saved_headlines_count), 'headline'), user_headlines_url(user)
+        = link_to pluralize(number_with_delimiter(user.has_calculated_timeframe_karma? ? user.timeframe_headline_count : user.saved_headlines_count), 'headline'), user_headlines_url(user)
         \/
-        = link_to pluralize(number_with_delimiter(user.vote_count), 'vote'), user_votes_url(user)
+        - if user.has_calculated_timeframe_karma?
+          = link_to 'view votes', user_votes_url(user)
+        - else
+          = link_to pluralize(number_with_delimiter(user.vote_count), 'vote'), user_votes_url(user)
         \/
-        = link_to pluralize(number_with_delimiter(user.comments_count), 'comment'), user_comments_url(user)
+        - if user.has_calculated_timeframe_karma?
+          = link_to 'view comments', user_comments_url(user)
+        - else
+          = link_to pluralize(number_with_delimiter(user.comments_count), 'comment'), user_comments_url(user)

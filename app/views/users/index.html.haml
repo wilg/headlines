@@ -4,7 +4,18 @@
 %h2 Leaderboard
 .lead.text-muted Get karma when other people upvote your saved headlines.
 
+.btn-group.source-picker
+  = link_to "All Time", merge_sort_url({page: 1, timeframe: :all}), class: default_button_toggle(:timeframe, :all, true)
+  = link_to merge_sort_url({page: 1, timeframe: :this_month}), class: default_button_toggle(:timeframe, :this_month) do
+    %span.hidden-xs This
+    Month
+  = link_to merge_sort_url({page: 1, timeframe: :this_week}), class: default_button_toggle(:timeframe, :this_week) do
+    %span.hidden-xs This
+    Week
+  = link_to merge_sort_url({page: 1, timeframe: :today}), class: default_button_toggle(:timeframe, :today) do
+    Today
+
 %table.table.table-striped.users-table
   = render @users
 
-= will_paginate @users, renderer: BootstrapPagination::Rails
+= will_paginate @users, renderer: BootstrapPagination::Rails if @users.respond_to?(:total_pages)

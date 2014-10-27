@@ -34,6 +34,34 @@ class User < ActiveRecord::Base
     end while self.class.exists?(api_key: api_key)
   end
 
+  def self.with_karma_for_timeframe(timeframe = nil)
+    aggregate = -> (func) {
+      <<-sql
+      (SELECT #{func}
+           FROM headlines
+           WHERE headlines.creator_id = users.id
+           #{timeframe ? "AND (headlines.created_at > #{sanitize timeframe.ago})" : ''}
+          )
+      sql
+    }
+
+    timeframe_headline_count = aggregate.call("COUNT(*)")
+    timeframe_vote_count = aggregate.call("SUM(vote_count)")
+    timeframe_karma = "#{timeframe_vote_count} - #{timeframe_headline_count}"
+
+    sql = <<-sql
+    #{timeframe_headline_count} AS timeframe_headline_count,
+    #{timeframe_vote_count} AS timeframe_vote_count,
+    #{timeframe_karma} AS timeframe_karma
+    sql
+
+    User.select('*', sql).where("#{timeframe_karma} is not null").order('timeframe_karma desc')
+  end
+
+  def has_calculated_timeframe_karma?
+    self.respond_to?(:timeframe_karma)
+  end
+
   def calculate_karma!
     self.saved_headlines_count = self.headlines.count
     self.karma = self.headlines.sum(:vote_count) - self.saved_headlines_count
