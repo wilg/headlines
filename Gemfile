@@ -36,6 +36,8 @@ gem 'newrelic_rpm'
 
 gem 'flickraw-cached'
 
+gem 'dalli'
+
 # Dev
 group :development do
   gem 'spring'

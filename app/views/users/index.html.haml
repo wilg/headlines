@@ -15,7 +15,13 @@
   = link_to merge_sort_url({page: 1, timeframe: :today}), class: default_button_toggle(:timeframe, :today) do
     Today
 
-%table.table.table-striped.users-table
-  = render @users
+= cache cache_key_for_duration(10.minutes, ["leaderboard", params]) do
+  %table.table.table-striped.users-table
+    = render @users
 
 = will_paginate @users, renderer: BootstrapPagination::Rails if @users.respond_to?(:total_pages)
+
+%p
+  %small.text-muted
+    %i.fa.fa-refresh
+    Leaderboard updates every 10 minutes.

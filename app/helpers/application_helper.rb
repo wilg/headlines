@@ -12,4 +12,8 @@ module ApplicationHelper
     @open_graph_tags ? default.merge(@open_graph_tags) : default
   end
 
+  def cache_key_for_duration(duration, key)
+    "#{key.to_s}_#{Time.now.to_i/(duration.to_i)*(duration.to_i)}"
+  end
+
 end
