@@ -9,8 +9,8 @@
     karma
     .more-info.hidden-xs
       %span.text-muted
-        = link_to pluralize(user.saved_headlines_count, 'headline'), user_headlines_url(user)
+        = link_to pluralize(number_with_delimiter(user.saved_headlines_count), 'headline'), user_headlines_url(user)
         \/
-        = link_to pluralize(user.vote_count, 'vote'), user_votes_url(user)
+        = link_to pluralize(number_with_delimiter(user.vote_count), 'vote'), user_votes_url(user)
         \/
-        = link_to pluralize(user.comments_count, 'comment'), user_comments_url(user)
+        = link_to pluralize(number_with_delimiter(user.comments_count), 'comment'), user_comments_url(user)
