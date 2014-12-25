@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.2.0"
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.2.0'
 gem 'unicorn'
 
 gem 'headline_sources', github: 'wilg/headline-sources'
@@ -41,8 +41,7 @@ gem 'dalli'
 # Dev
 group :development do
   gem 'spring'
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'web-console', '~> 2.0'
 end
 
 # Heroku Deploy
