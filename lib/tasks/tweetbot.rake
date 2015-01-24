@@ -2,7 +2,7 @@ namespace :tweetbot do
 
   task tweet: :environment do
 
-    tweet_every = 3.02.hours
+    tweet_every = 2.02.hours
 
     if Headline.last_bot_tweet > tweet_every.ago
       puts "Too soon for a tweet!"
