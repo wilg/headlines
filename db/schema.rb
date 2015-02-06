@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150206205911) do
 
   create_table "sources", id: false, force: :cascade do |t|
     t.string "id"
-    t.text   "json"
+    t.json   "json"
   end
 
   create_table "users", force: :cascade do |t|
