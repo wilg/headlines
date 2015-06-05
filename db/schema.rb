@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206205911) do
+ActiveRecord::Schema.define(version: 20150605062237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20150206205911) do
     t.text     "photo_data"
     t.datetime "bot_shared_at"
     t.string   "bot_share_tweet_id", limit: 255
+    t.integer  "retweet_count"
+    t.integer  "favorite_count"
   end
 
   add_index "headlines", ["created_at"], name: "index_headlines_on_created_at", using: :btree
