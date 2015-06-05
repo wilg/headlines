@@ -13,8 +13,8 @@ namespace :heroku do
       puts "Fetching database from #{a}"
       Bundler.with_clean_env {
         system %Q{
-          #{"heroku pgbackups:capture -a #{a} --expire" unless ENV['no_capture']}
-          #{"curl -o /tmp/headlines.dump `heroku pgbackups:url -a #{a}`" unless ENV['use_local_dump']}
+          #{"heroku pg:backups capture -a #{a}" unless ENV['no_capture']}
+          #{"curl -o /tmp/headlines.dump `heroku pg:backups public-url -a #{a}`" unless ENV['use_local_dump']}
         }
       }
     end
