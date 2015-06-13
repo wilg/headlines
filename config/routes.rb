@@ -8,7 +8,7 @@ Headlines::Application.routes.draw do
 
   resources :comments
 
-  resources :headlines do
+  resources :headlines, except: [:show, :update, :edit, :destroy] do
     resources :comments
     collection do
       get :random
@@ -42,6 +42,9 @@ Headlines::Application.routes.draw do
   post "generator/save", to: "generator#save", as: :save
 
   get 'best/:timeframe', to: 'headlines#index'
+
+  resources :headlines, only: [:show, :destroy], path: "/"
+  get '/headlines/:id' => redirect('/%{id}')
 
   root to: "headlines#index"
 
