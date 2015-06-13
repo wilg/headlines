@@ -93,6 +93,14 @@ module HeadlinesHelper
     "https://www.facebook.com/sharer/sharer.php?u=#{headline_url(headline)}"
   end
 
+  def headline_description(headline)
+    d = "#{pluralize headline.vote_count, "vote"}"
+    if headline.creator
+      d << ", discovered by #{headline.creator.login}"
+    end
+    d
+  end
+
   def loading_icon
     "..."
   end

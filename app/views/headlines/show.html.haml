@@ -2,8 +2,12 @@
 - og! "og:title", @headline.name
 - og! "og:image", @headline.image_url('n')
 - og! "og:url", headline_url(@headline)
-- og! "og:description", "Fake headlines created by mashing up real headlines."
+- og! "og:description", headline_description(@headline)
 
+- og! "twitter:card", "summary"
+- og! "twitter:site", "@HeadlineSmasher"
+- og! "twitter:title", @headline.name
+- og! "twitter:description", headline_description(@headline)
 
 #headline-show.row
   / .photo-column.col-md-3
