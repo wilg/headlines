@@ -9,6 +9,8 @@ module HeadlinesHelper
     if sort_order == :new
       headlines = headlines.newest
     elsif sort_order == :trending
+      headlines = headlines.trending
+    elsif sort_order == :hot
       headlines = headlines.hot
     elsif sort_order == :top
       @sorting_top = true

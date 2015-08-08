@@ -10,17 +10,19 @@
       = link_to "Best", params.merge({page: 1, order: :top}), class: default_button_toggle(:order, :top, true)
       = link_to "Recent", params.merge({page: 1, order: :new}), class: default_button_toggle(:order, :new)
 - else
-  - if params[:order] == :trending
-    - @title = "Hot Mashups"
+  - if params[:order] == :hot
+    - @title = "Hot Smashes"
   - elsif params[:order] == :new
-    - @title = "Recent Mashups"
+    - @title = "Recent Smashes"
+  - elsif params[:order] == :trending
+    - @title = "Trending Smashes"
   - else
     - if params[:timeframe] == 'all'
-      - @title = "Best Mashups of All Time"
+      - @title = "Best Smashes of All Time"
     - elsif params[:timeframe] == 'this_week'
-      - @title = "Best Mashups of This Week"
+      - @title = "Best Smashes of This Week"
     - elsif params[:timeframe] == 'yesterday'
-      - @title = "Best Mashups from Yesterday"
+      - @title = "Best Smashes from Yesterday"
     - else
       - @title = "Stupidly Funny Computer-Generated Fake Headlines"
       - @short_title = :best

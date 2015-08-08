@@ -7,6 +7,7 @@ class Headline < ActiveRecord::Base
   scope :top, -> { order("COALESCE(headlines.score, headlines.vote_count) desc, headlines.created_at desc") }
   scope :bottom, -> { order("COALESCE(headlines.score, headlines.vote_count) asc, headlines.created_at desc") }
   scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("headlines.created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
+  scope :trending, -> { order("(COALESCE(headlines.retweet_count, 0) + headlines.mention_count + COALESCE(headlines.favorite_count, 0)) desc, headlines.updated_at desc") }
   scope :created_in_the_past, -> (timeframe){ where("headlines.created_at > ?", timeframe.ago) }
   scope :today, -> { created_in_the_past 1.day }
   scope :this_week, -> { created_in_the_past 7.days }
