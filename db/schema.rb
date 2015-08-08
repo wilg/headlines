@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808054146) do
+ActiveRecord::Schema.define(version: 20150808055220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150808054146) do
     t.integer  "retweet_count"
     t.integer  "favorite_count"
     t.integer  "mention_count",                  default: 0, null: false
+    t.float    "score"
   end
 
   add_index "headlines", ["created_at"], name: "index_headlines_on_created_at", using: :btree

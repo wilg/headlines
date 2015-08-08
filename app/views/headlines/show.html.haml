@@ -79,6 +79,15 @@
                 %i.fa.fa-gears
                 Smash from these news sources
           - if current_user.present? && current_user.login == "wil"
+            %p
+              Score
+              %strong #{@headline.score || "?"}
+              Retweets
+              %strong #{@headline.retweet_count || "?"}
+              Favorites
+              %strong #{@headline.favorite_count || "?"}
+              Mentions
+              %strong #{@headline.mention_count || "?"}
             - if @headline.source_headlines.length == 0
               = link_to "Find Sources", reconstruct_headline_url(@headline)
             - if @headline.tweeted_from_bot?

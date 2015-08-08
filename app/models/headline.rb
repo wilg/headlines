@@ -38,6 +38,7 @@ class Headline < ActiveRecord::Base
   before_validation do
     self.name_hash = Headline.name_hash(self.name)
     calculate_vote_count!
+    calculate_score!
   end
 
   # after_create do
@@ -46,6 +47,15 @@ class Headline < ActiveRecord::Base
 
   def calculate_vote_count!
     self.vote_count = self.votes.upvotes.sum(:value)
+  end
+
+  def calculate_score!
+    new_score = vote_count.to_f
+    new_score += comments_count.to_f
+    new_score += retweet_count.to_f * 2
+    new_score += favorite_count.to_f
+    new_score += mention_count.to_f * 2
+    self.score = new_score
   end
 
   def self.name_hash(name)
