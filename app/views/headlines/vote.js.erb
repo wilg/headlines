@@ -1,4 +1,4 @@
 $(".headline-row-<%= @headline.id %>").replaceWith("<%=j render partial: 'headlines/headline', locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])} %>");
-$("#show-vote-count").html("<%= pluralize @headline.vote_count, "vote" %>");
+$("#show-vote-count").html("<%= pluralize @headline.display_score, "vote" %>");
 $("#show-vote-box").html("<%=j render partial: "headlines/headline_votebox", locals: {headline: @headline, keybind: !!params[:keybind], vote_statuses: VoteStatusCollection.new(current_user, [@headline])} %>");
 mixpanel.track("Vote", {'Headline ID' : <%= @headline.id %>});

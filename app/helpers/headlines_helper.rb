@@ -94,7 +94,7 @@ module HeadlinesHelper
   end
 
   def headline_description(headline)
-    d = "#{pluralize headline.vote_count, "vote"}"
+    d = "#{pluralize headline.display_score, "vote"}"
     if headline.creator
       d << ", discovered by #{headline.creator.login}"
     end

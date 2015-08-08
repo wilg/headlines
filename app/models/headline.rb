@@ -4,8 +4,8 @@ class Headline < ActiveRecord::Base
   include HeadlinePhotoConcern
   include Rails.application.routes.url_helpers
 
-  scope :top, -> { order("headlines.vote_count desc, headlines.score desc, headlines.created_at desc") }
-  scope :bottom, -> { order("headlines.vote_count asc, headlines.score asc, headlines.created_at desc") }
+  scope :top, -> { order("headlines.score desc, headlines.created_at desc") }
+  scope :bottom, -> { order("headlines.score asc, headlines.created_at desc") }
   scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("headlines.created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
   scope :created_in_the_past, -> (timeframe){ where("headlines.created_at > ?", timeframe.ago) }
   scope :today, -> { created_in_the_past 1.day }
@@ -17,8 +17,10 @@ class Headline < ActiveRecord::Base
   scope :no_metadata, -> { includes(:source_headline_fragments).where(source_headline_fragments: {headline_id: nil}) }
 
   scope :tweeted, -> { where("bot_shared_at is not null") }
+  scope :scorable, -> { where("comments_count > 0 OR retweet_count > 0 OR favorite_count > 0 OR mention_count > 0") }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
+  scope :minimum_score, -> (score){ where("vote_count > ? OR score > ?", score, score) }
 
   validates_presence_of :name
   validates_uniqueness_of :name_hash
@@ -56,6 +58,10 @@ class Headline < ActiveRecord::Base
     new_score += favorite_count.to_f
     new_score += mention_count.to_f * 2
     self.score = new_score
+  end
+
+  def display_score
+    (score || vote_count).floor
   end
 
   def self.name_hash(name)

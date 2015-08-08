@@ -21,7 +21,7 @@
     %h1= tooltipped_headline @headline, inner_linked: true
     %h2
       .count.text-muted
-        %span#show-vote-count= pluralize @headline.vote_count, "vote"
+        %span#show-vote-count= pluralize @headline.display_score, "vote"
         - unless VOTING_DISABLED
           #show-vote-box.votebox.pull-left= render partial: "headlines/headline_votebox", locals: {keybind: true, headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
         #headline-show-social.pull-right
@@ -82,6 +82,8 @@
             %p
               Score
               %strong #{@headline.score || "?"}
+              Vote Count
+              %strong #{@headline.vote_count || "?"}
               Retweets
               %strong #{@headline.retweet_count || "?"}
               Favorites

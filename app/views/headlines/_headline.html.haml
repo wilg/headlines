@@ -1,9 +1,9 @@
 %tr{class: "headline-row-#{headline.id} #{'shitty' if headline.shitty?}", data: {headline_id: headline.id, details_url: headline_url(headline, format: :js, sourced: !!@headline_table_show_sources)}}
   %td.count.hidden-xs
-    %span.lead.vote-count= headline.vote_count
+    %span.lead.vote-count= headline.display_score
   - unless VOTING_DISABLED
     %td.votebox{class: can_downvote?(headline) || vote_statuses.did_downvote?(headline) ? 'downvotebox' : ''}
-      .lead.vote-count.visible-xs= headline.vote_count
+      .lead.vote-count.visible-xs= headline.display_score
       .btn-group.btn-group-justified
         = render partial: "headlines/headline_votebox", locals: {headline: headline, vote_statuses: vote_statuses}
         - if can_downvote?(headline) || vote_statuses.did_downvote?(headline)

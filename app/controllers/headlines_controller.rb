@@ -25,7 +25,7 @@ class HeadlinesController < ApplicationController
   end
 
   def random
-    @headline = Headline.where("vote_count > ?", params[:minimum] || 2).order('random()').first
+    @headline = Headline.minimum_score(params[:minimum] || 2).order('random()').first
     respond_to do |format|
       format.html { redirect_to @headline }
       format.json {render partial: "headlines/headline", locals: {headline: @headline}}
@@ -33,7 +33,7 @@ class HeadlinesController < ApplicationController
   end
 
   def newspaper
-    @headlines = Headline.where("vote_count > ?", params[:minimum] || 2).order('random()').limit(19)
+    @headlines = Headline.minimum_score(params[:minimum] || 2).order('random()').limit(19)
   end
 
   def reconstruct

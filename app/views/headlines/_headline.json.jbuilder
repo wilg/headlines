@@ -1,4 +1,4 @@
-json.extract! headline, :id, :vote_count, :name, :created_at, :updated_at
+json.extract! headline, :id, :score, :vote_count, :name, :created_at, :updated_at
 json.url headline_url(headline)
 json.author do
   if headline.creator.blank?

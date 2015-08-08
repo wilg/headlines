@@ -7,7 +7,7 @@
     %span.votes
       = link_to headline do
         %i.fa.fa-thumbs-up
-        = pluralize headline.vote_count, 'vote'
+        = pluralize headline.display_score, 'vote'
   %span.author
     by
     - if headline.creator
