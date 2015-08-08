@@ -4,8 +4,8 @@ class Headline < ActiveRecord::Base
   include HeadlinePhotoConcern
   include Rails.application.routes.url_helpers
 
-  scope :top, -> { order("COALESCE(headlines.score, headlines.vote_count) desc, headlines.created_at desc") }
-  scope :bottom, -> { order("COALESCE(headlines.score, headlines.vote_count) asc, headlines.created_at desc") }
+  scope :top, -> { order("headlines.score desc, headlines.created_at desc") }
+  scope :bottom, -> { order("headlines.score asc, headlines.created_at desc") }
   scope :hot, -> { order("(headlines.vote_count / (extract(epoch from now()) - extract(epoch from headlines.created_at))) desc").where("headlines.created_at < ?", 20.minutes.ago).where("headlines.vote_count > 1 AND headlines.vote_count < 50") }
   scope :trending, -> { order("(COALESCE(headlines.retweet_count, 0) + headlines.mention_count + COALESCE(headlines.favorite_count, 0)) desc, headlines.updated_at desc") }
   scope :created_in_the_past, -> (timeframe){ where("headlines.created_at > ?", timeframe.ago) }
@@ -21,7 +21,7 @@ class Headline < ActiveRecord::Base
   scope :scorable, -> { where("comments_count > 0 OR retweet_count > 0 OR favorite_count > 0 OR mention_count > 0") }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
-  scope :minimum_score, -> (score){ where("vote_count > ? OR score > ?", score, score) }
+  scope :minimum_score, -> (score){ where("OR score > ?", score) }
 
   validates_presence_of :name
   validates_uniqueness_of :name_hash
@@ -67,7 +67,7 @@ class Headline < ActiveRecord::Base
   end
 
   def display_score
-    (score || vote_count).floor
+    score.floor
   end
 
   def self.name_hash(name)
