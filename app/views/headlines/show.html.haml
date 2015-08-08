@@ -1,6 +1,6 @@
 - @title = @headline.name
 - og! "og:title", @headline.name
-- og! "og:image", @headline.image_url('n')
+- og! "og:image", @headline.image_url('n', false)
 - og! "og:url", headline_url(@headline)
 - og! "og:description", headline_description(@headline)
 

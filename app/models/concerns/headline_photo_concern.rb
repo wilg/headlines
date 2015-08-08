@@ -47,12 +47,13 @@ module HeadlinePhotoConcern
     image_url(*args)
   end
 
-  def image_url(size = 'q')
+  def image_url(size = 'q', return_bullshit_image = true)
     size = size.nil? ? "" : "_#{size}"
     if has_photo?
       r = photo_data['flickr']
       FlickRaw::PHOTO_SOURCE_URL % [r['farm'], r['server'], r['id'], r['secret'], size, "jpg"]
     else
+      return nil unless return_bullshit_image
       return "http://lorempixel.com/150/150" if size == 'q'
       "http://lorempixel.com/400/200"
     end

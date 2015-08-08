@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def og!(k, v)
     @open_graph_tags = {} unless @open_graph_tags
-    @open_graph_tags[k] = v
+    @open_graph_tags[k] = v if v
   end
 
   def og_tags
