@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 ruby "2.2.2"
 
 gem 'rails', '4.2.3'
-gem 'unicorn'
+gem 'puma'
+gem "rack-timeout"
 
 gem 'headline_sources', github: 'wilg/headline-sources'
 
