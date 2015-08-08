@@ -21,7 +21,7 @@ class Headline < ActiveRecord::Base
   scope :scorable, -> { where("comments_count > 0 OR retweet_count > 0 OR favorite_count > 0 OR mention_count > 0") }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
-  scope :minimum_score, -> (score){ where("OR score > ?", score) }
+  scope :minimum_score, -> (score){ where("score > ?", score) }
 
   validates_presence_of :name
   validates_uniqueness_of :name_hash
