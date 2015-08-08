@@ -30,6 +30,8 @@ class Headline < ActiveRecord::Base
   has_many :source_headline_fragments, dependent: :destroy
   has_many :source_headlines, through: :source_headline_fragments
 
+  has_many :headline_twitter_mentions
+
   serialize :source_names, Array
   serialize :photo_data, Hash
 

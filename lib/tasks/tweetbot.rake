@@ -1,6 +1,6 @@
 namespace :tweetbot do
 
-  task :tweet_and_fetch => ["tweetbot:tweet", "tweetbot:fetch_tweet_metadata"]
+  task :tweet_and_fetch => ["tweetbot:tweet", "tweetbot:fetch_tweet_metadata", "tweetbot:fetch_mentions"]
 
   task tweet: :environment do
 
@@ -35,6 +35,10 @@ namespace :tweetbot do
       puts "Updated headline #{headline.bot_share_tweet_id}."
     end
 
+  end
+
+  task fetch_mentions: :environment do
+    HeadlineTwitterMention.import_recent
   end
 
 end

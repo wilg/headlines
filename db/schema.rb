@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605062237) do
+ActiveRecord::Schema.define(version: 20150808054146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20150605062237) do
 
   add_index "comments", ["headline_id"], name: "index_comments_on_headline_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "headline_twitter_mentions", force: :cascade do |t|
+    t.string   "tweet_id"
+    t.string   "twitter_username"
+    t.integer  "headline_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "headline_twitter_mentions", ["headline_id"], name: "index_headline_twitter_mentions_on_headline_id", using: :btree
+  add_index "headline_twitter_mentions", ["tweet_id"], name: "index_headline_twitter_mentions_on_tweet_id", using: :btree
 
   create_table "headlines", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -42,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150605062237) do
     t.string   "bot_share_tweet_id", limit: 255
     t.integer  "retweet_count"
     t.integer  "favorite_count"
+    t.integer  "mention_count",                  default: 0, null: false
   end
 
   add_index "headlines", ["created_at"], name: "index_headlines_on_created_at", using: :btree
