@@ -44,6 +44,8 @@ gem 'dalli'
 group :development do
   gem 'spring'
   gem 'web-console', '~> 2.0'
+  gem 'ruby-prof'
+  gem 'rack-mini-profiler'
 end
 
 # Heroku Deploy
