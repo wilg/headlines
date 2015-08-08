@@ -134,6 +134,7 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.1)
     minitest (5.5.0)
+    mousetrap-rails (1.4.6)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -259,6 +260,7 @@ DEPENDENCIES
   jbuilder
   jquery-hoverIntent-rails
   jquery-rails
+  mousetrap-rails
   newrelic_rpm
   nokogiri
   pg

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require mousetrap
 //= require jquery.lazyload
 //= require jquery.hoverIntent
 //= require bootstrap/modal
