@@ -23,7 +23,7 @@
       .count.text-muted
         %span#show-vote-count= pluralize @headline.vote_count, "vote"
         - unless VOTING_DISABLED
-          #show-vote-box.votebox.pull-left= render partial: "headlines/headline_votebox", locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
+          #show-vote-box.votebox.pull-left= render partial: "headlines/headline_votebox", locals: {keybind: true, headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline])}
         #headline-show-social.pull-right
           .btn-toolbar
             .btn-group

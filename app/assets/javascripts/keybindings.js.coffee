@@ -1,6 +1,9 @@
 $ ->
   handleKeyBindings()
 
+$(document).on 'ajaxComplete', ->
+  handleKeyBindings()
+
 $(document).on 'page:change', ->
   handleKeyBindings()
 
@@ -12,6 +15,7 @@ handleKeyBindings = ->
   # Navigate link when hotkey pressed
   $('a[data-keybinding]').each (i, el) ->
     bindedKey = $(el).data('keybinding')
+    return unless bindedKey
     bindedKey = bindedKey.toString() if typeof(bindedKey) == 'number'
     Mousetrap.bind bindedKey, (e) ->
       if typeof(Turbolinks) == 'undefined'

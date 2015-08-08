@@ -1,5 +1,5 @@
 - if user_signed_in?
-  = link_to vote_headline_url(headline), remote: true, method: :post, class: "btn #{vote_statuses.did_upvote?(headline) ? "btn-success" : 'btn-default'} upvote-button", data: {disable_with: loading_icon} do
+  = link_to vote_headline_url(headline, keybind: defined?(keybind) && keybind), remote: true, method: :post, class: "btn #{vote_statuses.did_upvote?(headline) ? "btn-success" : 'btn-default'} upvote-button", data: {disable_with: loading_icon, keybinding: defined?(keybind) && keybind ? 'v' : nil} do
     %i.fa.fa-thumbs-up
     - unless can_downvote?(headline) || vote_statuses.did_downvote?(headline)
       - if vote_statuses.did_upvote?(headline)
