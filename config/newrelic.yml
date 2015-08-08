@@ -200,7 +200,7 @@ development:
   # NOTE: There is substantial overhead when running in developer mode.
   # Do not use for production or load testing.
   developer_mode: true
-  rules.ignore_url_regexes: ["^/assets"]
+  rules.ignore_url_regexes: ["^/assets", "^/favicon", "^/mini-profiler-resources"]
 
 
   # Enable textmate links
