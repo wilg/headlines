@@ -73,15 +73,19 @@ module HeadlinesHelper
     "btn btn-default " + active_if_param(*args)
   end
 
-  def main_button_best_toggle(value, also_if_blank = false)
-    k = "btn btn-lg btn-default "
+  def main_button_best_toggle(value, button_class, also_if_blank = false)
+    k = "btn #{button_class} btn-default "
     k << active_if_param(:order, value, also_if_blank) if @is_main_browse_page
     k
   end
 
-  def main_button_best_toggle_phone(*args)
-    k = "btn btn-sm btn-default "
-    k << active_if_param(*args) if params[:action].to_sym == :best
+  def main_button_explore_class(button_class)
+    k = "btn #{button_class} btn-default "
+    if @is_main_browse_page
+      k << active_if_param(:order, :top, true) + " "
+      k << active_if_param(:order, :trending) + " "
+      k << active_if_param(:order, :new) + " "
+    end
     k
   end
 

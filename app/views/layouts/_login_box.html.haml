@@ -6,10 +6,7 @@
       %span sign out
     = link_to current_user, class: 'btn btn-link' do
       %i.fa.fa-user
-      = current_user.login
-    = link_to leaderboard_url, class: 'btn btn-link' do
-      %i.fa.fa-trophy
-      = number_with_delimiter current_user.karma
+      #{current_user.login} (#{number_with_delimiter current_user.karma})
   - else
     .btn.btn-default.btn-sm{data:{toggle: 'modal', target: '#modal-login-form'}}
       %i.fa.fa-user

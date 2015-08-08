@@ -1,15 +1,25 @@
 .sort-tools
+
+  .btn-group.source-picker
+    = link_to root_url, class: main_button_best_toggle(:top, "", true) do
+      %i.fa.fa-star
+      Top
+    = link_to hot_url, class: main_button_best_toggle(:trending, "") do
+      %i.fa.fa-flash
+      Hot
+    = link_to recent_url, class: main_button_best_toggle(:new, "") do
+      %i.fa.fa-clock-o
+      New
+
   - if @sorting_top
-    .btn-group.source-picker
+    .btn-group.source-picker.source-picker-timeframes.pull-right
       = link_to merge_sort_url({page: 1, timeframe: :this_week}), class: default_button_toggle(:timeframe, :this_week, true) do
-        %span.hidden-xs This
         Week
       = link_to merge_sort_url({page: 1, timeframe: :this_month}), class: default_button_toggle(:timeframe, :this_month) do
-        %span.hidden-xs This
         Month
       = link_to "All Time", merge_sort_url({page: 1, timeframe: :all}), class: default_button_toggle(:timeframe, :all)
 
-  = form_tag params, class: 'searchbar hidden-xs', method: :get do
+  = form_tag params, class: 'searchbar', method: :get do
     %span.input-group
       %span.input-group-addon
         %i.fa.fa-search

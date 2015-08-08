@@ -17,10 +17,15 @@ header
   .site-title i
     color: $accent
 
+  +phone
+    padding: 10px 0 0 0
+    .pull-left
+      float: none !important
+
 header
   h1
     +phone
-      font-size: 24px
+      font-size: 18px
       text-align: center
       margin-top: 0
     a
@@ -33,6 +38,7 @@ header
       text-align: center
       margin-top: 0
       margin-bottom: 10px
+      font-size: 13px
 
 .vote-count.visible-xs
   margin: 0
@@ -54,6 +60,11 @@ footer
     &:hover
       background: white
       border-radius: 6px
+  +phone
+    margin-top: 10px
+    margin-bottom: 5px
+    a
+      font-size: 12px
 
 #login-column-left
   width: 250px
@@ -161,6 +172,9 @@ table.headlines-table
 
 .source-picker
   margin-bottom: 20px
+
+.source-picker-timeframes
+  margin-left: 10px
 
 .btn-autohide
   span
