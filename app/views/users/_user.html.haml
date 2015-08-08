@@ -5,7 +5,7 @@
     = link_to user.login, user
   %td.karma.text-left
     %i.fa.fa-trophy
-      = number_with_delimiter user.has_calculated_timeframe_karma? ? user.timeframe_karma : user.karma
+    = number_with_delimiter user.has_calculated_timeframe_karma? ? user.timeframe_karma : user.karma
     karma
     .more-info.hidden-xs
       %span.text-muted
