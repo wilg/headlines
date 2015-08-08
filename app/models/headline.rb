@@ -53,10 +53,15 @@ class Headline < ActiveRecord::Base
 
   def calculate_score!
     new_score = vote_count.to_f
-    new_score += comments_count.to_f
-    new_score += retweet_count.to_f * 2
-    new_score += favorite_count.to_f
-    new_score += mention_count.to_f * 2
+    # Unique commenters who are not the creator
+    new_score += comments.map{|c| c.user.id}.reject{|i| i == self.creator_id }.uniq.length.to_f
+    new_score += retweet_count.to_f * 3
+    new_score += favorite_count.to_f * 2
+    new_score += if tweeted_from_bot?
+      mention_count.to_f * 2
+    else
+      mention_count.to_f * 4
+    end
     self.score = new_score
   end
 
