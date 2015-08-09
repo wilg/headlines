@@ -18,6 +18,8 @@ module HeadlinesHelper
       if sort_timeframe == :all
       elsif sort_timeframe == :yesterday
         headlines = headlines.yesterday
+      elsif sort_timeframe == :day
+        headlines = headlines.today
       elsif sort_timeframe == :this_week
         headlines = headlines.this_week
       elsif sort_timeframe == :this_month
