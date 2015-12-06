@@ -1,17 +1,21 @@
 module HeadlinePhotoConcern
   extend ActiveSupport::Concern
 
-  TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler', 'stripper', 'sex', 'baby', 'babies', 'bacon', 'god', 'jesus', 'mario']
+  TRUMP_WORDS = ['obama', 'texas', 'california', 'moon', 'robot', 'police', 'cop', 'sheriff', 'dog', 'cat', 'chimp', 'baby', 'oprah', 'romney', 'wedding', 'insect', 'nintendo', 'xbox', 'bitcoin', 'halloween', 'disney', 'hitler', 'stripper', 'sex', 'baby', 'babies', 'bacon', 'god', 'jesus', 'mario', 'space']
 
-  IGNORED_WORDS = ['announcement', 'this', 'please', 'his', 'hers', 'him', 'her', 'a', 'the', 'them', 'of', 'your', 'on', 'an', 'i', 'but', 'here', 'cant', 'can', 'continues', 'continue', 'another', 'remarkable', 'example', 'in', 'into', 'now', 'is', 'story', 'many', 'actually', 'really', 'you', 'seriously', 'new', 'by', 'before', 'does', 'turning', 'that', 'will', 'all', 'us', 'something','resembles','basically','about','might','have', 'we', 'may', 'be', 'fact', 'why']
+  IGNORED_WORDS = ['announcement', 'this', 'please', 'his', 'hers', 'him', 'her', 'a', 'the', 'them', 'of', 'your', 'on', 'an', 'i', 'but', 'here', 'cant', 'can', 'continues', 'continue', 'another', 'remarkable', 'example', 'in', 'into', 'now', 'is', 'story', 'many', 'actually', 'really', 'you', 'seriously', 'new', 'by', 'before', 'does', 'turning', 'that', 'will', 'all', 'us', 'something','resembles','basically','about','might','have', 'we', 'may', 'be', 'fact', 'why', 'to', 'they', 'he', 'she', 'and']
 
   def to_tag
-    short_name = name.parameterize.gsub("-s-", "s-").gsub("-t-", "t-").split("-").reject{|w| IGNORED_WORDS.include?(w) }.uniq
+    short_name = name.parameterize.gsub("-s-", "s-").gsub("-t-", "t-").split("-").reject do |w|
+      IGNORED_WORDS.include?(w) || (w.upcase != w && w.length < 3)
+    end.uniq
+
     def length_with_bonus(str)
       bonus = 0
-      bonus = 5 if TRUMP_WORDS.include?(str) || TRUMP_WORDS.include?(str.pluralize)
+      bonus = 10 if TRUMP_WORDS.include?(str) || TRUMP_WORDS.include?(str.pluralize)
       str.length + bonus
     end
+
     return short_name.compact.sort{|a, b| length_with_bonus(b) <=> length_with_bonus(a)}.first(6).join(",")
   end
 
