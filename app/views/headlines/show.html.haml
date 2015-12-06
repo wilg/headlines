@@ -103,8 +103,14 @@
                     %i.fa.fa-twitter
                     Auto-Tweeted on #{@headline.bot_shared_at.strftime("%A, %B %e, %Y")}
               %p
-                = @headline.tags.split(",").join(", ")
-                = link_to "Change Photo", pick_photo_headline_url(@headline)
+                = link_to pick_photo_headline_url(@headline) do
+                  %i.fa.fa-camera
+                  Pick Photo
+                %span.text-muted
+                  (
+                  - @headline.tags.each do |tag|
+                    = link_to tag, pick_photo_headline_url(@headline, search: tag), class: "text-muted"
+                  )
 
             - if @headline.vote_count < 2 && @headline.creator == current_user
               .pull-right= link_to "Delete Headline", @headline, method: :delete, confirm: "Are you sure you want to delete this headline?", class: 'text-muted'

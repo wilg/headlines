@@ -6,7 +6,7 @@ module HeadlinePhotoConcern
   ]
 
   IGNORED_WORDS = %w[
-    announcement this please his hers him her a the them of your on an i but here cant can continues continue another remarkable example in into now is story many actually really you seriously new by before does turning that will all us something resembles basically about might have we may be fact why to they he she and after being
+    a about actually after all an and announcement another basically be before being but by can cant continue continues does example fact have he her here hers him his i in into is least many may might new now of on please rape really remarkable resembles seriously she something story that the them they this to turning us we why will with you your entire
   ]
 
   def tags
