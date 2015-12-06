@@ -33,7 +33,7 @@ class HeadlinesController < ApplicationController
   end
 
   def newspaper
-    @headlines = Headline.minimum_score(params[:minimum] || 2).order('random()').limit(19)
+    @headlines = Headline.minimum_score(params[:minimum] || 10).order('random()').limit(19).to_a
   end
 
   def reconstruct
