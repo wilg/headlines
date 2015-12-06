@@ -50,7 +50,7 @@ class HeadlinesController < ApplicationController
 
   def pick_photo
     @headline = Headline.find(params[:id])
-    @search = params[:search].presence || @headline.to_tag
+    @search = params[:search].presence || @headline.tags.join(", ")
     @photos = flickr.photos.search(tags: @search, per_page: 50, sort: 'relevance', media: 'photos', extras: "owner_name,license")
   end
 

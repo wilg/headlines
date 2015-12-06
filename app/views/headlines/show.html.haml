@@ -103,7 +103,7 @@
                     %i.fa.fa-twitter
                     Auto-Tweeted on #{@headline.bot_shared_at.strftime("%A, %B %e, %Y")}
               %p
-                = @headline.to_tag.split(",").join(", ")
+                = @headline.tags.split(",").join(", ")
                 = link_to "Change Photo", pick_photo_headline_url(@headline)
 
             - if @headline.vote_count < 2 && @headline.creator == current_user
