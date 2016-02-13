@@ -28,6 +28,8 @@ class NormalizationTest < ActiveSupport::TestCase
     "'This is quoted'" => "This is quoted",
     "Google+'s Real Goal Is Mars" => "Google+'s Real Goal Is Mars",
     "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be 'One of Microsoft's Best E3 Conferences'" => "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be One of Microsoft's Best E3 Conferences",
+    "My High Score ! (Sorry for Bad Photoshop)" => "My High Score! (Sorry for Bad Photoshop)",
+    "My High Score ? (Sorry for Bad Photoshop)" => "My High Score? (Sorry for Bad Photoshop)",
   }
 
   tests.each do |input, out|

@@ -184,7 +184,9 @@ class Headline < ActiveRecord::Base
     out.gsub!(/([a-zA-Z0-9_+])'\z/, '\1 ')
     out.gsub!(/\A'([a-zA-Z0-9_+])/, ' \1')
 
-    out.gsub!(" : ", ":  ")
+    %w[: ? !].each do |punctuation|
+      out.gsub!(" #{punctuation} ", "#{punctuation}  ")
+    end
 
     # Don't quote entire headlines
     if out.count('"') == 2 && out.start_with?('"') && out.end_with?('"')
