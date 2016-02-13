@@ -4,4 +4,4 @@ rvm:
 services:
   - postgresql
 before_script:
-  - rake db:create
+  - bundle exec rake db:create
