@@ -5,3 +5,5 @@ services:
   - postgresql
 before_script:
   - bundle exec rake db:create db:migrate
+addons:
+  postgresql: "9.4"
