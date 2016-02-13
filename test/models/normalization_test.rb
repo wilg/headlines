@@ -23,6 +23,8 @@ class NormalizationTest < ActiveSupport::TestCase
     "How to Dress Can't a Train'" => "How to Dress Can't a Train",
     "How to 'Dress' Can't a Train'" => "How to \"Dress\" Can't a Train",
     "\"This is quoted\"" => "This is quoted",
+    "99% of Everyone Poops," => "99% of Everyone Poops",
+    "99% of Everyone Poops, " => "99% of Everyone Poops",
     "'This is quoted'" => "This is quoted",
     "Google+'s Real Goal Is Mars" => "Google+'s Real Goal Is Mars",
     "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be 'One of Microsoft's Best E3 Conferences'" => "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be One of Microsoft's Best E3 Conferences",

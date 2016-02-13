@@ -191,11 +191,13 @@ class Headline < ActiveRecord::Base
       out.gsub!('"', ' ')
     end
 
-    if out.end_with?(".")
-      out = out.chop + " "
-    end
-    if out.count('.') == 1 && out.strip.end_with?(".")
-      out = out.sub('.', ' ')
+    [".", ","].each do |terminator|
+      if out.end_with?(terminator)
+        out = out.chop + " "
+      end
+      if out.count(terminator) == 1 && out.strip.end_with?(terminator)
+        out = out.sub(terminator, ' ')
+      end
     end
 
     # Mismatched double quotes
