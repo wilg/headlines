@@ -1,12 +1,12 @@
-- @title = @headline.name
-- og! "og:title", @headline.name
+- @title = @headline.formatted_name
+- og! "og:title", @headline.formatted_name
 - og! "og:image", @headline.image_url('n', false)
 - og! "og:url", headline_url(@headline)
 - og! "og:description", headline_description(@headline)
 
 - og! "twitter:card", "summary"
 - og! "twitter:site", "@HeadlineSmasher"
-- og! "twitter:title", @headline.name
+- og! "twitter:title", @headline.formatted_name
 - og! "twitter:description", headline_description(@headline)
 
 #headline-show{class: @headline.has_photo? ? "has-photo" : "no-photo"}
@@ -17,7 +17,7 @@
     - if @headline.has_photo?
       .photo-column.col-md-3
         = link_to @headline.image_info_url do
-          = image_tag @headline.image_url('z'), alt: @headline.name, class: "headline-image"
+          = image_tag @headline.image_url('z'), alt: @headline.formatted_name, class: "headline-image"
         %small.text-muted.photo-credit
           - if @headline.image_owner.present?
             by #{link_to @headline.image_owner, @headline.image_info_url}

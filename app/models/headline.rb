@@ -153,8 +153,66 @@ class Headline < ActiveRecord::Base
     "https://twitter.com/headlinesmasher/status/#{bot_share_tweet_id}"
   end
 
+  def self.normalize_smart_quotes(string)
+    string.gsub("’", "'").gsub("‘", "'").gsub('“', '"').gsub('”', '"')
+  end
+
+  # Must be the same length as original headline
+  def repunctuated_name
+    # return name
+    out = Headline.normalize_smart_quotes(name)
+
+    if out.count('"') == 1 && !out.match(/\d{1,2}'\d{1,2}"/)
+      out = out.sub('"', ' ')
+    end
+
+    # Replace single quoted things with double quotes
+    matches = out.match(/((?:\A| )'[\w\s]+'(?:\z| ))/)
+    if matches
+      matches.length.times do |i|
+        start_i, end_i = matches.offset(i)
+        pre = out[0, start_i]
+        mid = out[start_i, end_i - start_i]
+        post = out[end_i, out.length]
+        out = pre + mid.gsub("'", "\"") + post
+      end
+    end
+
+    # Replace mismatched single quotes that aren't contractions
+    out.gsub!(/'([^a-zA-Z0-9_+])/, ' \1')
+    out.gsub!(/([^a-zA-Z0-9_+])'/, '\1 ')
+    out.gsub!(/([a-zA-Z0-9_+])'\z/, '\1 ')
+    out.gsub!(/\A'([a-zA-Z0-9_+])/, ' \1')
+
+    out.gsub!(" : ", ":  ")
+
+    # Don't quote entire headlines
+    if out.count('"') == 2 && out.start_with?('"') && out.end_with?('"')
+      out.gsub!('"', ' ')
+    end
+
+    if out.end_with?(".")
+      out = out.chop + " "
+    end
+    if out.count('.') == 1 && out.strip.end_with?(".")
+      out = out.sub('.', ' ')
+    end
+
+    # Mismatched double quotes
+    open_quotes = out.scan(/[ -]"/).length
+    close_quotes = out.scan(/[ -]"/).length
+    if open_quotes > close_quotes
+      out = out.reverse.sub("\" ", "  ").reverse
+    end
+    if open_quotes < close_quotes
+      out = out.sub("\" ", "  ")
+    end
+
+    out
+  end
+
   def formatted_name
-    name.squish
+    @_formatted_name ||= repunctuated_name.squish
   end
 
   def tweet_from_bot!

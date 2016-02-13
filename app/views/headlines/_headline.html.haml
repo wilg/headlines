@@ -13,7 +13,7 @@
       = link_to headline, class: 'headline-link' do
         = tooltipped_headline headline, inner_linked: false
     - else
-      = link_to headline.name, headline, class: 'headline-link'
+      = link_to headline.formatted_name, headline, class: 'headline-link'
     - if headline.comments_count > 0
       .visible-xs
         = link_to(headline, abbr: "Comments", class: 'comment-link') do
