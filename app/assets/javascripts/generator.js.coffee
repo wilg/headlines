@@ -57,26 +57,39 @@ $ ->
     $("#generate-form .alert").addClass('hidden')
 
     # Get checked sources
-    source_names = $("#generate-form input:checkbox:checked").map(->
-      $(this).attr('name')
-    ).get()
-    window.generator_last_source_names = source_names
-    window.generator_last_depth = 2 #$("#generate-form input:radio[name=depth]:checked").val();
-    seed_word = $("#generate-form input[name=seed_word]").val().split(' ')[0]
+    # source_names = $("#generate-form input:checkbox:checked").map(->
+    #   $(this).attr('name')
+    # ).get()
+    # window.generator_last_source_names = source_names
+    # window.generator_last_depth = 2 #$("#generate-form input:radio[name=depth]:checked").val();
+    # seed_word = $("#generate-form input[name=seed_word]").val().split(' ')[0]
 
-    if $("#generate-form").data('reconstruct-phrase')
-      # Try reconstructing, ignore form
-      query = $.param
-        reconstruct: $("#generate-form").data('reconstruct-phrase')
-        sources: $("#generate-form").data('reconstruct-sources')
-    else
-      # Use the form params
-      query = $.param({depth:window.generator_last_depth, seed_word:seed_word, sources:source_names.join(",")})
+    # if $("#generate-form").data('reconstruct-phrase')
+    #   # Try reconstructing, ignore form
+    #   query = $.param
+    #     reconstruct: $("#generate-form").data('reconstruct-phrase')
+    #     sources: $("#generate-form").data('reconstruct-sources')
+    # else
+    #   # Use the form params
+    #   query = $.param
+    #     depth: window.generator_last_depth
+    #     seed_word: seed_word
+    #     sources: source_names.join(",")
+
+    age = window.generator_age || 14
+
+    query = $.param
+      age: age
 
     # Build URL
     url = $("#generate-form").data('generator-url') + "?" + query
 
-    mixpanel.track("Generate", {"Sources" : source_names, "Depth":  window.generator_last_depth, "Seed Word" : seed_word })
+    mixpanel.track("Generate", {
+      Age: age
+      # "Sources": source_names
+      # "Depth": window.generator_last_depth
+      # "Seed Word" : seed_word
+    })
 
     $.getJSON url, (data) ->
       $("#generated-headlines").html HandlebarsTemplates[if window.userSignedIn() then 'generator/results' else 'generator/results_signed_out'](data)

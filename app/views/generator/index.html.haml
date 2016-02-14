@@ -16,31 +16,31 @@
         .alert.alert-warning.hidden{style: 'margin-top: 10px'}
           %strong Couldn't Smash Headlines
           .swamp We might be getting swamped, try again!
-        %a.btn.btn-link.btn-block#collapse-generate-options{data: {toggle: :collapse, target: "#generate-form .source-box"}, style: "margin:10px 0"}
-          %i.fa.fa-gear
-          Pick Sources
-        .source-box.collapse
-          - generator_sources.each do |category_name, sources|
-            .source-category{id: "source-category-#{category_name.parameterize}"}
-              %h5
-                %a.toggler{data: {toggle: :collapse, target: "#source-category-#{category_name.parameterize} .sources"}, href: '#'}
-                  %i.fa.fa-fw.fa-caret-right
-                  #{category_name}
-                .pull-right
-                  %input.group-check-box{type: :checkbox, indeterminate: true}
-              .sources.collapse
-                - sources.sort{|a,b| a.name.downcase <=> b.name.downcase}.each do |source|
-                  %span.source-checkbox-block
-                    = check_box_tag source.id, 1, selected_sources_includes?(source), class: 'source-check-box'
-                    = label_tag source.id do
-                      = source_image_tag source
-                      = source.name
-          .form-group
-            .text-center
-              %a.btn.btn-xs.btn-link.link-muted#select-all Select All
-              %a.btn.btn-xs.btn-link.link-muted#select-none Select None
-        .form-group.seed-word-area{style: "display:none"}
-          %input.input-sm.form-control{type: :text, placeholder: "Seed Word", name: :seed_word, id: "seed-word-input"}
+        / %a.btn.btn-link.btn-block#collapse-generate-options{data: {toggle: :collapse, target: "#generate-form .source-box"}, style: "margin:10px 0"}
+        /   %i.fa.fa-gear
+        /   Pick Sources
+        / .source-box.collapse
+        /   - generator_sources.each do |category_name, sources|
+        /     .source-category{id: "source-category-#{category_name.parameterize}"}
+        /       %h5
+        /         %a.toggler{data: {toggle: :collapse, target: "#source-category-#{category_name.parameterize} .sources"}, href: '#'}
+        /           %i.fa.fa-fw.fa-caret-right
+        /           #{category_name}
+        /         .pull-right
+        /           %input.group-check-box{type: :checkbox, indeterminate: true}
+        /       .sources.collapse
+        /         - sources.sort{|a,b| a.name.downcase <=> b.name.downcase}.each do |source|
+        /           %span.source-checkbox-block
+        /             = check_box_tag source.id, 1, selected_sources_includes?(source), class: 'source-check-box'
+        /             = label_tag source.id do
+        /               = source_image_tag source
+        /               = source.name
+        /   .form-group
+        /     .text-center
+        /       %a.btn.btn-xs.btn-link.link-muted#select-all Select All
+        /       %a.btn.btn-xs.btn-link.link-muted#select-none Select None
+        / .form-group.seed-word-area{style: "display:none"}
+        /   %input.input-sm.form-control{type: :text, placeholder: "Seed Word", name: :seed_word, id: "seed-word-input"}
   .col-md-8
 
     - unless user_signed_in?
