@@ -82,10 +82,12 @@ $ ->
 
     age = window.generator_age || $("#generate-form").data('age')
     count = window.generator_count || $("#generate-form").data('count')
+    max_length = window.generator_max_length || $("#generate-form").data('max-length')
 
     query = $.param
       age: age
       count: count
+      length_max: max_length
 
     # Build URL
     url = $("#generate-form").data('generator-url') + "?" + query
