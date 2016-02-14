@@ -26,6 +26,13 @@
     - else
       - @title = "Stupidly Funny Computer-Generated Fake Headlines"
       - @short_title = :best
+      - @homepage = true
   = render 'headlines/sort_tools'
 
-= render partial: 'headlines/headlines_table', locals: {headlines: @headlines}
+= render partial: 'headlines/headlines_table', locals: {headlines: @headlines, no_paginate: @homepage}
+- if @homepage
+  - new_ones = Headline.newest.limit(20).all.shuffle.take(5)
+  - if new_ones.present?
+    %h4.text-muted This just in...
+    = render partial: 'headlines/headlines_table', locals: {headlines: new_ones }
+  = will_paginate @headlines, renderer: BootstrapPagination::Rails

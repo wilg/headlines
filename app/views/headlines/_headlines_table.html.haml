@@ -6,4 +6,5 @@
   %table.table.table-striped.headlines-table
     - headlines.each do |h|
       = render partial: 'headlines/headline', locals: {headline: h, vote_statuses: vote_statuses}
-  = will_paginate headlines, renderer: BootstrapPagination::Rails
+  - if headlines.respond_to?(:total_pages) && !(defined?(no_paginate) && no_paginate)
+    = will_paginate headlines, renderer: BootstrapPagination::Rails
