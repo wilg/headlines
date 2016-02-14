@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213223459) do
+ActiveRecord::Schema.define(version: 20160214015636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160213223459) do
   add_index "headlines", ["created_at"], name: "index_headlines_on_created_at", using: :btree
   add_index "headlines", ["creator_id"], name: "index_headlines_on_creator_id", using: :btree
   add_index "headlines", ["name_hash"], name: "index_headlines_on_name_hash", unique: true, using: :btree
+  add_index "headlines", ["score"], name: "index_headlines_on_score", using: :btree
   add_index "headlines", ["vote_count"], name: "index_headlines_on_vote_count", using: :btree
 
   create_table "source_headline_fragments", force: :cascade do |t|
