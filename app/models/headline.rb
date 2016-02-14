@@ -162,6 +162,9 @@ class Headline < ActiveRecord::Base
     # return name
     out = Headline.normalize_smart_quotes(name)
 
+    # Weird characters
+    out.gsub!("Â", " ")
+
     if out.count('"') == 1 && !out.match(/\d{1,2}'\d{1,2}"/)
       out = out.sub('"', ' ')
     end

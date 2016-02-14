@@ -30,6 +30,7 @@ class NormalizationTest < ActiveSupport::TestCase
     "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be 'One of Microsoft's Best E3 Conferences'" => "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be One of Microsoft's Best E3 Conferences",
     "My High Score ! (Sorry for Bad Photoshop)" => "My High Score! (Sorry for Bad Photoshop)",
     "My High Score ? (Sorry for Bad Photoshop)" => "My High Score? (Sorry for Bad Photoshop)",
+    "Venom Just Got Very RealÂ" => "Venom Just Got Very Real",
   }
 
   tests.each do |input, out|
