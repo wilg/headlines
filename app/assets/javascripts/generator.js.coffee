@@ -77,9 +77,11 @@ $ ->
     #     sources: source_names.join(",")
 
     age = window.generator_age || 14
+    count = window.generator_count || 30
 
     query = $.param
       age: age
+      count: count
 
     # Build URL
     url = $("#generate-form").data('generator-url') + "?" + query
