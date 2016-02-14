@@ -49,7 +49,7 @@
             - headlines.each do |headline|
               .module
                 .small-headline
-                  %h2= link_to headline.name, headline
+                  %h2= link_to headline.formatted_name, headline
                   = render partial: 'headlines/newspaper/byline', locals: {headline: headline}
 
       .row

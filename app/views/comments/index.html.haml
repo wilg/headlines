@@ -10,7 +10,7 @@
   %h2 Recent Comments
 
 - @comments.group_by{|c| c.headline}.each do |headline, comments|
-  %h3= link_to headline.name, headline
+  %h3= link_to headline.formatted_name, headline
   - comments.each do |comment|
     = render partial: 'comments/comment', locals: {comment: comment}
 
