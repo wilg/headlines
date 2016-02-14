@@ -196,7 +196,7 @@ class Headline < ActiveRecord::Base
       out.gsub!('"', ' ')
     end
 
-    [".", ","].each do |terminator|
+    [".", ",", ":", ";"].each do |terminator|
       if out.end_with?(terminator)
         out = out.chop + " "
       end
