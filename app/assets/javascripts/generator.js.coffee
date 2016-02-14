@@ -49,10 +49,14 @@ $ ->
 
   window.userSignedIn = -> $("body").hasClass('logged-in')
 
-  generate_new = ->
+  runGenerate = ->
 
-    $("#invent-button").addClass 'disabled'
-    $("#invent-button").removeClass 'enabled'
+    $('html, body').animate({
+      scrollTop: $(".generate-button").first().offset().top - 15
+    }, 1000)
+
+    $(".generate-button").addClass 'disabled'
+    $(".generate-button").removeClass 'enabled'
 
     $("#generate-form .alert").addClass('hidden')
 
@@ -99,18 +103,19 @@ $ ->
       $("#generate-form .alert").removeClass('hidden')
     .always ->
       $('.headline-fragment').tooltip()
-      $("#invent-button").removeClass 'disabled'
-      $("#invent-button").addClass 'enabled'
+      $(".generate-button").removeClass 'disabled'
+      $(".generate-button").addClass 'enabled'
+      $(".generate-button-wrapper").show()
 
   $("#generate-form").submit (event) ->
-    generate_new();
+    runGenerate();
     event.preventDefault()
 
   # Auto-generate when opening generator page
-  if $("#invent-button").length > 0
-    generate_new();
+  if $(".generate-button").length > 0
+    runGenerate()
 
-  $("#invent-button").on 'click', ->
+  $(".generate-button").on 'click', ->
     $("#generate-form").submit()
 
 

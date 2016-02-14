@@ -2,17 +2,18 @@
 - @short_title = :generator
 
 .row
-  .col-md-4
+  .col-md-10.col-md-offset-1
     - if GENERATOR_DISABLED
       .alert.alert-danger
         %strong Whoops!
         The generator is currently offline. Pardon our dust.
     - else
       %form#generate-form{data: {generator_url: GENERATOR_URL, save_url: save_url, reconstruct_phrase: params[:reconstruct_phrase], reconstruct_sources: params[:reconstruct_sources], age: ENV["GENERATOR_AGE"].presence || 45, count: ENV["GENERATOR_COUNT"].presence || 35}}
-        %a#invent-button.btn.btn-primary.btn-lg
-          %i.fa.fa-refresh.fa-spin
-          %span.enabled-title Smash Hilarious Headlines
-          %span.disabled-title Smashing Headlines
+        .generate-button-wrapper{style: "display:none"}
+          %a.generate-button.btn.btn-primary.btn-lg.btn-block
+            %i.fa.fa-refresh.fa-spin
+            %span.enabled-title Smash Hilarious Headlines
+            %span.disabled-title Smashing Headlines
         .alert.alert-warning.hidden{style: 'margin-top: 10px'}
           %strong Couldn't Smash Headlines
           .swamp We might be getting swamped, try again!
@@ -41,7 +42,6 @@
         /       %a.btn.btn-xs.btn-link.link-muted#select-none Select None
         / .form-group.seed-word-area{style: "display:none"}
         /   %input.input-sm.form-control{type: :text, placeholder: "Seed Word", name: :seed_word, id: "seed-word-input"}
-  .col-md-8
 
     - unless user_signed_in?
       #generator-sign-in-ask.well
@@ -53,9 +53,17 @@
         %p Free! Fun! No email address or personal information required.
 
     #generated-headlines
-      .well.text-center.text-muted.hidden-xs
+      .well.text-center.text-muted
         %i.fa-3x.fa.fa-gear.fa-spin
-        %h4 Smashing Headlines
+        %h6 PLEASE HOLD
+        %h4 Computers Are Creating Comedy...
+
+    - unless GENERATOR_DISABLED
+      .generate-button-wrapper{style: "display:none"}
+        %a.generate-button.btn.btn-primary.btn-lg.btn-block
+          %i.fa.fa-refresh.fa-spin
+          %span.enabled-title Smash Hilarious Headlines
+          %span.disabled-title Smashing Headlines
 
     .text-muted
       %p
