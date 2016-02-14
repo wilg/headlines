@@ -187,7 +187,7 @@ class Headline < ActiveRecord::Base
     out.gsub!(/([a-zA-Z0-9_+])'\z/, '\1 ')
     out.gsub!(/\A'([a-zA-Z0-9_+])/, ' \1')
 
-    %w[: ? !].each do |punctuation|
+    %w[: ? ! ;].each do |punctuation|
       out.gsub!(" #{punctuation} ", "#{punctuation}  ")
     end
 
@@ -196,7 +196,9 @@ class Headline < ActiveRecord::Base
       out.gsub!('"', ' ')
     end
 
-    [".", ",", ":", ";"].each do |terminator|
+    terminators = %w[. , : ;]
+    terminators << ")" if out.count("(") == 0 && out.count(")") == 1
+    terminators.each do |terminator|
       if out.end_with?(terminator)
         out = out.chop + " "
       end
