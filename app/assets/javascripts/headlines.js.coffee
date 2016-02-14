@@ -13,7 +13,8 @@ $ ->
   hoverOut = ->
     # Nothing
 
-  $('.headlines-table tr .headline-link').hoverIntent
+  $('.headlines-table').hoverIntent
     over: hoverIn
     out: hoverOut
     timeout: 3000
+    selector: 'tr .headline-link'
