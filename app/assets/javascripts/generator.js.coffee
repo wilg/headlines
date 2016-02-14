@@ -76,8 +76,8 @@ $ ->
     #     seed_word: seed_word
     #     sources: source_names.join(",")
 
-    age = window.generator_age || 14
-    count = window.generator_count || 30
+    age = window.generator_age || $("#generate-form").data('age')
+    count = window.generator_count || $("#generate-form").data('count')
 
     query = $.param
       age: age
