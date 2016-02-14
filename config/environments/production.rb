@@ -22,7 +22,7 @@ Headlines::Application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_files = false
   config.static_cache_control = "public, max-age=31536000"
-  config.action_controller.asset_host = "//assets.headlinesmasher.com"
+  config.action_controller.asset_host = "//d260rnacdi07m9.cloudfront.net"
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
