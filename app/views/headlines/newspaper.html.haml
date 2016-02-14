@@ -25,7 +25,7 @@
             = link_to paper_url do
               %i.fa.fa-refresh
               More News
-            = link_to root_url do
+            = link_to root_path do
               %i.fa.fa-gears
               Headline Smasher
           %span.date= Date.today.strftime("%A, %B %e, %Y")
@@ -62,7 +62,7 @@
               Smasher
           %h3 Fake headlines created by mashing up real headlines.
           %p Our amazing computers mash up headlines, then you vote on the best ones.
-          = link_to root_url, class: 'btn btn-lg btn-success' do
+          = link_to root_path, class: 'btn btn-lg btn-success' do
             %i.fa.fa-gears
             Smash Your Own Headlines
 

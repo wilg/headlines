@@ -4,7 +4,7 @@
       .clearfix
         .pull-left
           %h1.site-title
-            = link_to root_url do
+            = link_to root_path do
               Headline
               %i.fa.fa-gavel
               Smasher
@@ -14,7 +14,7 @@
       - [["visible-xs", "btn-sm"], ["hidden-xs", "btn-lg"]].to_h.each do |toolbar_class, button_class|
         .btn-toolbar{class: toolbar_class}
           .btn-group
-            = link_to root_url, class: main_button_explore_class(button_class) do
+            = link_to root_path, class: main_button_explore_class(button_class) do
               %i.fa.fa-star
               Explore
             - unless GENERATOR_DISABLED
