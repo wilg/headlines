@@ -40,6 +40,8 @@ gem 'flickraw-cached'
 
 gem 'dalli'
 
+gem 'rollbar', '~> 2.7.1'
+
 # Dev
 group :development do
   gem 'spring'
