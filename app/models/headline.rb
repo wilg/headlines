@@ -115,7 +115,7 @@ class Headline < ActiveRecord::Base
   end
 
   def sources
-    source_headlines.map(&:source).uniq{|source| source.id}
+    source_headlines.map(&:source).compact.uniq{|source| source.id}
   end
 
   def create_sources!(sources_json_array)
