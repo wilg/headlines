@@ -19,6 +19,14 @@ class Headline < ActiveRecord::Base
 
   scope :tweeted, -> { where("bot_shared_at is not null") }
   scope :scorable, -> { where("comments_count > 0 OR retweet_count > 0 OR favorite_count > 0 OR mention_count > 0") }
+  scope :appropriate, -> {
+    out = where({})
+    DISALLOWED_WORDS.each do |word|
+      out = out.where.not("name_hash LIKE :word", word: "%#{word}%")
+    end
+    out
+  }
+  scope :tweetable, -> { where({bot_shared_at: nil}).appropriate }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
   scope :minimum_score, -> (score){ where("score > ?", score) }

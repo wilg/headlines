@@ -11,10 +11,10 @@ namespace :tweetbot do
     else
 
       # Prefer my own sense of humor
-      headline = User.find(1).upvoted_headlines.where(bot_shared_at: nil).order('random()').first
+      headline = User.find(1).upvoted_headlines.tweetable.order('random()').first
 
       # Then popular ones
-      headline = Headline.where(bot_shared_at: nil).order('random()').where("vote_count > 10").first unless headline
+      headline = Headline.tweetable.order('random()').where("vote_count > 10").first unless headline
 
       headline.tweet_from_bot!
 

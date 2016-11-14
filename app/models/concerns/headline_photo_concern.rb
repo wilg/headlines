@@ -1,7 +1,7 @@
 module HeadlinePhotoConcern
   extend ActiveSupport::Concern
 
-  TRUMP_WORDS = %w[
+  INTERESTING_WORDS = %w[
     obama texas california moon robot police cop sheriff dog cat chimp baby oprah romney wedding insect nintendo xbox bitcoin halloween disney hitler stripper sex baby babies bacon god jesus mario space
   ]
 
@@ -16,7 +16,7 @@ module HeadlinePhotoConcern
 
     def length_with_bonus(str)
       bonus = 0
-      bonus = 10 if TRUMP_WORDS.include?(str) || TRUMP_WORDS.include?(str.pluralize)
+      bonus = 10 if INTERESTING_WORDS.include?(str) || INTERESTING_WORDS.include?(str.pluralize)
       str.length + bonus
     end
 
