@@ -83,6 +83,7 @@ $ ->
     age = window.generator_age || $("#generate-form").data('age')
     count = window.generator_count || $("#generate-form").data('count')
     max_length = window.generator_max_length || $("#generate-form").data('max-length')
+    disallowed_words = $("#generate-form").data('disallowed-words')
 
     query = $.param
       age: age
@@ -100,6 +101,12 @@ $ ->
     })
 
     $.getJSON url, (data) ->
+      data.headlines = data.headlines.filter((h) ->
+        for word in disallowed_words
+          if h.headline.toLowerCase().indexOf(word) != -1
+            return false
+        return true
+      )
       $("#generated-headlines").html HandlebarsTemplates[if window.userSignedIn() then 'generator/results' else 'generator/results_signed_out'](data)
     .fail ->
       $("#generate-form .alert").removeClass('hidden')
