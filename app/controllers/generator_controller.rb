@@ -36,10 +36,10 @@ private
 
   def parse_sources!
     @sources = []
-    HeadlineSources::Source.all.each do |source|
+    HeadlineSource.all.each do |source|
       @sources << source.id if params[source.id].to_i == 1
     end
-    @sources = HeadlineSources::Source.all.reject{|s| !s.default }.map(&:id) if @sources.blank?
+    @sources = HeadlineSource.all.reject{|s| !s.default }.map(&:id) if @sources.blank?
   end
 
 end

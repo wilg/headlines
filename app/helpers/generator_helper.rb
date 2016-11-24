@@ -1,7 +1,7 @@
 module GeneratorHelper
 
   def generator_sources
-    HeadlineSources::Source.all.reject{|s| s.dead }.sort_by{|s| s.category}.group_by{|s| s.category }
+    HeadlineSource.all.reject{|s| s.dead }.sort_by{|s| s.category}.group_by{|s| s.category }
   end
 
   def generate_url_like(headline)
