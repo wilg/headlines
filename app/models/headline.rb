@@ -167,7 +167,7 @@ class Headline < ActiveRecord::Base
 
   # Must be the same length as original headline
   def repunctuated_name
-    # return name
+
     out = Headline.normalize_smart_quotes(name)
 
     # Weird characters
@@ -207,7 +207,7 @@ class Headline < ActiveRecord::Base
     terminators = %w[. , : ;]
     terminators << ")" if out.count("(") == 0 && out.count(")") == 1
     terminators.each do |terminator|
-      if out.end_with?(terminator)
+      if out.end_with?(terminator) && !out.end_with?("...")
         out = out.chop + " "
       end
       if out.count(terminator) == 1 && out.strip.end_with?(terminator)

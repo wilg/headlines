@@ -8,6 +8,7 @@ class NormalizationTest < ActiveSupport::TestCase
     "Hello Stupid' You See Me" => "Hello Stupid You See Me",
     "Hello ‘Can’ You See Me" => "Hello \"Can\" You See Me",
     "Dumb Butt." => "Dumb Butt",
+    "Hello Can't You See Me..." => "Hello Can't You See Me...",
     "Dumb Butt. " => "Dumb Butt",
     "Pharrell Has a 5'4\" Boyfriend" => "Pharrell Has a 5'4\" Boyfriend",
     "Get \"Frozen\" Again as Elsa Sings \"Let It Flow" => "Get \"Frozen\" Again as Elsa Sings \"Let It Flow",
