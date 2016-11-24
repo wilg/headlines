@@ -2,11 +2,15 @@
 %h2 Sources
 %hr/
 - @source_groups.each do |group, sources|
-  %h3= group
+  %h3{:class => ("text-danger" if group == "Fake News Sites")}
+    = group
+  - if group == "Fake News Sites"
+    .alert.alert-danger
+      These are not legitimate news sources.
   %table.table.table-striped#sources-table
     - sources.each do |source|
       %tr
         %td.image
           = source_image_tag source, true
         %td.name
-          %h4= link_to source.name, source_url(source.id)
+          %h4= link_to source.name, source_url(source.id), class: ("text-danger" if group == "Fake News Sites")

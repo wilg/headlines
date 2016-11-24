@@ -6,7 +6,7 @@ class SourcesController < ApplicationController
   end
 
   def index
-    @source_groups = HeadlineSource.all.sort_by{|s| s.category}.group_by{|s| s.category }
+    @source_groups = HeadlineSource.all.sort_by{|s| "#{s.fake?}#{s.name.downcase}" }.group_by{|s| s.fake? ? "Fake News Sites" : "Headline Sources" }
   end
 
 end
