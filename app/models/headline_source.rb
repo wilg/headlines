@@ -12,4 +12,8 @@ class HeadlineSource < HeadlineSources::Source
     Vote.joins(headline: :source_headlines).where("source_headlines.source_id = ?", self.id)
   end
 
+  def fake?
+    fake_source.present?
+  end
+
 end

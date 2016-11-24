@@ -11,6 +11,14 @@
 .stats{style: 'clear:both'}
   = render partial: 'sources/source_stats', locals: {source: @source}
 
+
+- if @source.fake?
+  %br/
+  #fake-news-alert.alert.alert-danger
+    .label.label-danger Fake News Site
+    #{@source.name} is not a legitimate news source.
+    = link_to "Details", @source.fake_source, class: "btn btn-danger btn-sm pull-right"
+
 %hr/
 
 %h3 Most Popular Smashes
