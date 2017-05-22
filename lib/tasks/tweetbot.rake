@@ -9,7 +9,7 @@ namespace :tweetbot do
 
   task tweet: :environment do
 
-    if Headline.last_tweet_time > TWEET_EVERY.ago
+    if Headline.last_tweet_time && Headline.last_tweet_time > TWEET_EVERY.ago
       puts "Too soon for a tweet!"
     else
 
@@ -23,7 +23,7 @@ namespace :tweetbot do
 
     end
 
-    if Headline.last_retweet_time > RETWEET_EVERY.ago
+    if Headline.last_retweet_time && Headline.last_retweet_time > RETWEET_EVERY.ago
       puts "Too soon for a retweet!"
     else
       retweet_headline = Headline.retweetable.where(["retweeted_at is null OR retweeted_at < ?", RETWEET_EVERY.ago]).where(["vote_count >= ?", MIN_VOTES]).order('random()').first
