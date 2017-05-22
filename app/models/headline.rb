@@ -76,7 +76,6 @@ class Headline < ActiveRecord::Base
   end
 
   def display_score
-    raise
     score.floor
   end
 
