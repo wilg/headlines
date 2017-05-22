@@ -151,11 +151,11 @@ class Headline < ActiveRecord::Base
   end
 
   def self.last_tweet_time
-    Headline.where("bot_shared_at is not null").order("bot_shared_at desc").first.bot_shared_at
+    Headline.where("bot_shared_at is not null").order("bot_shared_at desc").first.try(:bot_shared_at)
   end
 
   def self.last_retweet_time
-    Headline.where("retweeted_at is not null").order("retweeted_at desc").first.retweeted_at
+    Headline.where("retweeted_at is not null").order("retweeted_at desc").first.try(:retweeted_at)
   end
 
   def tweeted_from_bot?
