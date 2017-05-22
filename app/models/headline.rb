@@ -27,6 +27,7 @@ class Headline < ActiveRecord::Base
     out
   }
   scope :tweetable, -> { where({bot_shared_at: nil}).appropriate }
+  scope :retweetable, -> { appropriate.where.not({bot_shared_at: nil}) }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
   scope :minimum_score, -> (score){ where("score > ?", score) }
@@ -75,6 +76,7 @@ class Headline < ActiveRecord::Base
   end
 
   def display_score
+    raise
     score.floor
   end
 
@@ -149,8 +151,12 @@ class Headline < ActiveRecord::Base
     vote_count < 1
   end
 
-  def self.last_bot_tweet
+  def self.last_tweet_time
     Headline.where("bot_shared_at is not null").order("bot_shared_at desc").first.bot_shared_at
+  end
+
+  def self.last_retweet_time
+    Headline.where("retweeted_at is not null").order("retweeted_at desc").first.retweeted_at
   end
 
   def tweeted_from_bot?
@@ -236,6 +242,12 @@ class Headline < ActiveRecord::Base
     tweet = TWITTER_BOT_CLIENT.update(formatted_name)
     self.bot_shared_at = Time.now
     self.bot_share_tweet_id = tweet.id
+    self.save!
+  end
+
+  def retweet_from_bot!
+    rt = TWITTER_BOT_CLIENT.retweet(bot_share_tweet_id)
+    self.retweeted_at = Time.now
     self.save!
   end
 
