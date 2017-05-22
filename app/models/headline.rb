@@ -14,6 +14,8 @@ class Headline < ActiveRecord::Base
   scope :this_month, -> { created_in_the_past 30.days }
   scope :yesterday, -> { where("headlines.created_at > ? AND headlines.created_at < ?", 2.days.ago, 1.day.ago) }
   scope :newest, -> { order("headlines.created_at desc") }
+  scope :babies, -> { where(vote_count: 1) }
+  scope :just_in, -> { this_month.babies.order("random()") }
 
   scope :no_metadata, -> { includes(:source_headline_fragments).where(source_headline_fragments: {headline_id: nil}) }
 

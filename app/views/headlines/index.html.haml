@@ -31,7 +31,7 @@
 
 = render partial: 'headlines/headlines_table', locals: {headlines: @headlines, no_paginate: @homepage}
 - if @homepage
-  - new_ones = Headline.newest.limit(20).all.shuffle.take(5)
+  - new_ones = Headline.just_in.limit(6)
   - if new_ones.present?
     %h4.text-muted This just in...
     = render partial: 'headlines/headlines_table', locals: {headlines: new_ones }
