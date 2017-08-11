@@ -49,6 +49,52 @@ $ ->
 
   window.userSignedIn = -> $("body").hasClass('logged-in')
 
+  age = window.generator_age || $("#generate-form").data('age')
+  count = 10#window.generator_count || $("#generate-form").data('count')
+  max_length = window.generator_max_length || $("#generate-form").data('max-length')
+  disallowed_words = $("#generate-form").data('disallowed-words')
+
+  currentLoad = null
+  preloadData = null
+
+  generatePromise = (shouldPreload = false) ->
+
+    if currentLoad
+      console.log "already loading..."
+      return currentLoad
+
+    if preloadData
+      console.log "preloaded..."
+      promise = $.Deferred()
+      promise.resolve(preloadData)
+      preloadData = null
+      preload()
+      return promise
+
+    console.log "needs fresh load..."
+
+    query = $.param
+      age: age
+      count: count
+      length_max: max_length
+
+    # Build URL
+    url = $("#generate-form").data('generator-url') + "?" + query
+
+    currentLoad = $.getJSON url
+    currentLoad.then ->
+      currentLoad = null
+
+      if shouldPreload
+        preload()
+
+    return currentLoad
+
+  preload = ->
+    console.log "preloading..."
+    generatePromise().then (data) ->
+      preloadData = data
+
   runGenerate = ->
 
     $('html, body').animate({
@@ -80,19 +126,6 @@ $ ->
     #     seed_word: seed_word
     #     sources: source_names.join(",")
 
-    age = window.generator_age || $("#generate-form").data('age')
-    count = window.generator_count || $("#generate-form").data('count')
-    max_length = window.generator_max_length || $("#generate-form").data('max-length')
-    disallowed_words = $("#generate-form").data('disallowed-words')
-
-    query = $.param
-      age: age
-      count: count
-      length_max: max_length
-
-    # Build URL
-    url = $("#generate-form").data('generator-url') + "?" + query
-
     mixpanel.track("Generate", {
       Age: age
       # "Sources": source_names
@@ -100,7 +133,8 @@ $ ->
       # "Seed Word" : seed_word
     })
 
-    $.getJSON url, (data) ->
+    promise = generatePromise(true)
+    promise.then (data) ->
       data.headlines = data.headlines.filter((h) ->
         for word in disallowed_words
           if h.headline.toLowerCase().indexOf(word) != -1

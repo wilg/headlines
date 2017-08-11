@@ -9,10 +9,10 @@ class GeneratorController < ApplicationController
 
     sources = JSON.parse(params[:sources_json])
 
-    if Headline.salted_hash(params[:headline]) != params[:hash]
-      head :forbidden
-      return
-    end
+    # if Headline.salted_hash(params[:headline]) != params[:hash]
+    #   head :forbidden
+    #   return
+    # end
 
     @headline = Headline.with_name(params[:headline]).first_or_initialize
 
