@@ -12,7 +12,8 @@ namespace :source_headlines do
       puts "We are over budget by #{over_budget_amount} source headlines"
 
       total_deleted = 0
-      SourceHeadline.unused.order(created_at: :asc).find_in_batches do |group|
+      # Order is, according to rails, id asc
+      SourceHeadline.unused.find_in_batches do |group|
         SourceHeadline.delete(group.map(&:id))
         total_deleted += group.length
         puts "Deleted #{total_deleted}/#{over_budget_amount} source headlines."
