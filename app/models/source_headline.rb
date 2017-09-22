@@ -23,4 +23,12 @@ class SourceHeadline < ActiveRecord::Base
     author.gsub(/By /i, '')
   end
 
+  def self.unused
+    includes(:source_headline_fragments).where(source_headline_fragments: {id: nil})
+  end
+
+  def self.used
+    includes(:source_headline_fragments).where.not(source_headline_fragments: {id: nil})
+  end
+
 end

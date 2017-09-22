@@ -1,5 +1,30 @@
 namespace :source_headlines do
 
+  task trim: :environment do
+    budget = Integer(ENV["MAX_UNUSED_SOURCE_HEADLINES"])
+    puts "Trimming source headlines to a max of #{budget}"
+
+    unused_count = SourceHeadline.unused.count
+    puts "There are #{unused_count} headlines in the database"
+
+    over_budget_amount = unused_count - budget
+    if over_budget_amount > 0
+      puts "We are over budget by #{over_budget_amount} source headlines"
+
+      total_deleted = 0
+      SourceHeadline.unused.order(created_at: :asc).find_in_batches do |group|
+        SourceHeadline.delete(group.map(&:id))
+        total_deleted += group.length
+        puts "Deleted #{total_deleted}/#{over_budget_amount} source headlines."
+        break if total_deleted >= over_budget_amount
+      end
+
+    else
+      puts "We are under budget by #{over_budget_amount.abs}. Exiting."
+    end
+
+  end
+
   task resave: :environment do
     g = 0
     n = 0
