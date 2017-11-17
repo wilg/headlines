@@ -48,7 +48,7 @@ group :development do
   gem 'spring'
   gem 'web-console', '~> 2.0'
   gem 'ruby-prof'
-  gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler', '~> 0.10.1'
 end
 
 # Heroku Deploy
