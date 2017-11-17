@@ -41,7 +41,7 @@ gem 'flickraw-cached'
 
 gem 'dalli'
 
-gem 'rollbar', '~> 2.8.0'
+gem 'rollbar', '~> 2.15.5'
 
 # Dev
 group :development do
