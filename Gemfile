@@ -5,7 +5,7 @@ gem 'rails', '4.2.7.1'
 gem 'puma'
 gem "rack-timeout"
 
-gem 'headline_sources', github: 'wilg/headline-sources'
+gem 'headline_sources', git: 'https://github.com/wilg/headline-sources.git'
 
 gem 'pg'
 gem 'haml'
