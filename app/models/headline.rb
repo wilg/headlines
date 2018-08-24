@@ -2,6 +2,7 @@ require 'digest/sha1'
 
 class Headline < ActiveRecord::Base
   include HeadlinePhotoConcern
+  include AppropriatenessConcern
   include Rails.application.routes.url_helpers
 
   scope :top, -> { order("headlines.score desc, headlines.created_at desc") }
@@ -21,13 +22,6 @@ class Headline < ActiveRecord::Base
 
   scope :tweeted, -> { where("bot_shared_at is not null") }
   scope :scorable, -> { where("comments_count > 0 OR retweet_count > 0 OR favorite_count > 0 OR mention_count > 0") }
-  scope :appropriate, -> {
-    out = where({})
-    DISALLOWED_WORDS.each do |word|
-      out = out.where.not("name_hash LIKE :word", word: "%#{word}%")
-    end
-    out
-  }
   scope :tweetable, -> { where({bot_shared_at: nil}).appropriate }
   scope :retweetable, -> { appropriate.where.not({bot_shared_at: nil}) }
 
