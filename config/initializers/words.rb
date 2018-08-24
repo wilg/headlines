@@ -2,5 +2,5 @@ DISALLOWED_WORDS = %w[
   rape
   nigger
   nigga
-  n*gger
+  n-gg # the * will be hashed as -
 ]
