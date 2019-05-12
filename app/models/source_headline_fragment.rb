@@ -20,7 +20,7 @@ class SourceHeadlineFragment < ActiveRecord::Base
   end
 
   def source
-    source_headline.source
+    source_headline && source_headline.source
   end
 
   def self.normalize(string)
