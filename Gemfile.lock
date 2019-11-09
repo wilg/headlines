@@ -152,7 +152,7 @@ GEM
     orm_adapter (0.5.0)
     pg (0.19.0)
     puma (2.12.3)
-    rack (1.6.8)
+    rack (1.6.11)
     rack-cors (1.0.1)
     rack-mini-profiler (0.10.6)
       rack (>= 1.2.0)
