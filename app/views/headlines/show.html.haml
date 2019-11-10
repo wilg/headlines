@@ -86,7 +86,7 @@
                 = link_to generate_url_like(@headline) do
                   %i.fa.fa-gears
                   Smash from these news sources
-            - if current_user.present? && current_user.login == "wil"
+            - if current_user.present? && current_user.admin?
               %p
                 Score
                 %strong #{@headline.score || "?"}

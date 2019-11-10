@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     self.respond_to?(:timeframe_karma)
   end
 
+  def admin?
+    login == "wil"
+  end
+
   def calculate_karma!
     self.saved_headlines_count = self.headlines.count
     self.karma = self.headlines.sum(:vote_count) - self.saved_headlines_count

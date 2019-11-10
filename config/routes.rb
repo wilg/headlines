@@ -12,6 +12,7 @@ Headlines::Application.routes.draw do
     resources :comments
     collection do
       get :random
+      get :download
     end
     member do
       post :vote
@@ -22,7 +23,12 @@ Headlines::Application.routes.draw do
     end
   end
 
-  resources :source_headlines
+  resources :source_headlines do
+    collection do
+      get :download
+    end
+  end
+
   resources :sources
 
   resources :users do

@@ -3,6 +3,7 @@ class SourceHeadline < ActiveRecord::Base
   require 'headline_sources/headline'
 
   include AppropriatenessConcern
+  include RandomConcern
 
   has_many :source_headline_fragments, dependent: :nullify
   has_many :headlines, through: :source_headline_fragments

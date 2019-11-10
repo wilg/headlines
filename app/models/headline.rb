@@ -3,6 +3,7 @@ require 'digest/sha1'
 class Headline < ActiveRecord::Base
   include HeadlinePhotoConcern
   include AppropriatenessConcern
+  include RandomConcern
   include Rails.application.routes.url_helpers
 
   scope :top, -> { order("headlines.score desc, headlines.created_at desc") }

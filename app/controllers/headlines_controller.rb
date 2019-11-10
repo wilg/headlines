@@ -36,6 +36,23 @@ class HeadlinesController < ApplicationController
     @headlines = Headline.minimum_score(params[:minimum] || 10).order('random()').limit(19).to_a
   end
 
+  def download
+    if current_user && current_user.admin?
+      limit = params[:limit].to_i.zero? ? 1000 : params[:limit].to_i
+      collection = if params[:percent]
+        Headline.random_set(percent: params[:percent].to_f).pluck(:name)
+      else
+        Headline.random_set(approximate_limit: limit).pluck(:name)
+      end
+      respond_to do |format|
+        format.json { render json: collection }
+        format.text { render text: collection.join("\n") }
+      end
+    else
+      head :not_found
+    end
+  end
+
   def reconstruct
     @headline = Headline.find(params[:id])
     redirect_to generator_url(reconstruct_phrase: @headline.name, reconstruct_sources: @headline.source_names.join(","))
