@@ -44,6 +44,7 @@ class HeadlinesController < ApplicationController
       else
         Headline.random_set(approximate_limit: limit).pluck(:name)
       end
+      headers['Content-Disposition'] = "attachment" if params[:download]
       respond_to do |format|
         format.json { render json: collection }
         format.text { render text: collection.join("\n") }
