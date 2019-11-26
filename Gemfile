@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby "2.2.2"
+ruby `cat .ruby-version`.strip
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '~> 4.2.10'
 gem 'puma'
 gem "rack-timeout"
 
@@ -35,13 +35,15 @@ gem 'nokogiri'
 
 gem 'rakismet'
 
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', '~> 3.12'
 
 gem 'flickraw-cached'
 
 gem 'dalli'
 
 gem 'rollbar', '~> 2.15.5'
+
+gem 'faker'
 
 # Dev
 group :development do
