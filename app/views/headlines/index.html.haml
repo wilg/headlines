@@ -33,6 +33,6 @@
 - if @homepage
   - new_ones = Headline.just_in.limit(6)
   - if new_ones.present?
-    %h4.text-muted This just in...
-    = render partial: 'headlines/headlines_table', locals: {headlines: new_ones }
+    %h4.text-muted Breaking:
+    = render partial: 'headlines/headlines_table', locals: { headlines: new_ones, breaking: true }
   = will_paginate @headlines, renderer: BootstrapPagination::Rails

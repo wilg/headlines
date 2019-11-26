@@ -1,3 +1,4 @@
+- breaking = defined?(breaking) && breaking
 - if !headlines || headlines.length < 1
   .well
     No headlines found.
@@ -5,6 +6,6 @@
   - vote_statuses = current_user.present? ? current_user.vote_statuses(headlines) : VoteStatusCollection.new
   %table.table.table-striped.headlines-table
     - headlines.each do |h|
-      = render partial: 'headlines/headline', locals: {headline: h, vote_statuses: vote_statuses}
+      = render partial: 'headlines/headline', locals: {headline: h, vote_statuses: vote_statuses, breaking: breaking}
   - if headlines.respond_to?(:total_pages) && !(defined?(no_paginate) && no_paginate)
     = will_paginate headlines, renderer: BootstrapPagination::Rails
