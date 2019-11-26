@@ -20,7 +20,7 @@ namespace :headlines do
     500.times do |i|
       vote_count = Faker::Number.between(1, 3)
       h = Headline.create!(
-        name: Faker::Hipster.sentence,
+        name: Faker::Hipster.sentence.titleize,
         vote_count: vote_count,
         created_at: Faker::Time.backward(35),
         bot_share_tweet_id: "fake-#{i}"
