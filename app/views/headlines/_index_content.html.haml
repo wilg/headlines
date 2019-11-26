@@ -1,0 +1,6 @@
+= render partial: 'headlines/headlines_table', locals: {headlines: @headlines, no_paginate: @homepage}
+- if @homepage
+  - new_ones = Headline.just_in.limit(6)
+  - if new_ones.present?
+    %h4.text-muted Breaking:
+    = render partial: 'headlines/headlines_table', locals: { headlines: new_ones, breaking: true }

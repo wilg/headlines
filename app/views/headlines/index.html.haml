@@ -29,10 +29,7 @@
       - @homepage = true
   = render 'headlines/sort_tools'
 
-= render partial: 'headlines/headlines_table', locals: {headlines: @headlines, no_paginate: @homepage}
+#index-content-infinite-scroll
+  = render partial: 'headlines/index_content'
 - if @homepage
-  - new_ones = Headline.just_in.limit(6)
-  - if new_ones.present?
-    %h4.text-muted Breaking:
-    = render partial: 'headlines/headlines_table', locals: { headlines: new_ones, breaking: true }
   = will_paginate @headlines, renderer: BootstrapPagination::Rails
