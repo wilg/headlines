@@ -1,4 +1,4 @@
-Headlines::Application.routes.draw do
+Rails.application.routes.draw do
 
   # Legacy redirects for URLs that are commonly in use
   get '/headlines/best' => redirect('/')

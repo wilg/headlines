@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby `cat .ruby-version`.strip
 
-gem 'rails', '~> 4.2.10'
+gem 'rails', '5.0.4'
 gem 'puma'
 gem "rack-timeout"
 
@@ -9,11 +9,11 @@ gem 'headline_sources', git: 'https://github.com/wilg/headline-sources.git'
 
 gem 'pg'
 gem 'haml'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '>= 6'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.1'
 gem 'jquery-rails'
-gem 'jbuilder'
+gem 'jbuilder', '>= 2.5'
 gem 'rack-cors'
 
 gem 'bootstrap-sass', '~> 3.4.1'

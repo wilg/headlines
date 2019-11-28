@@ -1,4 +1,4 @@
-class SourceHeadline < ActiveRecord::Base
+class SourceHeadline < ApplicationRecord
 
   require 'headline_sources/headline'
 

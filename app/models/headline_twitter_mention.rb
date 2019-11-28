@@ -1,4 +1,4 @@
-class HeadlineTwitterMention < ActiveRecord::Base
+class HeadlineTwitterMention < ApplicationRecord
 
   belongs_to :headline, counter_cache: :mention_count
 

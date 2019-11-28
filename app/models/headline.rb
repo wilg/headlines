@@ -1,6 +1,6 @@
 require 'digest/sha1'
 
-class Headline < ActiveRecord::Base
+class Headline < ApplicationRecord
   include HeadlinePhotoConcern
   include AppropriatenessConcern
   include RandomConcern

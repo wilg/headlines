@@ -1,4 +1,4 @@
-class SourceHeadlineFragment < ActiveRecord::Base
+class SourceHeadlineFragment < ApplicationRecord
 
   belongs_to :source_headline
   belongs_to :headline
