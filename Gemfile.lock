@@ -100,8 +100,8 @@ GEM
     flickraw (0.9.8)
     flickraw-cached (20120701)
       flickraw (>= 0.9)
-    font-awesome-rails (4.4.0.0)
-      railties (>= 3.2, < 5.0)
+    font-awesome-rails (4.7.0.5)
+      railties (>= 3.2, < 6.1)
     font_assets (0.1.11)
       rack
     foreman (0.82.0)
