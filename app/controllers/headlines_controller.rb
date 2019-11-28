@@ -6,7 +6,7 @@ class HeadlinesController < ApplicationController
 
   def index
     if params[:user_id]
-      @user = User.find_by_login(params[:user_id])
+      @user = User.find_by_login!(params[:user_id])
       @headlines = headlines_sorted_by_params @user.headlines
     else
       @is_main_browse_page = true
