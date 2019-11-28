@@ -1,4 +1,4 @@
 <% @headline_show_tooltips = true %>
 <% @headline_table_show_sources = params[:sourced] == 'true' %>
-<% @breaking = params[:breaking] == 'true' %>
+<% breaking = params[:breaking] == 'true' %>
 $(".headline-row-<%= @headline.id %>").replaceWith("<%=j render partial: 'headlines/headline', locals: {headline: @headline, vote_statuses: VoteStatusCollection.new(current_user, [@headline]), breaking: breaking} %>");
