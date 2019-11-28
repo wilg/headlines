@@ -16,7 +16,7 @@ gem 'jquery-rails'
 gem 'jbuilder'
 gem 'rack-cors'
 
-gem 'bootstrap-sass', '~> 3.1.1'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'font-awesome-rails'
 gem 'will_paginate-bootstrap'
 gem 'handlebars_assets'
