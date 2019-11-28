@@ -145,7 +145,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     naught (1.0.0)
-    newrelic_rpm (3.18.1.330)
+    newrelic_rpm (6.7.0.359)
     nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
@@ -276,7 +276,7 @@ DEPENDENCIES
   jquery-hoverIntent-rails
   jquery-rails
   mousetrap-rails
-  newrelic_rpm (~> 3.12)
+  newrelic_rpm (~> 6.7)
   nokogiri
   pg
   puma
