@@ -198,8 +198,7 @@ GEM
     rakismet (1.5.1)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rollbar (2.15.5)
-      multi_json
+    rollbar (2.22.1)
     ruby-prof (0.15.8)
     sanitize (4.6.6)
       crass (~> 1.0.2)
@@ -289,7 +288,7 @@ DEPENDENCIES
   rails_12factor
   rails_autolink
   rakismet
-  rollbar (~> 2.15.5)
+  rollbar
   ruby-prof
   sass-rails (~> 4.0.3)
   spring
