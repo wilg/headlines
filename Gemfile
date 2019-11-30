@@ -48,7 +48,7 @@ gem 'faker'
 # Dev
 group :development do
   gem 'spring'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.3'
   gem 'ruby-prof'
   gem 'rack-mini-profiler', '~> 1.1.3'
 end
