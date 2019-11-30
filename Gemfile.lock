@@ -259,8 +259,8 @@ GEM
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
-    will_paginate (3.0.7)
-    will_paginate-bootstrap (1.0.1)
+    will_paginate (3.2.1)
+    will_paginate-bootstrap (1.0.2)
       will_paginate (>= 3.0.3)
 
 PLATFORMS
