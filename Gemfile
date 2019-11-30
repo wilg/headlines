@@ -22,7 +22,7 @@ gem 'will_paginate-bootstrap'
 gem 'handlebars_assets'
 gem 'font_assets'
 gem 'rails_autolink'
-gem 'rails-timeago', '~> 2.0'
+gem 'rails-timeago', '~> 2.18'
 gem 'jquery-hoverIntent-rails'
 gem 'mousetrap-rails'
 
