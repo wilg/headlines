@@ -111,11 +111,10 @@ GEM
     haml (5.0.0)
       temple (>= 0.8.0)
       tilt
-    handlebars_assets (0.20.2)
+    handlebars_assets (0.23.2)
       execjs (~> 2.0)
-      multi_json (~> 1.0)
-      sprockets (>= 2.0.0, < 4.0)
-      tilt (~> 1.2)
+      sprockets (>= 2.0.0)
+      tilt (>= 1.2)
     htmlentities (4.3.4)
     http (0.6.4)
       http_parser.rb (~> 0.6.0)
@@ -143,7 +142,6 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.13.0)
     mousetrap-rails (1.4.6)
-    multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     naught (1.0.0)
@@ -279,7 +277,7 @@ DEPENDENCIES
   font_assets
   foreman
   haml
-  handlebars_assets
+  handlebars_assets (= 0.23.2)
   headline_sources!
   jbuilder
   jquery-hoverIntent-rails
