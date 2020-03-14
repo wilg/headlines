@@ -1,6 +1,5 @@
 TWEET_EVERY = 3.03.hours
-RETWEET_AFTER = 1.year
-RETWEET_EVERY = 26.hours
+RETWEET_EVERY = 6.months
 MIN_VOTES = 10
 
 namespace :tweetbot do
@@ -8,28 +7,19 @@ namespace :tweetbot do
   task :tweet_and_fetch => ["tweetbot:tweet", "tweetbot:fetch_tweet_metadata", "tweetbot:fetch_mentions"]
 
   task tweet: :environment do
-
     if Headline.last_tweet_time && Headline.last_tweet_time > TWEET_EVERY.ago
       puts "Too soon for a tweet!"
     else
-
-      # Prefer my own sense of humor
-      headline = User.find(1).upvoted_headlines.tweetable.order('random()').first
-
-      # Then popular ones
-      headline = Headline.tweetable.order('random()').where(["vote_count >= ?", MIN_VOTES]).first unless headline
-
-      headline.tweet_from_bot!
-
+      headline = Headline.high_quality_tweetable
+      headline.tweet_from_bot! if headline
     end
 
     if Headline.last_retweet_time && Headline.last_retweet_time > RETWEET_EVERY.ago
       puts "Too soon for a retweet!"
     else
-      retweet_headline = Headline.retweetable.where(["retweeted_at is null OR retweeted_at < ?", RETWEET_EVERY.ago]).where(["vote_count >= ?", MIN_VOTES]).order('random()').first
+      retweet_headline = Headline.high_quality_retweetable(timeframe: RETWEET_EVERY)
       retweet_headline.retweet_from_bot! if retweet_headline
     end
-
   end
 
   task fetch_tweet_metadata: :environment do

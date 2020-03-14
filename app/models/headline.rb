@@ -27,7 +27,7 @@ class Headline < ActiveRecord::Base
   scope :retweetable, -> { appropriate.where.not({bot_shared_at: nil}) }
 
   scope :with_name,  -> (name){ where(name_hash: Headline.name_hash(name)) }
-  scope :minimum_score, -> (score){ where("score > ?", score) }
+  scope :minimum_score, -> (score){ where("score >= ?", score) }
 
   validates_presence_of :name
   validates_uniqueness_of :name_hash
@@ -247,6 +247,43 @@ class Headline < ActiveRecord::Base
     rt = TWITTER_BOT_CLIENT.retweet(bot_share_tweet_id)
     self.retweeted_at = Time.now
     self.save!
+  end
+
+  def self.high_quality_randomized(scope:)
+    # A batch of the top headlines that:
+    #   - at least someone else thought was funny
+    #   - are the best scoring
+    good_ones = scope.top.minimum_score(2)
+
+    # We'll pick a random timeframe, so that we guarantee we will
+    # eventually cover the whoe scope, but prefer more recent stuff so
+    # that we don't just cover old news.
+    timeframe_scopes = [:today, :this_week, :this_month, :all]
+
+    # Get the top ones from the timeframe
+    # (if there are none try all the rest of the timeframes)
+    batch = []
+    timeframe_scopes.shuffle.each do |timeframe|
+      batch = good_ones.send(timeframe).limit(50).to_a
+      break unless batch.empty?
+    end
+
+    # There must just be no matching headlines
+    return nil if batch.empty?
+
+    # Pick a random headline from the batch
+    batch.sample
+  end
+
+  def self.high_quality_tweetable
+    high_quality_randomized(scope: tweetable)
+  end
+
+  def self.high_quality_retweetable(timeframe: 6.months)
+      retweetable
+        .where(["retweeted_at is null OR retweeted_at < ?", timeframe.ago])
+        .order('random()')
+        .first
   end
 
 end
