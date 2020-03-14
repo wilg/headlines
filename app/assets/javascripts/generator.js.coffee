@@ -49,6 +49,25 @@ $ ->
 
   window.userSignedIn = -> $("body").hasClass('logged-in')
 
+  randomRange = (min, max) ->
+    Math.random() * (max - min) + min
+
+  randomItem = (items) ->
+    items[Math.floor(Math.random() * items.length)]
+
+  shuffle = (a) ->
+    j = undefined
+    x = undefined
+    i = undefined
+    i = a.length - 1
+    while i > 0
+      j = Math.floor(Math.random() * (i + 1))
+      x = a[i]
+      a[i] = a[j]
+      a[j] = x
+      i--
+    a
+
   runGenerate = ->
 
     $('html, body').animate({
@@ -85,14 +104,29 @@ $ ->
     max_length = window.generator_max_length || $("#generate-form").data('max-length')
     disallowed_words = $("#generate-form").data('disallowed-words')
     sources = $("#generate-form").data('sources')
+    sourcesForGenerate = Object.values(sources).filter((source) -> !source.dead)
 
-    query = $.param
-      age: age
+    ageRanges = [[20, 365], [20, 45], [15, 60], [365, 3650], [20, 365 * 2]]
+    sourceRanges = [[5, sourcesForGenerate.length], [5, 10], [5, 15], [5, 50], [5, sourcesForGenerate.length / 2]]
+    lengthRanges = [[max_length / 2, max_length], [max_length / 3, max_length], [max_length / 2, max_length * 1.5], [max_length - 10, max_length + 10]]
+    randomizeQuery = ->
+      [sourceMin, sourceMax] = randomItem(sourceRanges)
+      [ageMin, ageMax] = randomItem(ageRanges)
+      [lengthMin, lengthMax] = randomItem(lengthRanges)
+
+      sourceCount = Math.round(randomRange(sourceMin, sourceMax))
+
+      age: Math.round(randomRange(ageMin, ageMax))
+      length_max: Math.round(randomRange(lengthMin, lengthMax))
+      sourceCount: sourceCount
+      sources: shuffle(sourcesForGenerate)[...sourceCount].map((source) -> source.id).join(",")
       count: count
-      length_max: max_length
+
+    query = randomizeQuery()
+    console.log("Generating with settings:", query)
 
     # Build URL
-    url = $("#generate-form").data('generator-url') + "?" + query
+    url = $("#generate-form").data('generator-url')
 
     mixpanel.track("Generate", {
       Age: age
@@ -101,7 +135,7 @@ $ ->
       # "Seed Word" : seed_word
     })
 
-    $.getJSON url, (data) ->
+    $.post url, query, (data) ->
       data.headlines = data.headlines.filter((h) ->
         if h.sources
           for source in h.sources
