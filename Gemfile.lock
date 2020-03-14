@@ -152,7 +152,7 @@ GEM
     nokogumbo (2.0.2)
       nokogiri (~> 1.8, >= 1.8.4)
     orm_adapter (0.5.0)
-    pg (1.2.2)
+    pg (0.19.0)
     puma (4.3.0)
       nio4r (~> 2.0)
     rack (1.6.11)
@@ -284,7 +284,7 @@ DEPENDENCIES
   mousetrap-rails
   newrelic_rpm (~> 6.7)
   nokogiri
-  pg
+  pg (~> 0.19.0)
   puma
   rack-cors
   rack-mini-profiler (~> 1.1.3)

@@ -7,7 +7,7 @@ gem "rack-timeout"
 
 gem 'headline_sources', git: 'https://github.com/wilg/headline-sources.git'
 
-gem 'pg'
+gem 'pg', '~> 0.19.0'
 gem 'haml'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
