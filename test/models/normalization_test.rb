@@ -42,6 +42,9 @@ Fear Becoming Hostage to Chinas Belt and Road" => "Six arrested, one sough
     "My High Score ? (Sorry for Bad Photoshop)" => "My High Score? (Sorry for Bad Photoshop)",
     "Venom Just Got Very RealÂ" => "Venom Just Got Very Real",
     "This ends with a colon:" => "This ends with a colon",
+    "Help! My Fiance’s Dog Is Top Dog, Too  Often," => "Help! My Fiance's Dog Is Top Dog, Too Often",
+    # TODO: this should work
+    # "Help! My Fiancé’s Dog Is Top Dog, Too  Often," => "Help! My Fiancé's Dog Is Top Dog, Too Often",
     "Blizzard's Long History of Racism and \u0093cleanliness\u0094..." => "Blizzard's Long History of Racism and \"cleanliness\"..."
   }
 
