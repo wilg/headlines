@@ -261,13 +261,13 @@ class Headline < ActiveRecord::Base
     # We'll pick a random timeframe, so that we guarantee we will
     # eventually cover the whoe scope, but prefer more recent stuff so
     # that we don't just cover old news.
-    timeframe_scopes = [:today, :this_week, :this_month, :this_year, :all]
+    timeframe_scopes = {today: 5, this_week: 10, this_month: 20, this_year: 50, all: 200}
 
     # Get the top ones from the timeframe
     # (if there are none try all the rest of the timeframes)
     batch = []
-    timeframe_scopes.shuffle.each do |timeframe|
-      batch = good_ones.send(timeframe).limit(50).to_a
+    timeframe_scopes.to_a.shuffle.each do |(timeframe, limit)|
+      batch = good_ones.send(timeframe).limit(limit).to_a
       break unless batch.empty?
     end
 
