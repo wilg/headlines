@@ -6,6 +6,7 @@ gem 'puma'
 gem "rack-timeout"
 
 gem 'headline_sources', git: 'https://github.com/wilg/headline-sources.git'
+# gem 'headline_sources', path: "~/code/headline-sources"
 
 gem 'pg', '~> 0.19.0'
 gem 'haml'

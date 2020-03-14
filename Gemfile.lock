@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/wilg/headline-sources.git
-  revision: 5e6d442e7f5516b6901481c23ef836ab99d3c79b
+  revision: 287248c2b58ffe051ba455837ea10100ccc6222c
   specs:
     headline_sources (0.0.1)
       activerecord
