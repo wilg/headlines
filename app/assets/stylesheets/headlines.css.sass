@@ -14,8 +14,29 @@ header
     p:last-child
       margin-bottom: 0
 
-  .site-title i
-    color: $accent
+  .site-title
+    i
+      color: $accent
+    margin: 0
+    padding-top: 20px
+    +phone
+      padding: 0
+
+  .site-title-box
+    +phone
+      padding: 10px 0
+
+  .site-image
+    img
+      height: 96px
+      width: auto
+      margin-right: 20px
+      margin-bottom: 20px
+      +phone
+        display: inline-block
+        margin: 0
+    +phone
+      text-align: center
 
   +phone
     padding: 10px 0 0 0
@@ -61,8 +82,12 @@ footer
       background: white
       border-radius: 6px
   +phone
+    // position: absolute
+    // top: 0
+    // left: 0
+    // right: 0
     margin-top: 10px
-    margin-bottom: 5px
+    margin-bottom: 10px
     a
       font-size: 12px
 

@@ -2,13 +2,16 @@
   .container
     #header-content
       .clearfix
-        .pull-left
+        .pull-left.site-image
+          = link_to root_path do
+            = image_tag "logo.png"
+        .pull-left.site-title-box
           %h1.site-title
             = link_to root_path do
               Headline
               %i.fa.fa-gavel
               Smasher
-          .lead Fake headlines created by smashing up real headlines.
+          .lead Real news remixed into fake news.
         .hidden-xs.pull-right= render 'layouts/login_box'
 
       - [["visible-xs", "btn-sm"], ["hidden-xs", "btn-lg"]].to_h.each do |toolbar_class, button_class|
