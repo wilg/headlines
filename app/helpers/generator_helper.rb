@@ -10,9 +10,10 @@ module GeneratorHelper
   end
 
   def generator_all_sources
-    HeadlineSource.all.reject{|s| s.dead }.map do |source|
+    HeadlineSource.all.map do |source|
       [source.id, {
         id: source.id,
+        dead: source.dead,
         image_url: source_image_url(source),
         name: source.name
       }]
