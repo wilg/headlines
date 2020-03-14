@@ -36,6 +36,8 @@ Fear Becoming Hostage to Chinas Belt and Road" => "Six arrested, one sough
     "99% of Everyone Poops) " => "99% of Everyone Poops",
     "You Suck ; But It's okay " => "You Suck; But It's okay",
     "'This is quoted'" => "This is quoted",
+    # TODO: this should work
+    # "Ben Affleck Wants to Be in a ‘Healthy’ and ‘Stable’ Relationship" => "Ben Affleck Wants to Be in a \"Healthy\" and \"Stable\" Relationship",
     "Google+'s Real Goal Is Mars" => "Google+'s Real Goal Is Mars",
     "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be 'One of Microsoft's Best E3 Conferences'" => "*GRAPHIC* Disturbing, 78-Second Video Surfaces Claiming to Be One of Microsoft's Best E3 Conferences",
     "My High Score ! (Sorry for Bad Photoshop)" => "My High Score! (Sorry for Bad Photoshop)",
