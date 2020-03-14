@@ -14,6 +14,7 @@ class Headline < ActiveRecord::Base
   scope :today, -> { created_in_the_past 1.day }
   scope :this_week, -> { created_in_the_past 7.days }
   scope :this_month, -> { created_in_the_past 30.days }
+  scope :this_year, -> { created_in_the_past 1.year }
   scope :yesterday, -> { where("headlines.created_at > ? AND headlines.created_at < ?", 2.days.ago, 1.day.ago) }
   scope :newest, -> { order("headlines.created_at desc") }
   scope :babies, -> { where(vote_count: 1) }
@@ -176,6 +177,8 @@ class Headline < ActiveRecord::Base
     out.gsub!("Â", " ")
     out.gsub!("\u0091", "'")
     out.gsub!("\u0092", "'")
+    out.gsub!("\u0093", "\"")
+    out.gsub!("\u0094", "\"")
 
     if out.count('"') == 1 && !out.match(/\d{1,2}'\d{1,2}"/)
       out = out.sub('"', ' ')
@@ -258,7 +261,7 @@ class Headline < ActiveRecord::Base
     # We'll pick a random timeframe, so that we guarantee we will
     # eventually cover the whoe scope, but prefer more recent stuff so
     # that we don't just cover old news.
-    timeframe_scopes = [:today, :this_week, :this_month, :all]
+    timeframe_scopes = [:today, :this_week, :this_month, :this_year, :all]
 
     # Get the top ones from the timeframe
     # (if there are none try all the rest of the timeframes)
