@@ -29,6 +29,8 @@ class NormalizationTest < ActiveSupport::TestCase
     "99% of Everyone Poops:" => "99% of Everyone Poops",
     "99% of Everyone Poops: " => "99% of Everyone Poops",
     "99% of Everyone Poops;" => "99% of Everyone Poops",
+    "Six arrested, one sought in Dominican Republic murder of Patricia Anton
+Fear Becoming Hostage to Chinas Belt and Road" => "Six arrested, one sought in Dominican Republic murder of Patricia Anton Fear Becoming \"Hostage\" to China's Belt and Road",
     "99% of Everyone Poops; " => "99% of Everyone Poops",
     "99% of Everyone Poops)" => "99% of Everyone Poops",
     "99% of Everyone Poops) " => "99% of Everyone Poops",
@@ -39,6 +41,7 @@ class NormalizationTest < ActiveSupport::TestCase
     "My High Score ! (Sorry for Bad Photoshop)" => "My High Score! (Sorry for Bad Photoshop)",
     "My High Score ? (Sorry for Bad Photoshop)" => "My High Score? (Sorry for Bad Photoshop)",
     "Venom Just Got Very RealÂ" => "Venom Just Got Very Real",
+    "This ends with a colon:" => "This ends with a colon",
   }
 
   tests.each do |input, out|

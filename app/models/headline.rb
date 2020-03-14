@@ -174,6 +174,8 @@ class Headline < ActiveRecord::Base
 
     # Weird characters
     out.gsub!("Â", " ")
+    out.gsub!("\u0091", "'")
+    out.gsub!("\u0092", "'")
 
     if out.count('"') == 1 && !out.match(/\d{1,2}'\d{1,2}"/)
       out = out.sub('"', ' ')
