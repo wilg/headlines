@@ -24,7 +24,7 @@ class GeneratorController < ApplicationController
     end
 
     if @headline.new_record? || @headline.source_headline_fragments.size == 0
-      @headline.create_sources!(sources)
+      @headline.create_sources!(sources) unless Rails.env.development?
     end
 
     current_user.upvote_headline! @headline
