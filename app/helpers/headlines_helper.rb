@@ -59,9 +59,14 @@ module HeadlinesHelper
     @sources.present? && @sources.include?(source.id)
   end
 
+  def source_image_url(source)
+    return nil unless source && source.has_icon?
+    image_url("headline_sources/#{source.id}.png")
+  end
+
   def source_image_tag(source, linked = false)
     return nil unless source && source.has_icon?
-    img = image_tag("headline_sources/#{source.id}.png", class: 'source-icon', alt: source.name)
+    img = image_tag(source_image_url(source), class: 'source-icon', alt: source.name)
     if linked
       link_to img, source_url(source.id), data: {toggle: :tooltip, title: source.name}, class: 'source-icon-link'
     else

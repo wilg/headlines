@@ -84,6 +84,7 @@ $ ->
     count = window.generator_count || $("#generate-form").data('count')
     max_length = window.generator_max_length || $("#generate-form").data('max-length')
     disallowed_words = $("#generate-form").data('disallowed-words')
+    sources = $("#generate-form").data('sources')
 
     query = $.param
       age: age
@@ -102,6 +103,12 @@ $ ->
 
     $.getJSON url, (data) ->
       data.headlines = data.headlines.filter((h) ->
+        if h.sources
+          for source in h.sources
+            metadata = sources[source.source_id]
+            icon = if metadata
+              "<img class='source-icon' alt='#{metadata.name}' src='#{metadata.image_url}' /> "
+            source.tooltip = "<span class='sourcename'>#{icon}#{metadata?.name || source.id}:</span> #{source.source_phrase}"
         for word in disallowed_words
           if h.headline.toLowerCase().indexOf(word) != -1
             return false

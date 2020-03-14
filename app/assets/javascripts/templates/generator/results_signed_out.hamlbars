@@ -4,7 +4,7 @@
     %tr{class: "generated-headline-{{hash}}"}
       %td.headline
         {{#each sources}}
-        %span.headline-fragment{data: {toggle: :tooltip, html: 'true', title: "<span class='sourcename'>{{source_id}}:</span> {{source_phrase}}"}}
+        %span.headline-fragment{data: {toggle: :tooltip, html: 'true', title: "{{tooltip}}"}}
           {{fragment}}
         {{/each}}
         %td.text-right.tools
