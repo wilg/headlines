@@ -108,7 +108,9 @@ $ ->
             metadata = sources[source.source_id]
             icon = if metadata
               "<img class='source-icon' alt='#{metadata.name}' src='#{metadata.image_url}' /> "
-            source.tooltip = "<span class='sourcename'>#{icon}#{metadata?.name || source.id}:</span> #{source.source_phrase}"
+            else
+              ""
+            source.tooltip = "<span class='sourcename'>#{icon}#{metadata?.name || source.source_id}:</span> #{source.source_phrase}"
         for word in disallowed_words
           if h.headline.toLowerCase().indexOf(word) != -1
             return false
