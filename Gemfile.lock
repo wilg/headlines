@@ -203,7 +203,7 @@ GEM
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
     rollbar (2.22.1)
-    ruby-prof (0.15.8)
+    ruby-prof (1.4.2)
     sanitize (5.1.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
