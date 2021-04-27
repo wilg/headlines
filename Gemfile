@@ -36,7 +36,7 @@ gem 'nokogiri'
 
 gem 'rakismet'
 
-gem 'newrelic_rpm', '~> 6.7'
+gem 'newrelic_rpm', '~> 7.0'
 
 gem 'flickraw-cached'
 
