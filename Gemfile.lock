@@ -52,7 +52,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.8)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     arel (6.0.4)
     autoprefixer-rails (9.7.2)
       execjs
@@ -153,6 +154,7 @@ GEM
       nokogiri (~> 1.8, >= 1.8.4)
     orm_adapter (0.5.0)
     pg (0.19.0)
+    public_suffix (4.0.6)
     puma (4.3.3)
       nio4r (~> 2.0)
     rack (1.6.13)
