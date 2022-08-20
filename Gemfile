@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby `cat .ruby-version`.strip
 
 gem 'rails', '~> 4.2.10'
+gem 'bigdecimal', '1.3.5' # remove on ruby upgrade
 gem 'puma'
 gem "rack-timeout"
 
